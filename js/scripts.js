@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const games = [
-        { title: "Sane", start: "2024-10", end: "2024-11", description: "Creator and owner of a simplistic but lore filled horror game.", link: null },
-        { title: "Throw Bricks At People", start: "2024-07", end: "2024-09", description: "Main developer in a full and large team.", link: null },
+        { title: "Sane", start: "2024-10", end: "Present", description: "Creator and owner of a simplistic but lore filled horror game. Actively under development.", link: null },
+        { title: "Throw Bricks At People", start: "2024-07", end: "Present", description: "Main developer in a full and large team. Actively under development.", link: null },
         { title: "Inbetween", start: "2024-04", end: "2024-07", description: "Inspired by Interliminality, full 11 section game with a story, I was the main creator, collaborating with friends", link: null },
         { title: "Interliminality", start: "2024-03", end: "2024-04", description: "Second large impact and role for a large game, I enjoyed the time I worked on this game, I was an animator, scripter, builder and music artist", link: "https://www.roblox.com/games/14237585680/5-24-24-Interliminality-ALPHA-1-1-5" },
         { title: "Blade Ball", start: "2024-02", end: "2024-02", description: "Offered to help fix any possible lag and difficulties with server-adjustments, I gave a recommendation for a sword that got added though", link: "https://www.roblox.com/games/13772394625/UPD-Blade-Ball" },
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (gameList) {
         games.forEach(game => {
             const gameElement = document.createElement("div");
-            gameElement.classList.add("col-lg-10", "mb-4");
+            gameElement.classList.add("col-lg-12", "mb-4");
             gameElement.innerHTML = `
                 <div class="card" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
                     <div class="card-body">
