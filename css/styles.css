@@ -383,9 +383,7 @@ select:disabled {
 button,
 [type=button],
 [type=reset],
-[type=submit] {
-  -webkit-appearance: button;
-}
+[type=submit],
 button:not(:disabled),
 [type=button]:not(:disabled),
 [type=reset]:not(:disabled),
@@ -456,7 +454,6 @@ legend + * {
 
 [type=search] {
   outline-offset: -2px;
-  -webkit-appearance: textfield;
 }
 
 /* rtl:raw:
@@ -477,7 +474,6 @@ legend + * {
 
 ::file-selector-button {
   font: inherit;
-  -webkit-appearance: button;
 }
 
 output {
@@ -3386,14 +3382,14 @@ textarea.form-control-lg {
 }
 
 .portfolio-item {
-  background-color: #1a1a1a; /* Set the background color */
-  border-radius: 15px; /* Rounded corners */
+  background-color: #1a1a1a;
+  border-radius: 15px;
   padding-top: 56.25%;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4); /* Add a shadow for a slight depth effect */
-  overflow: hidden; /* Ensure the rounded corners apply to child elements */
-  padding: 10px; /* Add some padding for aesthetics */
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  padding: 10px;
   transition: box-shadow 0.2s ease-out;
-  object-fit: cover; /* Crops the image to maintain the aspect ratio */
+  object-fit: cover;
 }
 
 .portfolio-item:hover {
@@ -3997,30 +3993,30 @@ textarea.form-control-lg {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  display: none; /* Initially hidden */
-  padding: 10px; /* Less padding to keep it compact */
+  display: none;
+  padding: 10px;
   font-size: 16px;
-  background-color: #5000ff !important; /* Custom background color */
-  color: #fff !important; /* Custom text color */
-  border: 2px solid #5000ff !important; /* Custom border color */
+  background-color: #5000ff !important;
+  color: #fff !important;
+  border: 2px solid #5000ff !important;
   border-radius: 8px;
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease !important; /* Smooth transitions for background, border, and text color */
-  animation: none; /* No animation until triggered */
+  transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease !important;
+  animation: none;
   opacity: 0;
-  white-space: nowrap; /* Prevents text wrapping, keeps button small */
-  width: auto; /* Width is determined by the content */
-  text-align: center; /* Center-align the text */
-  max-width: max-content; /* Keep the width as compact as possible */
+  white-space: nowrap;
+  width: auto;
+  text-align: center;
+  max-width: max-content;
 }
 
 #scrollToTopBtn:hover {
-  background-color: #000000 !important; /* Force hover background color */
-  color: #fff !important; /* Ensure text remains white */
-  border-color: #000000 !important; /* Force hover border color */
+  background-color: #000000 !important;
+  color: #fff !important;
+  border-color: #000000 !important;
 }
-/* Keyframes for the "pop in" and "pop out" animations */
+
 @keyframes popIn {
   0% {
       transform: translateX(-50%) scale(0);
@@ -4043,19 +4039,17 @@ textarea.form-control-lg {
   }
 }
 
-/* Show and animate the button when it's visible */
 #scrollToTopBtn.show {
   display: block;
   animation: popIn 0.5s ease-out forwards;
   opacity: 1;
 }
 
-/* Hide the button with an animation */
 #scrollToTopBtn.hide {
   display: block;
   animation: popOut 0.5s ease-in forwards;
   opacity: 0;
-  pointer-events: none; /* Prevents user interaction when fading out */
+  pointer-events: none;
 }
 
 .navbar-nav-scroll {
@@ -4481,10 +4475,10 @@ textarea.form-control-lg {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  display: none; /* Initially hidden */
+  display: none;
   padding: 10px 15px;
   font-size: 16px;
-  background-color: #007bff; /* Customize as desired */
+  background-color: #007bff;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -4494,7 +4488,7 @@ textarea.form-control-lg {
 }
 
 #scrollToTopBtn:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3;
 }
 
 
@@ -4719,7 +4713,7 @@ textarea.form-control-lg {
   float: left;
   padding-right: var(--bs-breadcrumb-item-padding-x);
   color: var(--bs-breadcrumb-divider-color);
-  content: var(--bs-breadcrumb-divider, "/") /* rtl: var(--bs-breadcrumb-divider, "/") */;
+  content: var(--bs-breadcrumb-divider, "/");
 }
 .breadcrumb-item.active {
   color: var(--bs-breadcrumb-item-active-color);
@@ -11176,6 +11170,7 @@ header.masthead {
   text-align: center;
   color: #fff;
   min-height: 40vh;
+  max-height: 40vh;
   background: linear-gradient(270deg, #310094, #000000);
   background-repeat: no-repeat;
   background-attachment: fixed;
