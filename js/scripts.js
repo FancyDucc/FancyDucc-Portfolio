@@ -6,8 +6,56 @@
 //
 // Scripts
 // 
-
+/*
 window.addEventListener('DOMContentLoaded', event => {
+    //// Game List
+    const games = [
+        { title: "Interliminality", start: "2024-03", end: "2024-04", description: "Second large impact and role for a large game, I enjoyed the time I worked on this game, I was an animator, scripter, builder and music artist", link: "https://www.roblox.com/games/14237585680/5-24-24-Interliminality-ALPHA-1-1-5" },
+        { title: "Blade Ball", start: "2024-02", end: "2024-03", description: "Offered to help fix any possible lag and difficulties with server-adjustments, I gave a recommendation for a sword that got added though", link: "https://www.roblox.com/games/13772394625/UPD-Blade-Ball" },
+        { title: "Terra-Isle", start: "2024-02", end: "2024-02", description: "Only creator, made in 13 hours without breaks, currently my most impressive Roblox creation.", link: "https://www.roblox.com/games/16404803992/Terra-Isle" },
+        { title: "Enigma", start: "2023-07", end: "2023-11", description: "My first game that had a story, ideas, and full set plan. Sadly Roblox had other plans and removed the game for a DMCA strike, only later that month reopening the game again", link: null },
+        { title: "Cozy Cuddle", start: "2023-06", end: "2023-06", description: "Second collaboration with a large horror game group, I was a scripter, animator, and UI designer, I quit soon after joining as the work environment was unfriendly and development was far far too slow", link: null },
+        { title: "The Bunker", start: "2023-08", end: "2024-01", description: "A game collaborated with Vizion, a close friend and a fellow game developer, this game was made throughout teaching my friend how to make a game and to actually make one on the way", link: "https://www.roblox.com/games/14350543850/The-Bunker-HORROR-Pre-Alpha" },
+        { title: "Cutscene", start: "2023-06", end: "2023-06", description: "My first cutscene game, I am still very proud of this project, I made this to challenge my animation abilities, this entire thing was made in 2 days, 8 hours of animating, 3 hours of voice acting and sound design", link: "https://www.roblox.com/games/13695671920/Cutscene" },
+        { title: "Quantum Decay", start: "2023-07", end: "2023-07", description: "Entire main menu, sound design, systems and the entire game made in 48 hours, no reason, just boredom.", link: "https://www.roblox.com/games/14084341057/Quantum-Decay" },
+        { title: "The Frontrooms", start: "2022-11", end: "2022-12", description: "My second horror game, was made when the backrooms started to pop up everywhere, decided to get on the train", link: null },
+        { title: "Noob Attack", start: "2022-02", end: "2022-06", description: "Almost a full game, inspired by Defend the Statue and got the original creator of DtS on board, almost made it to release, was the main developer.", link: null },
+        { title: "Melee Blitz", start: "2021-06", end: "2021-11", description: "First collaboration with a studio, I was the main animator and a map designer", link: null },
+        { title: "The Island", start: "2021-03", end: "2021-03", description: "My first showcase game, this was to challenge myself and to get a base idea on how to use studios technology and how to push it", link: "https://www.roblox.com/games/6573164158/The-Island" },
+        { title: "Vindigo", start: "2020-12", end: "2021-01", description: "Second horror game that nearly finished, made it quite far in development but burnout was the death of it.", link: null },
+        { title: "Planet Artifact", start: "2020-11", end: "2020-11", description: "First attempt at an open world game, did not get past alpha.", link: null },
+        { title: "What Happened", start: "2020-06", end: "2020-07", description: "My very first solo horror game, the single project that kickstarted my entire lifestyle, hobby, and career.", link: "https://www.roblox.com/games/5212171853/What-Happened-Pre-Beta" }
+    ];
+
+    function formatDate(dateStr) {
+        const [year, month] = dateStr.split('-');
+        return new Date(year, month - 1);
+    }
+
+    // Sort games by start date (newest to oldest)
+    games.sort((a, b) => formatDate(b.start) - formatDate(a.start));
+
+    // Populate games
+    const gameList = document.getElementById("game-list");
+    games.forEach(game => {
+        const gameElement = document.createElement("div");
+        gameElement.classList.add("col-lg-10", "mb-4");
+        gameElement.innerHTML = `
+            <div class="card" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
+                <div class="card-body">
+                ${game.link ? `<a href="${game.link}" target="_blank" class="hover-link" style="text-decoration: none; color: rgb(80, 0, 230);">
+                    <h5 class="card-title" style="color: inherit;"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
+                    <p class="card-text" style="color: inherit;"><strong>${game.description}</strong></p>
+                </a>` : `<h5 class="card-title" style="color: rgb(80, 0, 230);"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
+                <p class="card-text" style="color: rgb(80, 0, 230);"><strong>${game.description}<strong> <span style="font-size: 0.9em; color: #888;">(Unplayable)</span></p>`}                
+                </div>
+            </div>
+        `;
+        gameList.appendChild(gameElement);
+    });
+
+    //// Scroll To Top
+
     // Add the "scroll to top" button functionality
     const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
@@ -42,4 +90,252 @@ window.addEventListener('DOMContentLoaded', event => {
 
     // Initialize the button visibility on load
     toggleScrollToTopBtn();
+});
+*/
+document.addEventListener('DOMContentLoaded', function () {
+    // Game List Handling
+    const games = [
+        { title: "Interliminality", start: "2024-03", end: "2024-04", description: "Second large impact and role for a large game, I enjoyed the time I worked on this game, I was an animator, scripter, builder and music artist", link: "https://www.roblox.com/games/14237585680/5-24-24-Interliminality-ALPHA-1-1-5" },
+        { title: "Blade Ball", start: "2024-02", end: "2024-03", description: "Offered to help fix any possible lag and difficulties with server-adjustments, I gave a recommendation for a sword that got added though", link: "https://www.roblox.com/games/13772394625/UPD-Blade-Ball" },
+        { title: "Terra-Isle", start: "2024-02", end: "2024-02", description: "Only creator, made in 13 hours without breaks, currently my most impressive Roblox creation.", link: "https://www.roblox.com/games/16404803992/Terra-Isle" },
+        { title: "Enigma", start: "2023-07", end: "2023-11", description: "My first game that had a story, ideas, and full set plan. Sadly Roblox had other plans and removed the game for a DMCA strike, only later that month reopening the game again", link: null },
+        { title: "Cozy Cuddle", start: "2023-06", end: "2023-06", description: "Second collaboration with a large horror game group, I was a scripter, animator, and UI designer, I quit soon after joining as the work environment was unfriendly and development was far far too slow", link: null },
+        { title: "The Bunker", start: "2023-08", end: "2024-01", description: "A game collaborated with Vizion, a close friend and a fellow game developer, this game was made throughout teaching my friend how to make a game and to actually make one on the way", link: "https://www.roblox.com/games/14350543850/The-Bunker-HORROR-Pre-Alpha" },
+        { title: "Cutscene", start: "2023-06", end: "2023-06", description: "My first cutscene game, I am still very proud of this project, I made this to challenge my animation abilities, this entire thing was made in 2 days, 8 hours of animating, 3 hours of voice acting and sound design", link: "https://www.roblox.com/games/13695671920/Cutscene" },
+        { title: "Quantum Decay", start: "2023-07", end: "2023-07", description: "Entire main menu, sound design, systems and the entire game made in 48 hours, no reason, just boredom.", link: "https://www.roblox.com/games/14084341057/Quantum-Decay" },
+        { title: "The Frontrooms", start: "2022-11", end: "2022-12", description: "My second horror game, was made when the backrooms started to pop up everywhere, decided to get on the train", link: null },
+        { title: "Noob Attack", start: "2022-02", end: "2022-06", description: "Almost a full game, inspired by Defend the Statue and got the original creator of DtS on board, almost made it to release, was the main developer.", link: null },
+        { title: "Melee Blitz", start: "2021-06", end: "2021-11", description: "First collaboration with a studio, I was the main animator and a map designer", link: null },
+        { title: "The Island", start: "2021-03", end: "2021-03", description: "My first showcase game, this was to challenge myself and to get a base idea on how to use studios technology and how to push it", link: "https://www.roblox.com/games/6573164158/The-Island" },
+        { title: "Vindigo", start: "2020-12", end: "2021-01", description: "Second horror game that nearly finished, made it quite far in development but burnout was the death of it.", link: null },
+        { title: "Planet Artifact", start: "2020-11", end: "2020-11", description: "First attempt at an open world game, did not get past alpha.", link: null },
+        { title: "What Happened", start: "2020-06", end: "2020-07", description: "My very first solo horror game, the single project that kickstarted my entire lifestyle, hobby, and career.", link: "https://www.roblox.com/games/5212171853/What-Happened-Pre-Beta" }
+    ];
+
+    function formatDate(dateStr) {
+        const [year, month] = dateStr.split('-');
+        return new Date(year, month - 1);
+    }
+
+    // Sort games by start date (newest to oldest)
+    games.sort((a, b) => formatDate(b.start) - formatDate(a.start));
+
+    const gameList = document.getElementById("game-list");
+    if (gameList) {
+        games.forEach(game => {
+            const gameElement = document.createElement("div");
+            gameElement.classList.add("col-lg-10", "mb-4");
+            gameElement.innerHTML = `
+                <div class="card" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
+                    <div class="card-body">
+                    ${game.link ? `<a href="${game.link}" target="_blank" class="hover-link" style="text-decoration: none; color: rgb(80, 0, 230);">
+                        <h5 class="card-title" style="color: inherit;"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
+                        <p class="card-text" style="color: inherit;"><strong>${game.description}</strong></p>
+                    </a>` : `<h5 class="card-title" style="color: rgb(80, 0, 230);"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
+                    <p class="card-text" style="color: rgb(80, 0, 230);"><strong>${game.description}<strong> <span style="font-size: 0.9em; color: #888;">(Unplayable)</span></p>`}
+                    </div>
+                </div>
+            `;
+            gameList.appendChild(gameElement);
+        });
+    }
+
+    //// Scroll To Top Button
+    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+    if (scrollToTopBtn) {
+        const toggleScrollToTopBtn = () => {
+            if (window.scrollY > 50) {
+                scrollToTopBtn.classList.add('show');
+                scrollToTopBtn.classList.remove('hide');
+            } else {
+                scrollToTopBtn.classList.add('hide');
+                scrollToTopBtn.classList.remove('show');
+            }
+        };
+
+        const scrollToTop = () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll effect
+            });
+        };
+
+        window.addEventListener("scroll", toggleScrollToTopBtn);
+        scrollToTopBtn.addEventListener("click", scrollToTop);
+        toggleScrollToTopBtn(); // Initial check
+    }
+
+    //// Audio Player Handling
+    const audioPlayers = document.querySelectorAll('.custom-audio-player');
+    let savedVolume = localStorage.getItem('audioVolume') || 1; // Default to max volume if nothing is saved
+
+    audioPlayers.forEach(function (playerContainer) {
+        const audio = playerContainer.nextElementSibling; // Assume <audio> is immediately after custom player div
+        if (!audio || audio.tagName !== 'AUDIO') {
+            console.error('Audio element not found or incorrect tag for custom player container');
+            return;
+        }
+
+        const playPauseButton = playerContainer.querySelector('.play-pause-button');
+        const seekSlider = playerContainer.querySelector('.seek-slider');
+        const volumeSlider = playerContainer.querySelector('.volume-slider');
+        const currentTimeElem = playerContainer.querySelector('.current-time');
+        const totalTimeElem = playerContainer.querySelector('.total-time');
+
+        // Set initial volume from localStorage
+        audio.volume = savedVolume;
+        if (volumeSlider) {
+            volumeSlider.value = savedVolume;
+        }
+
+        // Play/pause audio
+        if (playPauseButton) {
+            playPauseButton.addEventListener('click', function () {
+                if (audio.paused) {
+                    audio.play();
+                    playPauseButton.textContent = 'Pause';
+                } else {
+                    audio.pause();
+                    playPauseButton.textContent = 'Play';
+                }
+                updateVolumeSliderPosition(); // Update volume slider position immediately after play/pause button click
+            });
+        }
+
+        // Update seek slider as audio plays
+        if (seekSlider) {
+            audio.addEventListener('timeupdate', function () {
+                seekSlider.value = (audio.currentTime / audio.duration) * 100;
+                if (currentTimeElem) {
+                    currentTimeElem.textContent = formatTime(audio.currentTime);
+                }
+                updateVolumeSliderPosition(); // Ensure volume slider follows when playback slider updates
+            });
+
+            // Seek when slider is moved
+            seekSlider.addEventListener('input', function () {
+                audio.currentTime = (seekSlider.value / 100) * audio.duration;
+                updateVolumeSliderPosition(); // Update volume slider position when seeking
+            });
+        }
+
+        // Update total time
+        audio.addEventListener('loadedmetadata', function () {
+            if (totalTimeElem) {
+                totalTimeElem.textContent = formatTime(audio.duration);
+            }
+            updateVolumeSliderPosition(); // Update volume slider position when audio metadata loads
+        });
+
+        // Adjust volume when volume slider is moved
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', function () {
+                const newVolume = volumeSlider.value;
+                setVolumeForAllPlayers(newVolume);
+            });
+        }
+
+        // Function to sync volume slider's position to playback slider
+        function updateVolumeSliderPosition() {
+            if (!seekSlider || !volumeSlider) return;
+            const seekRect = seekSlider.getBoundingClientRect();
+            const playerRect = playerContainer.getBoundingClientRect();
+            const offsetLeft = seekRect.left - playerRect.left;
+
+            volumeSlider.style.left = `${offsetLeft}px`;
+        }
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        // Initial setup to ensure everything is in sync from the beginning
+        updateVolumeSliderPosition();
+    });
+
+    function setVolumeForAllPlayers(volume) {
+        audioPlayers.forEach(function (playerContainer) {
+            const audio = playerContainer.nextElementSibling;
+            const volumeSlider = playerContainer.querySelector('.volume-slider');
+            if (audio && audio.tagName === 'AUDIO') audio.volume = volume;
+            if (volumeSlider) volumeSlider.value = volume;
+        });
+
+        // Save the volume to localStorage
+        localStorage.setItem('audioVolume', volume);
+    }
+
+    particlesJS("particles-js", {
+        "particles": {
+            "number": {
+                "value": 100,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": "#5000e6"
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                }
+            },
+            "opacity": {
+                "value": 0.3,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 10,
+                "random": true,
+                "anim": {
+                    "enable": false,
+                    "speed": 20,
+                    "size_min": 0.1,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": false
+            },
+            "move": {
+                "enable": true,
+                "speed": 1.5,
+                "direction": "top",
+                "random": false,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": false
+                },
+                "onclick": {
+                    "enable": false
+                },
+                "resize": true
+            }
+        },
+        "retina_detect": true
+    });       
 });

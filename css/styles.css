@@ -654,13 +654,13 @@ progress {
 }
 
 .hover-link {
-  color: #5000ff;
+  color: #5000ff !important;
   text-decoration: none;
-  transition: color 1s ease;
+  transition: color 0.4s ease !important;
 }
 
 .hover-link:hover {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .container,
@@ -709,6 +709,16 @@ progress {
   --bs-gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+.row-music {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
@@ -1319,10 +1329,17 @@ progress {
   .col-lg-4 {
     flex: 0 0 auto;
     width: 33.33333333%;
+    margin-bottom: 10px;
   }
   .col-lg-5 {
     flex: 0 0 auto;
-    width: 41.66666667%;
+    width: 33.33333333%;
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 12px 12px rgba(0, 0, 0, 0.3);
+    flex: 1 1 calc(33.333% - 15px);
+    box-sizing: border-box;
   }
   .col-lg-6 {
     flex: 0 0 auto;
@@ -1809,6 +1826,23 @@ progress {
   border-top: 2px solid currentcolor;
 }
 
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .caption-top {
   caption-side: top;
 }
@@ -1998,6 +2032,56 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+.custom-audio-player {
+  display: flex;
+  align-items: center;
+  background: #1a1a1a;
+  padding: 10px;
+  border-radius: 8px;
+  color: #f0f0f0;
+  margin-top: 10px;
+  position: relative;
+}
+
+.play-pause-button {
+  background: none;
+  border: none;
+  color: #f0f0f0;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 15px;
+}
+
+.seek-slider {
+  width: 100%;
+  color: #5000e6 !important;;
+  max-width: 200px;
+  margin-right: 10px;
+}
+
+.current-time, .total-time {
+  font-size: 14px;
+}
+
+.volume-slider {
+  position: absolute;
+  left: 70px;
+  bottom: 60px;
+  opacity: 0;
+  color: #5000e6 !important;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: translateY(20px);
+  width: 100%;
+  max-width: 200px;
+  cursor: pointer;
+}
+
+.custom-audio-player:hover .volume-slider {
+  opacity: 1;
+  transform: translateY(20px);
+}
+
 .form-label {
   margin-bottom: 0.5rem;
 }
@@ -3302,12 +3386,19 @@ textarea.form-control-lg {
 }
 
 .portfolio-item {
-  transition: box-shadow 0.2s ease;
-}
-.portfolio-item:hover {
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0);
+  background-color: #1a1a1a; /* Set the background color */
+  border-radius: 15px; /* Rounded corners */
+  padding-top: 56.25%;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4); /* Add a shadow for a slight depth effect */
+  overflow: hidden; /* Ensure the rounded corners apply to child elements */
+  padding: 10px; /* Add some padding for aesthetics */
+  transition: box-shadow 0.2s ease-out;
+  object-fit: cover; /* Crops the image to maintain the aspect ratio */
 }
 
+.portfolio-item:hover {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+}
 
 .dropdown-menu-start {
   --bs-position: start;
@@ -11084,12 +11175,37 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
+  min-height: 40vh;
   background: linear-gradient(270deg, #310094, #000000);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
   animation: gradientAnimation 3s ease infinite;
+  overflow: hidden;
+}
+
+.masthead-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.masthead .container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 400%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+  transform: translateY(-40%);
 }
 
 @keyframes gradientAnimation {

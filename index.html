@@ -6,106 +6,114 @@
         <meta name="description" content="Fancy Ducc Portfolio - Game Development, Animation, Music, and more." />
      <meta name="author" content="Fancy Ducc" />
         <title>Fancy Ducc Portfolio</title>
-        <link rel="icon" type="image/x-icon" href="assets/Ducc2D.png" />
+        <link rel="icon" href="assets/Ducc2D.png" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top" style="background-color: #000000; color: #f0f0f0;">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><span style="color: #5000e6;"><strong>Fancy Ducc Portfolio</strong></span></a>
+                <a class="navbar-brand" href="index.html">
+                    <img src="assets/Ducc2D.png" alt="Logo" style="height: 30px; margin-right: 10px;">
+                    <span style="color: #5000e6;"><strong>Fancy Ducc Portfolio</strong></span>
+                </a>                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> Menu <i class="fas fa-bars ms-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link" href="index.html"><strong>Home</strong></a></li>
                         <li class="nav-item"><a class="nav-link" href="why-hire-me.html"><strong>Why Hire Me</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="testimonials.html"><strong>Testimonials</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="payments.html"><strong>Payments</strong></a></li>
                         <li class="nav-item"><a class="nav-link" href="games.html"><strong>Games</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="index.html#contact"><strong>Contact</strong></a></li>
+                        <li class="nav-item"><a class="nav-link" href="payments.html"><strong>Payments</strong></a></li>
+                        <li class="nav-item"><a class="nav-link" href="testimonials.html"><strong>Testimonials</strong></a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Masthead-->
         <header class="masthead">
-            <div class="container">
-                <div class="masthead-heading"><span style="color: rgb(80, 0, 230);">Hi, I'm Fancy Ducc</span></div>
-                <div class="masthead-subheading"><span style="color: #f0f0f0;">Animations, scripts, music, 3D models, and so much more.</span></div>
+            <div class="masthead-content">
+                <div id="particles-js"></div> <!-- Add this div for the particle effect -->
+                <div class="container">
+                    <div class="masthead-heading"><span style="color: rgb(80, 0, 230);">Hi, I'm Fancy Ducc</span></div>
+                    <div class="masthead-subheading"><span style="color: #f0f0f0;">Animations, scripts, music, 3D models, and so much more.</span></div>
+                </div>
             </div>
-        </header>
+        </header>        
         <!-- Animation Section-->
         <section class="page-section" id="animation" style="background-color: #111111; color: #f0f0f0;">
             <div class="container">
                 <div class="text-center" data-aos="fade-up" data-aos-duration="800">
                     <h2 class="section-heading text-uppercase"><span style="color: #f0f0f0;">Professional Animations</span></h2>
                 </div>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <p><span style="color: #f0f0f0;">In the world of animation, bringing characters and scenes to life is my specialty, though I have enjoyed doing other things. With over 9 years of hands-on experience in animating, I've mastered the art of making characters move. From walk cycles to action-packed cutscenes, my animations aim to immerse everyone at every turn. </span></p>
-                        <p><span style="color: #f0f0f0;"><strong>I created a cutscene not a long time ago, but I don't know what to put here if I remove this section, so it stays :p.</strong></span></p>
-                        <p><span style="color: #f0f0f0;"><strong>If you wish to play the game and have your own avatar in the cutscene, click <a href="https://www.roblox.com/games/13695671920/Cutscene" class="hover-link">here</strong></a>
-                    </div>
+                <div class="col-lg-12">
+                    <p><span style="color: #f0f0f0;">In the world of animation, bringing characters and scenes to life is my specialty. With over 9 years of hands-on experience, I've mastered the art of making characters move. From walk cycles to action-packed cutscenes, my animations aim to immerse everyone at every turn.</span></p>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <!-- Searching Drawers -->
-                        <div class="portfolio-item">
-                            <img class="img-fluid" src="assets/img/gifs/Searching Drawers.gif" alt="..." loading="lazy">
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Searching Drawers</div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="portfolio-item">
+                                    <img class="img-fluid" src="assets/img/gifs/Searching Drawers.gif" alt="Searching Drawers" loading="lazy">
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">Searching Drawers</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>                        
+                            <div class="col-md-6 mb-4">
+                                <div class="portfolio-item">
+                                    <img class="img-fluid" src="assets/img/gifs/Simple Walk Loop.gif" alt="Simple Walk Loop" loading="lazy">
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">Simple Walk Loop</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="portfolio-item">
+                                    <img class="img-fluid" src="assets/img/gifs/Crawler Enter.gif" alt="Crawler Enter" loading="lazy">
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">Crawler Enter Vent</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="portfolio-item">
+                                    <img class="img-fluid" src="assets/img/gifs/Crawler Exit.gif" alt="Crawler Exit" loading="lazy">
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">Crawler Exit Vent</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="portfolio-item">
+                                    <img class="img-fluid" src="assets/img/gifs/Toxic Collosus Walk.gif" alt="Toxic Collossus Crawl" loading="lazy">
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">Toxic Collossus Crawl</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="portfolio-item">
+                                    <img class="img-fluid" src="assets/img/gifs/Toxic Collossus Idle.gif" alt="Toxic Collossus Idle" loading="lazy">
+                                    <div class="portfolio-caption">
+                                        <div class="portfolio-caption-heading">Toxic Collossus Idle</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <!-- Simple Walk Loop -->
-                        <div class="portfolio-item">
-                            <img class="img-fluid" src="assets/img/gifs/Simple Walk Loop.gif" alt="..." loading="lazy">
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Simple Walk Loop</div>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <!-- Crawler Enter -->
-                        <div class="portfolio-item">
-                            <img class="img-fluid" src="assets/img/gifs/Crawler Enter.gif" alt="..." loading="lazy">
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Crawler Enter Vent</div>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <!-- Crawler Exit -->
-                        <div class="portfolio-item">
-                            <img class="img-fluid" src="assets/img/gifs/Crawler Exit.gif" alt="..." loading="lazy">
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Crawler Exit Vent</div>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <!-- Toxic Collossus Crawl -->
-                        <div class="portfolio-item">
-                            <img class="img-fluid" src="assets/img/gifs/Toxic Collosus Walk.gif" alt="..." loading="lazy">
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Toxic Collossus Crawl</div>
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
-                        <!-- Toxic Collossus Idle -->
-                        <div class="portfolio-item">
-                            <img class="img-fluid" src="assets/img/gifs/Toxic Collossus Idle.gif" alt="..." loading="lazy">
-                            <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Toxic Collossus Idle</div>
-                            </div>
-                        </div>                        
+                    <!-- Text and YouTube Video on the Right -->
+                    <div class="col-lg-6">
+                        <p><span style="color: #f0f0f0;"><strong>I created a cutscene not a long time ago, but I don't know what to put here if I remove this section, so it stays :p.</strong></span></p>
+                        <p><span style="color: #f0f0f0;"><strong>If you wish to play the game and have your own avatar in the cutscene, click <a href="https://www.roblox.com/games/13695671920/Cutscene" class="hover-link">here</a></strong></span></p>
+                        <div class="video-wrapper mt-4">
+                            <iframe width="100%" height="315" src="https://www.youtube.com/embed/slbXtMLoMMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -303,12 +311,14 @@
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <!-- Quantum Decay Main Menu Video -->
                         <div class="portfolio-item">
-                            <iframe class="img-fluid" width="560" height="480" src="https://www.youtube.com/embed/slbXtMLoMMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/slbXtMLoMMU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Quantum Decay Main Menu Video</div>
                                 <div class="portfolio-caption-subheading text-muted">2023 July</div>
                             </div>
-                        </div>
+                        </div>                                             
                     </div>
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <!-- Quantum Decay Hallway -->
@@ -418,153 +428,260 @@
         
         <!-- Music Section-->
         <section class="page-section" id="music" style="background-color: #111111; color: #1a1a1a;">
-            <div class="container">
+            <div class="container" style="padding-right: 5px; padding-left: 5px;">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase"><span style="color: #f0f0f0;">Experienced Music Design</span></h2>
                 </div>
                 <p><span style="color: #f0f0f0;">With the help of Bandlab, FL Studio, friends, and family, I know how to make active and great soundtracks in different themes. Whether it's horror, atmospheric, lofi, or even a remix of a meme—I've got you covered.</span></p>
-                <div class="row">
-                    <div class="col-lg-4">
+                <div class="row-music">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Atmospheric</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Where Am I</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Where am I.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Atmospheric</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Atmospheric Test</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Atmospheric thing.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Ambient</span></h4>
                         <div class="portfolio-caption-subheading text-muted">The In-Between</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/In-Between.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Ambient</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Limbo</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Limbo.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Horror</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Rage Chase Theme</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Rage Chase Theme.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Horror</span></h4>
                         <div class="portfolio-caption-subheading text-muted">The Art Gallery</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/The_Art_Gallery.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Horror</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Zmgr Vcrg</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Zmgr Vcrg.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Vaporwave</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Synth Testing</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Synth i guess.MP3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Vaporwave</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Synth Testing</div>
-                        <div class="portfolio-caption-subheading text-muted">Warning: This goes incredibly hard</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/The Wave.MP3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Electronic</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Electronic Thing</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Cyberpunk music Test.MP3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Electronic</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Project Dusk Main Menu Theme</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/project_DUsK.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Lofi</span></h4>
                         <div class="portfolio-caption-subheading text-muted">The Future Can't Wait</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/The Future Cant Wait.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Lofi</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Mio</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Mio.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Lofi</span></h4>
-                        <div class="portfolio-caption-subheading text-muted">The Thoughts I Can't Own</div>
-                        <audio controls>
+                        <div class="portfolio-caption-subheading text-muted">The Thoughts I Don't Own</div>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/The Thoughts I Cant Own.MP3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Funny</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Fire In The Hole</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/FIRE IN THE HOLE.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Funny</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Ghost Rave</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/Ghost Rave.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Funny</span></h4>
                         <div class="portfolio-caption-subheading text-muted">Braim Fard</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/braim fard.mp3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-5">
                         <h4><span style="color: #f0f0f0;">Misc</span></h4>
                         <div class="portfolio-caption-subheading text-muted">The Wild Saloon</div>
-                        <audio controls>
+                        <div class="custom-audio-player">
+                            <button class="play-pause-button">Play</button>
+                            <input type="range" class="seek-slider" value="0" max="100">
+                            <span class="current-time">0:00</span> / <span class="total-time">0:00</span>
+                            <input type="range" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                        </div>
+                        <audio class="audio-element">
                             <source src="assets/audio/The Wild Saloon.MP3" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
@@ -605,7 +722,9 @@
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
                         <!-- Simple Render -->
                         <div class="portfolio-item">
-                            <iframe class="img-fluid" width="560" height="1080" src="https://www.youtube.com/embed/PsgU6GH-Su8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="video-wrapper">
+                                <iframe src="https://www.youtube.com/embed/PsgU6GH-Su8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Made for fun :P</div>
                             </div>
@@ -626,8 +745,19 @@
                 <p><span style="color: #f0f0f0;">Thanks for taking the time to explore my work! If you've liked what you've seen and think we could make something great together, I'd love to hear from you. Whether you need expert animation, detailed scripting, unique building, or even a bit of 3D modeling, I'm here to help bring your gaming ideas to life.</span></p>
                 <p><span style="color: #f0f0f0;">Don't be a stranger - feel free to reach out with any questions, project ideas, or even just to chat about game development. I'm available on Discord as distinguished_duccer 7 days a week because I am chronically online. :D</span></p>
                 <div class="text-center">
-                    <a href="#contactForm" class="btn btn-primary btn-xl text-uppercase"><span style="color: #ffffff;">Contact Me Here</span></a>
+                    <a href="http://discordapp.com/users/1027686323282260069" target="_blank" class="btn btn-primary btn-xl text-uppercase"><span style="color: #ffffff;">Contact Me Here</span></a>
                 </div>
+                <div class="text-center mt-4">
+                    <a href="http://discordapp.com/users/1027686323282260069" target="_blank" class="contact-icon">
+                        <img class="img-fluid" src="assets/img/logos/Discord.png" alt="..." loading="lazy"/>
+                    </a>
+                    <a href="mailto:aweeaaweee@gmail.com" target="_blank" class="contact-icon mx-4">
+                        <img class="img-fluid" src="assets/img/logos/Gmail.png" alt="..." loading="lazy"/>
+                    </a>
+                    <a href="https://www.roblox.com/users/2038901944/profile" target="_blank" class="contact-icon">
+                        <img class="img-fluid" src="assets/img/logos/Roblox.png" alt="..." loading="lazy"/>
+                    </a>
+                </div>                
             </div>
         </section>
 
