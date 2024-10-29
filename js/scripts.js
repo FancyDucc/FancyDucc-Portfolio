@@ -1,3 +1,18 @@
+const style = document.createElement("style");
+style.textContent = `
+  .hidden-element {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .visible-element {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+document.head.appendChild(style);
+
 document.addEventListener('DOMContentLoaded', function () {
     const games = [
         { title: "Sane", start: "2024-10", end: "Present", description: "Creator and owner of a simplistic but lore filled horror game. Actively Under Development", link: null },
@@ -68,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleScrollToTopBtn();
     }
     const audioPlayers = document.querySelectorAll('.custom-audio-player');
-    let savedVolume = localStorage.getItem('audioVolume') || 1;d
+    let savedVolume = localStorage.getItem('audioVolume') || 1;
 
     audioPlayers.forEach(function (playerContainer) {
         const audio = playerContainer.nextElementSibling;
@@ -148,5 +163,42 @@ document.addEventListener('DOMContentLoaded', function () {
             if (volumeSlider) volumeSlider.value = volume;
         });
         localStorage.setItem('audioVolume', volume);
-    } 
+    }
+
+    let videos = document.querySelectorAll("iframe, video");
+  let observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let video = entry.target;
+        video.src = video.dataset.src;
+        observer.unobserve(video);
+      }
+    });
+  });
+
+  videos.forEach(video => {
+    observer.observe(video);
+  });
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.1,
+  };
+
+  const fadeInOnScroll = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible-element");
+        entry.target.classList.remove("hidden-element");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const elementsToFadeIn = document.querySelectorAll(".fade-in");
+  elementsToFadeIn.forEach((el) => {
+    el.classList.add("hidden-element");
+    fadeInOnScroll.observe(el);
+  });
 });
