@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const gameElement = document.createElement("div");
             gameElement.classList.add("col-lg-10", "mb-4");
             gameElement.innerHTML = `
-                <div class="card" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
+                <div class="card fade-in-item" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
                     <div class="card-body">
                     ${game.link ? `<a href="${game.link}" target="_blank" class="hover-link" style="text-decoration: none; color: rgb(80, 0, 230);">
                         <h5 class="card-title" style="color: inherit;"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
@@ -82,123 +82,147 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollToTopBtn.addEventListener("click", scrollToTop);
         toggleScrollToTopBtn();
     }
+
+    const fadeElements = document.querySelectorAll('.fade-in-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    });
+
+    fadeElements.forEach(el => observer.observe(el));
+
     const audioPlayers = document.querySelectorAll('.custom-audio-player');
     let savedVolume = localStorage.getItem('audioVolume') || 1;
 
     audioPlayers.forEach(function (playerContainer) {
-        const audio = playerContainer.nextElementSibling;
-        if (!audio || audio.tagName !== 'AUDIO') {
-            console.error('Audio element not found or incorrect tag for custom player container');
-            return;
-        }
+    const audio = playerContainer.nextElementSibling;
+    if (!audio || audio.tagName !== 'AUDIO') {
+        console.error('Audio element not found or incorrect tag for custom player container');
+        return;
+    }
 
-        const playPauseButton = playerContainer.querySelector('.play-pause-button');
-        const seekSlider = playerContainer.querySelector('.seek-slider');
-        const volumeSlider = playerContainer.querySelector('.volume-slider');
-        const currentTimeElem = playerContainer.querySelector('.current-time');
-        const totalTimeElem = playerContainer.querySelector('.total-time');
-        audio.volume = savedVolume;
-        if (volumeSlider) {
-            volumeSlider.value = savedVolume;
-        }
-        if (playPauseButton) {
-            playPauseButton.addEventListener('click', function () {
-                if (audio.paused) {
-                    audio.play();
-                    playPauseButton.textContent = 'Pause';
-                } else {
-                    audio.pause();
-                    playPauseButton.textContent = 'Play';
-                }
-                updateVolumeSliderPosition();
-            });
-        }
-        if (seekSlider) {
-            audio.addEventListener('timeupdate', function () {
-                seekSlider.value = (audio.currentTime / audio.duration) * 100;
-                if (currentTimeElem) {
-                    currentTimeElem.textContent = formatTime(audio.currentTime);
-                }
-                updateVolumeSliderPosition();
-            });
-            seekSlider.addEventListener('input', function () {
-                audio.currentTime = (seekSlider.value / 100) * audio.duration;
-                updateVolumeSliderPosition();
-            });
-        }
-        audio.addEventListener('loadedmetadata', function () {
-            if (totalTimeElem) {
-                totalTimeElem.textContent = formatTime(audio.duration);
+    const playPauseButton = playerContainer.querySelector('.play-pause-button');
+    const seekSlider = playerContainer.querySelector('.seek-slider');
+    const volumeSlider = playerContainer.querySelector('.volume-slider');
+    const currentTimeElem = playerContainer.querySelector('.current-time');
+    const totalTimeElem = playerContainer.querySelector('.total-time');
+    const downloadButton = playerContainer.querySelector('.download-button');
+
+    audio.volume = savedVolume;
+    if (volumeSlider) {
+        volumeSlider.value = savedVolume;
+    }
+
+    if (playPauseButton) {
+        playPauseButton.addEventListener('click', function () {
+            if (audio.paused) {
+                audio.play();
+                playPauseButton.textContent = 'Pause';
+            } else {
+                audio.pause();
+                playPauseButton.textContent = 'Play';
             }
             updateVolumeSliderPosition();
         });
-        if (volumeSlider) {
-            volumeSlider.addEventListener('input', function () {
-                const newVolume = volumeSlider.value;
-                setVolumeForAllPlayers(newVolume);
-            });
-        }
-        function updateVolumeSliderPosition() {
-            if (!seekSlider || !volumeSlider) return;
-            const seekRect = seekSlider.getBoundingClientRect();
-            const playerRect = playerContainer.getBoundingClientRect();
-            const offsetLeft = seekRect.left - playerRect.left;
+        audio.addEventListener('ended', function () {
+            playPauseButton.textContent = 'Play';
+            updateVolumeSliderPosition();
+        });
+    }
 
-            volumeSlider.style.left = `${offsetLeft}px`;
-        }
+    if (seekSlider) {
+        audio.addEventListener('timeupdate', function () {
+            seekSlider.value = (audio.currentTime / audio.duration) * 100;
+            if (currentTimeElem) {
+                currentTimeElem.textContent = formatTime(audio.currentTime);
+            }
+            updateVolumeSliderPosition();
+        });
+        seekSlider.addEventListener('input', function () {
+            audio.currentTime = (seekSlider.value / 100) * audio.duration;
+            updateVolumeSliderPosition();
+        });
+    }
 
-        function formatTime(time) {
-            const minutes = Math.floor(time / 60);
-            const seconds = Math.floor(time % 60);
-            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    audio.addEventListener('loadedmetadata', function () {
+        if (totalTimeElem) {
+            totalTimeElem.textContent = formatTime(audio.duration);
         }
         updateVolumeSliderPosition();
     });
 
-    function setVolumeForAllPlayers(volume) {
-        audioPlayers.forEach(function (playerContainer) {
-            const audio = playerContainer.nextElementSibling;
-            const volumeSlider = playerContainer.querySelector('.volume-slider');
-            if (audio && audio.tagName === 'AUDIO') audio.volume = volume;
-            if (volumeSlider) volumeSlider.value = volume;
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', function () {
+            const newVolume = volumeSlider.value;
+            setVolumeForAllPlayers(newVolume);
         });
-        localStorage.setItem('audioVolume', volume);
     }
 
-    let videos = document.querySelectorAll("iframe, video");
-  let observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        let video = entry.target;
-        video.src = video.dataset.src;
-        observer.unobserve(video);
-      }
+    document.querySelectorAll('.custom-audio-player').forEach(playerContainer => {
+        const audio = playerContainer.nextElementSibling;
+        const playPauseButton = playerContainer.querySelector('.play-pause-button');
+        const downloadButton = playerContainer.querySelector('.download-button');
+      
+        playPauseButton.addEventListener('click', () => {
+          if (audio.paused) {
+            audio.play();
+            playPauseButton.textContent = 'Pause';
+          } else {
+            audio.pause();
+            playPauseButton.textContent = 'Play';
+          }
+        });
+      
+        if (downloadButton) {
+          downloadButton.addEventListener('click', () => {
+            const audioSource = audio.querySelector('source').src;
+            const filename = audioSource.split('/').pop();
+      
+            fetch(audioSource)
+              .then(response => response.blob())
+              .then(blob => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = filename;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+              })
+              .catch(error => console.error('Download error:', error));
+          });
+        }
+      });       
+
+    function updateVolumeSliderPosition() {
+        if (!seekSlider || !volumeSlider) return;
+        const seekRect = seekSlider.getBoundingClientRect();
+        const playerRect = playerContainer.getBoundingClientRect();
+        const offsetLeft = seekRect.left - playerRect.left;
+
+        volumeSlider.style.left = `${offsetLeft}px`;
+    }
+
+    function formatTime(time) {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+
+        updateVolumeSliderPosition();
     });
-  });
 
-  videos.forEach(video => {
-    observer.observe(video);
-  });
-
-  const observerOptions = {
-    root: null,
-    rootMargin: "0px",
-    threshold: 0.1,
-  };
-
-  const fadeInOnScroll = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible-element");
-        entry.target.classList.remove("hidden-element");
-        observer.unobserve(entry.target);
-      }
+    function setVolumeForAllPlayers(volume) {
+    audioPlayers.forEach(function (playerContainer) {
+        const audio = playerContainer.nextElementSibling;
+        const volumeSlider = playerContainer.querySelector('.volume-slider');
+        if (audio && audio.tagName === 'AUDIO') audio.volume = volume;
+        if (volumeSlider) volumeSlider.value = volume;
     });
-  }, observerOptions);
-
-  const elementsToFadeIn = document.querySelectorAll(".fade-in");
-  elementsToFadeIn.forEach((el) => {
-    el.classList.add("hidden-element");
-    fadeInOnScroll.observe(el);
-  });
+    localStorage.setItem('audioVolume', volume);
+    }
 });
