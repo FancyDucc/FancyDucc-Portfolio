@@ -63,18 +63,16 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
-    /*
-    updateDiscount(90, [
+    updateDiscount(30, [
         { name: 'building', description: 'Building Services' },
     ]);
-    updateDiscount(60, [
+    updateDiscount(25, [
         { name: 'music', description: 'Music Design' },
     ]);
-    updateDiscount(100, [
+    updateDiscount(13, [
         { name: 'animation', description: 'Animation' },
     ]);
-    updateDiscount(84, [
+    updateDiscount(5, [
         { name: '3d modeling', description: '3D Modeling' },
     ]);
-    */
 });
