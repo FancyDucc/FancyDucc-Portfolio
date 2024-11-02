@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             const originalPrice = parseFloat(priceElement.getAttribute("data-original-price"));
                             const discountedPrice = (originalPrice * cumulativeDiscounts[serviceKey]).toFixed(2);
                             const discountedRobuxEquivalent = Math.round(discountedPrice * 80);
-                            const suffixMatch = priceElement.textContent.match(/\/(hr|script|track|asset)$/);
+                            const suffixMatch = priceElement.textContent.match(/\/(hr|script|track|asset|animation|build)$/);
                             const suffix = suffixMatch ? suffixMatch[0] : '/hr';
                             if (priceElement.classList.contains('usd')) {
                                 priceElement.textContent = `$${discountedPrice}${suffix}`;
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                 const originalPrice = parseFloat(startingPriceElement.getAttribute("data-original-price"));
                                 const discountedPrice = (originalPrice * cumulativeDiscounts[serviceKey]).toFixed(2);
                                 const discountedRobux = Math.round(discountedPrice * 80);
-                                const suffixMatch = startingPriceElement.textContent.match(/\/(hr|script|track|asset)$/);
+                                const suffixMatch = startingPriceElement.textContent.match(/\/(hr|script|track|asset|animation|build)$/);
                                 const suffix = suffixMatch ? suffixMatch[0] : '/hr';
 
                                 if (startingPriceElement.classList.contains('usd')) {
@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
+    /*
     updateDiscount(90, [
         { name: 'building', description: 'Building Services' },
     ]);
@@ -75,4 +76,5 @@ document.addEventListener("DOMContentLoaded", function() {
     updateDiscount(84, [
         { name: '3d modeling', description: '3D Modeling' },
     ]);
+    */
 });

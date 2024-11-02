@@ -82,7 +82,6 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollToTopBtn.addEventListener("click", scrollToTop);
         toggleScrollToTopBtn();
     }
-
     const audioPlayers = document.querySelectorAll('.custom-audio-player');
     let savedVolume = localStorage.getItem('audioVolume') || 1;
 
@@ -105,34 +104,16 @@ document.addEventListener('DOMContentLoaded', function () {
         volumeSlider.value = savedVolume;
     }
 
-    if (playPauseButton) {
-        playPauseButton.addEventListener('click', function () {
-            if (audio.paused) {
-                audio.play();
-                playPauseButton.textContent = 'Pause';
-            } else {
-                audio.pause();
-                playPauseButton.textContent = 'Play';
-            }
-            updateVolumeSliderPosition();
-        });
-        audio.addEventListener('ended', function () {
-            playPauseButton.textContent = 'Play';
-            updateVolumeSliderPosition();
-        });
-    }
-
     if (seekSlider) {
         audio.addEventListener('timeupdate', function () {
             seekSlider.value = (audio.currentTime / audio.duration) * 100;
             if (currentTimeElem) {
                 currentTimeElem.textContent = formatTime(audio.currentTime);
             }
-            updateVolumeSliderPosition();
         });
         seekSlider.addEventListener('input', function () {
             audio.currentTime = (seekSlider.value / 100) * audio.duration;
-            updateVolumeSliderPosition();
+            updateVolumeSliderPosition()
         });
     }
 
@@ -140,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (totalTimeElem) {
             totalTimeElem.textContent = formatTime(audio.duration);
         }
-        updateVolumeSliderPosition();
+        updateVolumeSliderPosition()
     });
 
     if (volumeSlider) {
@@ -159,11 +140,18 @@ document.addEventListener('DOMContentLoaded', function () {
           if (audio.paused) {
             audio.play();
             playPauseButton.textContent = 'Pause';
+            updateVolumeSliderPosition();
           } else {
             audio.pause();
             playPauseButton.textContent = 'Play';
+            updateVolumeSliderPosition();
           }
         });
+
+        audio.addEventListener('ended', () => {
+            playPauseButton.textContent = 'Play';
+            updateVolumeSliderPosition();
+        })
       
         if (downloadButton) {
           downloadButton.addEventListener('click', () => {
@@ -192,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const seekRect = seekSlider.getBoundingClientRect();
         const playerRect = playerContainer.getBoundingClientRect();
         const offsetLeft = seekRect.left - playerRect.left;
-
+        
         volumeSlider.style.left = `${offsetLeft}px`;
     }
 
@@ -201,8 +189,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const seconds = Math.floor(time % 60);
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
-
-        updateVolumeSliderPosition();
     });
 
     function setVolumeForAllPlayers(volume) {
