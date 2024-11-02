@@ -83,17 +83,6 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleScrollToTopBtn();
     }
 
-    const fadeElements = document.querySelectorAll('.fade-in-item');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    });
-
-    fadeElements.forEach(el => observer.observe(el));
-
     const audioPlayers = document.querySelectorAll('.custom-audio-player');
     let savedVolume = localStorage.getItem('audioVolume') || 1;
 
