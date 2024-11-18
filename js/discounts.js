@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const cumulativeDiscounts = {}; // Keep track of cumulative discounts for each service
+    const cumulativeDiscounts = {};
 
     function updateDiscount(discountPercentage, services) {
         const discountCard = document.getElementById('discount-card');
@@ -63,16 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
-    updateDiscount(30, [
+    updateDiscount(15, [
         { name: 'building', description: 'Building Services' },
-    ]);
-    updateDiscount(25, [
-        { name: 'music', description: 'Music Design' },
-    ]);
-    updateDiscount(13, [
-        { name: 'animation', description: 'Animation' },
-    ]);
-    updateDiscount(5, [
-        { name: '3d modeling', description: '3D Modeling' },
     ]);
 });

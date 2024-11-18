@@ -1,18 +1,3 @@
-const style = document.createElement("style");
-style.textContent = `
-  .hidden-element {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  }
-
-  .visible-element {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-document.head.appendChild(style);
-
 document.addEventListener('DOMContentLoaded', function () {
     const games = [
         { title: "Sane", start: "2024-10", end: "Present", description: "Creator and owner of a simplistic but lore filled horror game. Actively Under Development", link: null },
@@ -35,6 +20,50 @@ document.addEventListener('DOMContentLoaded', function () {
         { title: "Planet Artifact", start: "2020-11", end: "2020-11", description: "First attempt at an open world game, did not get past alpha.", link: null },
         { title: "What Happened", start: "2020-06", end: "2020-07", description: "My very first solo horror game, the single project that kickstarted my entire lifestyle, hobby, and career.", link: "https://www.roblox.com/games/5212171853/What-Happened-Pre-Beta" }
     ];
+
+    const lazyElements = document.querySelectorAll("img[loading='lazy'], video, .portfolio-item, .custom-audio-player");
+
+    if ("IntersectionObserver" in window) {
+        const lazyObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && entry.intersectionRatio === 1) {
+                const lazyElement = entry.target;
+  
+                setTimeout(() => {
+                  if (lazyElement.tagName === "IMG" || lazyElement.tagName === "VIDEO") {
+                    if (lazyElement.hasAttribute("data-src")) {
+                      lazyElement.src = lazyElement.getAttribute("data-src");
+                      lazyElement.removeAttribute("data-src");
+                    }
+                    lazyElement.classList.add("visible-element");
+                  } else {
+                    lazyElement.classList.add("visible-element");
+                  }
+  
+                  observer.unobserve(lazyElement);
+                }, 500);
+              }
+            });
+          },
+          { threshold: 1 }
+        );
+  
+      lazyElements.forEach(element => {
+        element.classList.add("hidden-element");
+        lazyObserver.observe(element);
+      });
+    } else {
+      lazyElements.forEach(element => {
+        if (element.tagName === "IMG" || element.tagName === "VIDEO") {
+          if (element.hasAttribute("data-src")) {
+            element.src = element.getAttribute("data-src");
+            element.removeAttribute("data-src");
+          }
+        }
+        element.classList.add("visible-element");
+      });
+    }   
 
     function formatDate(dateStr) {
         const [year, month] = dateStr.split('-');
@@ -154,25 +183,28 @@ document.addEventListener('DOMContentLoaded', function () {
         })
       
         if (downloadButton) {
-          downloadButton.addEventListener('click', () => {
-            const audioSource = audio.querySelector('source').src;
-            const filename = audioSource.split('/').pop();
-      
-            fetch(audioSource)
-              .then(response => response.blob())
-              .then(blob => {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                URL.revokeObjectURL(url);
-              })
-              .catch(error => console.error('Download error:', error));
-          });
-        }
+            downloadButton.addEventListener("click", () => {
+              const audioSource = audio.querySelector("source").src;
+              const filename = audioSource.split("/").pop();
+    
+              if (audioSource) {
+                fetch(audioSource)
+                  .then(response => response.blob())
+                  .then(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = url;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                  })
+                  .catch(error => console.error("Download error:", error));
+              }
+            });
+          }
+    
       });       
 
     function updateVolumeSliderPosition() {
@@ -200,4 +232,68 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     localStorage.setItem('audioVolume', volume);
     }
+    
+    /*
+    if (document.querySelectorAll(".portfolio-item").length > 0) {
+      VanillaTilt.init(document.querySelectorAll(".portfolio-item"), {
+          max: -10,
+          speed: 2000,
+          easing: "cubic-bezier(.03,.98,.52,.99)",
+          glare: true,
+          "max-glare": 0.1,
+      });
+    
+  }
+  */
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  if (lightbox && lightboxImg) {
+      document.querySelectorAll(".portfolio-image").forEach(image => {
+          image.addEventListener("click", function() {
+              lightboxImg.src = this.src;
+              lightbox.classList.add("active");
+              lightbox.style.animation = "fadeInLightbox 0.3s ease-in-out";
+          });
+      });
+
+      lightbox.addEventListener("click", function(e) {
+          if (e.target !== lightboxImg) {
+              lightbox.style.animation = "fadeOutLightbox 0.3s ease-in-out";
+              setTimeout(() => {
+                  lightbox.classList.remove("active");
+              }, 300);
+          }
+      });
+  }
+
+  
+    const gifs = document.querySelectorAll("img.gif");
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const gif = entry.target;
+            if (!entry.isIntersecting) {
+                gif.src = gif.dataset.static; // Replace with static image
+            } else {
+                gif.src = gif.dataset.gif; // Replace with GIF
+            }
+        });
+    });
+    gifs.forEach(gif => observer.observe(gif));
+});
+
+window.addEventListener('load', () => {
+  const gifs = document.querySelectorAll('img.gif');
+  let index = 0;
+
+  function loadNextGif() {
+      if (index >= gifs.length) return;
+      const gif = gifs[index];
+      gif.src = gif.dataset.src;
+      index++;
+      setTimeout(loadNextGif, 200);
+  }
+  document.querySelectorAll('img.gif').forEach(img => {
+      img.src = img.dataset.src;
+  });
 });
