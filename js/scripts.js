@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (gameList) {
         games.forEach(game => {
             const gameElement = document.createElement("div");
-            gameElement.classList.add("col-lg-10", "mb-4");
+            gameElement.classList.add("col-lg-12", "mb-4");
             gameElement.innerHTML = `
                 <div class="card fade-in-item" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
                     <div class="card-body">
@@ -233,7 +233,6 @@ document.addEventListener('DOMContentLoaded', function () {
     localStorage.setItem('audioVolume', volume);
     }
     
-    /*
     if (document.querySelectorAll(".portfolio-item").length > 0) {
       VanillaTilt.init(document.querySelectorAll(".portfolio-item"), {
           max: -10,
@@ -244,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     
   }
-  */
+
   const lightbox = document.getElementById("lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
 
