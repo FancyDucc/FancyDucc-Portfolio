@@ -115,17 +115,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let savedVolume = localStorage.getItem('audioVolume') || 1;
 
     audioPlayers.forEach(function (playerContainer) {
-    const audio = playerContainer.nextElementSibling;
-    if (!audio || audio.tagName !== 'AUDIO') {
-        console.error('Audio element not found or incorrect tag for custom player container');
-        return;
-    }
-
-    const playPauseButton = playerContainer.querySelector('.play-pause-button');
+      const audio = playerContainer.nextElementSibling;
+      if (!audio || audio.tagName !== 'AUDIO') {
+          console.error('Audio element not found or incorrect tag for custom player container');
+          return;
+      }
     const seekSlider = playerContainer.querySelector('.seek-slider');
     const volumeSlider = playerContainer.querySelector('.volume-slider');
     const currentTimeElem = playerContainer.querySelector('.current-time');
     const totalTimeElem = playerContainer.querySelector('.total-time');
+    const playPauseButton = playerContainer.querySelector('.play-pause-button');
     const downloadButton = playerContainer.querySelector('.download-button');
 
     audio.volume = savedVolume;
@@ -160,59 +159,70 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    document.querySelectorAll('.custom-audio-player').forEach(playerContainer => {
-        const audio = playerContainer.nextElementSibling;
-        const playPauseButton = playerContainer.querySelector('.play-pause-button');
-        const downloadButton = playerContainer.querySelector('.download-button');
-      
-        playPauseButton.addEventListener('click', () => {
+    console.log("Initializing audio player:", playerContainer);
+  
+      console.log("Audio element:", audio);
+      console.log("Play/Pause button:", playPauseButton);
+      console.log("Download button:", downloadButton);
+  
+      playPauseButton.addEventListener('click', () => {
           if (audio.paused) {
-            audio.play();
-            playPauseButton.textContent = 'Pause';
-            updateVolumeSliderPosition();
+              console.log("Playing audio");
+              audio.play();
+              playPauseButton.textContent = 'Pause';
+              updateVolumeSliderPosition();
           } else {
-            audio.pause();
-            playPauseButton.textContent = 'Play';
-            updateVolumeSliderPosition();
+              console.log("Pausing audio");
+              audio.pause();
+              playPauseButton.textContent = 'Play';
+              updateVolumeSliderPosition();
           }
-        });
-
-        audio.addEventListener('ended', () => {
-            playPauseButton.textContent = 'Play';
-            updateVolumeSliderPosition();
-        })
-      
-        if (downloadButton) {
-            downloadButton.addEventListener("click", () => {
+      });
+  
+      audio.addEventListener('ended', () => {
+          console.log("Audio ended");
+          playPauseButton.textContent = 'Play';
+          updateVolumeSliderPosition();
+      });
+  
+      if (downloadButton) {
+          downloadButton.addEventListener("click", () => {
+              console.log("Download button clicked");
               const audioSource = audio.querySelector("source").src;
               const filename = audioSource.split("/").pop();
-    
+  
+              console.log("Audio source:", audioSource);
+              console.log("Filename for download:", filename);
+  
               if (audioSource) {
-                fetch(audioSource)
-                  .then(response => response.blob())
-                  .then(blob => {
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement("a");
-                    link.href = url;
-                    link.download = filename;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
-                  })
-                  .catch(error => console.error("Download error:", error));
+                  fetch(audioSource)
+                      .then(response => {
+                          console.log("Fetch successful");
+                          return response.blob();
+                      })
+                      .then(blob => {
+                          console.log("Blob created");
+                          const url = URL.createObjectURL(blob);
+                          const link = document.createElement("a");
+                          link.href = url;
+                          link.download = filename;
+                          document.body.appendChild(link);
+                          link.click();
+                          document.body.removeChild(link);
+                          URL.revokeObjectURL(url);
+                          console.log("Download initiated");
+                      })
+                      .catch(error => console.error("Download error:", error));
               }
-            });
-          }
-    
-      });       
+          });
+      }
 
     function updateVolumeSliderPosition() {
         if (!seekSlider || !volumeSlider) return;
         const seekRect = seekSlider.getBoundingClientRect();
         const playerRect = playerContainer.getBoundingClientRect();
         const offsetLeft = seekRect.left - playerRect.left;
-        
+
         volumeSlider.style.left = `${offsetLeft}px`;
     }
 
