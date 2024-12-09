@@ -978,27 +978,48 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .lightbox-overlay {
-  display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  cursor: default;
+  top: 0; left: 0; 
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; 
+  transition: opacity 0.3s ease-in-out;
 }
-
 .lightbox-overlay.active {
-  display: flex;
-  animation: fadeInLightbox 1s ease-in-out;
+  opacity: 1; pointer-events: auto;
 }
-
 .lightbox-img {
   max-width: 90%;
   max-height: 90%;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.lightbox-overlay.active .lightbox-img {
+  opacity: 1;
+  transform: scale(1.05);
+}
+.lightbox-arrow {
+  position: absolute; top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+.lightbox-arrow-left {
+  left: 2%;
+}
+.lightbox-arrow-right {
+  right: 2%;
+}
+.lightbox-arrow.show {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 @keyframes spinner-border {

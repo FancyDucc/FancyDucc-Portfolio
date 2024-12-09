@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
     const games = [
+        { title: "Paradox", start: "2024-11", end: "Present", description: "Developer for a DOORS fangame known as Paradox, I was a Builder, Scripter, Animator, Sound Designer, and VFX Artist", link: "https://www.roblox.com/games/15185420347/DEMO-Paradox-DOORS" },
         { title: "Sane", start: "2024-10", end: "Present", description: "Creator and owner of a simplistic but lore filled horror game. Actively Under Development", link: null },
-        { title: "Throw Bricks At People", start: "2024-07", end: "Present", description: "Main developer in a full and large team.  Actively Under Development", link: null },
+        { title: "Throw Bricks At People", start: "2024-07", end: "2024-11", description: "Main developer in a full and large team. I still periodically help out with the game when it is needed.", link: null },
         { title: "Inbetween", start: "2024-04", end: "2024-07", description: "Inspired by Interliminality, full 11 section game with a story, I was the main creator, collaborating with friends", link: null },
-        { title: "Interliminality", start: "2024-03", end: "2024-04", description: "Second large impact and role for a large game, I enjoyed the time I worked on this game, I was an animator, scripter, builder and music artist", link: "https://www.roblox.com/games/14237585680/5-24-24-Interliminality-ALPHA-1-1-5" },
+        { title: "Interliminality", start: "2024-03", end: "2024-04", description: "Second large impact and role for a large game, I enjoyed the time I worked on this game, I was an Animator, Scripter, Builder and Music artist", link: "https://www.roblox.com/games/14237585680/5-24-24-Interliminality-ALPHA-1-1-5" },
         { title: "Blade Ball", start: "2024-02", end: "2024-02", description: "Offered to help fix any possible lag and difficulties with server-adjustments, I gave a recommendation for a sword that got added though", link: "https://www.roblox.com/games/13772394625/UPD-Blade-Ball" },
-        { title: "Terra-Isle", start: "2024-02", end: "2024-02", description: "Only creator, made in 13 hours without breaks, currently my most impressive Roblox creation.", link: "https://www.roblox.com/games/16404803992/Terra-Isle" },
+        { title: "Terra-Isle", start: "2024-02", end: "2024-02", description: "Only creator, made in 13 hours without breaks, currently my most impressive Roblox game.", link: "https://www.roblox.com/games/16404803992/Terra-Isle" },
         { title: "Enigma", start: "2023-07", end: "2023-11", description: "My first game that had a story, ideas, and full set plan. Sadly Roblox had other plans and removed the game for a DMCA strike, only later that month reopening the game again", link: null },
         { title: "Cozy Cuddle", start: "2023-06", end: "2023-06", description: "Second collaboration with a large horror game group, I was a scripter, animator, and UI designer, I quit soon after joining as the work environment was unfriendly and development was far far too slow", link: null },
         { title: "The Bunker", start: "2023-08", end: "2024-01", description: "A game collaborated with Vizion, a close friend and a fellow game developer, this game was made throughout teaching my friend how to make a game and to actually make one on the way", link: "https://www.roblox.com/games/14350543850/The-Bunker-HORROR-Pre-Alpha" },
@@ -158,21 +159,12 @@ document.addEventListener('DOMContentLoaded', function () {
             setVolumeForAllPlayers(newVolume);
         });
     }
-
-    console.log("Initializing audio player:", playerContainer);
-  
-      console.log("Audio element:", audio);
-      console.log("Play/Pause button:", playPauseButton);
-      console.log("Download button:", downloadButton);
-  
       playPauseButton.addEventListener('click', () => {
           if (audio.paused) {
-              console.log("Playing audio");
               audio.play();
               playPauseButton.textContent = 'Pause';
               updateVolumeSliderPosition();
           } else {
-              console.log("Pausing audio");
               audio.pause();
               playPauseButton.textContent = 'Play';
               updateVolumeSliderPosition();
@@ -180,28 +172,21 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   
       audio.addEventListener('ended', () => {
-          console.log("Audio ended");
           playPauseButton.textContent = 'Play';
           updateVolumeSliderPosition();
       });
   
       if (downloadButton) {
           downloadButton.addEventListener("click", () => {
-              console.log("Download button clicked");
               const audioSource = audio.querySelector("source").src;
               const filename = audioSource.split("/").pop();
-  
-              console.log("Audio source:", audioSource);
-              console.log("Filename for download:", filename);
   
               if (audioSource) {
                   fetch(audioSource)
                       .then(response => {
-                          console.log("Fetch successful");
                           return response.blob();
                       })
                       .then(blob => {
-                          console.log("Blob created");
                           const url = URL.createObjectURL(blob);
                           const link = document.createElement("a");
                           link.href = url;
@@ -254,27 +239,68 @@ document.addEventListener('DOMContentLoaded', function () {
     
   }
 
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
+    const images = Array.from(document.querySelectorAll(".portfolio-image"))
+    const lightbox = document.getElementById("lightbox")
+    const lightboxImg = document.getElementById("lightbox-img")
+    const prevArrow = document.getElementById("lightbox-prev")
+    const nextArrow = document.getElementById("lightbox-next")
+    let currentIndex = -1
 
-  if (lightbox && lightboxImg) {
-      document.querySelectorAll(".portfolio-image").forEach(image => {
-          image.addEventListener("click", function() {
-              lightboxImg.src = this.src;
-              lightbox.classList.add("active");
-              lightbox.style.animation = "fadeInLightbox 0.3s ease-in-out";
-          });
-      });
+    if (lightbox && lightboxImg && images.length > 0) {
+        images.forEach((image, index) => {
+            image.addEventListener("click", function() {
+                currentIndex = index
+                showImage(index, false)
+                lightbox.classList.add("active")
+            })
+        })
 
-      lightbox.addEventListener("click", function(e) {
-          if (e.target !== lightboxImg) {
-              lightbox.style.animation = "fadeOutLightbox 0.3s ease-in-out";
-              setTimeout(() => {
-                  lightbox.classList.remove("active");
-              }, 300);
-          }
-      });
-  }
+        function showImage(index, fade) {
+            if (index < 0 || index >= images.length) return
+            const newSrc = images[index].src
+            if (fade) {
+                lightboxImg.style.opacity = "0"
+                setTimeout(() => {
+                    lightboxImg.src = newSrc
+                    lightboxImg.style.opacity = "1"
+                }, 300)
+            } else {
+                lightboxImg.src = newSrc
+                lightboxImg.style.opacity = "1"
+            }
+
+            if (index > 0) {
+                prevArrow.classList.add("show")
+            } else {
+                prevArrow.classList.remove("show")
+            }
+
+            if (index < images.length - 1) {
+                nextArrow.classList.add("show")
+            } else {
+                nextArrow.classList.remove("show")
+            }
+        }
+
+        lightbox.addEventListener("click", function(e) {
+            if (e.target === lightbox || e.target === prevArrow || e.target === nextArrow) return
+            lightbox.classList.remove("active")
+        })
+
+        prevArrow.addEventListener("click", function() {
+            if (currentIndex > 0) {
+                currentIndex--
+                showImage(currentIndex, true)
+            }
+        })
+
+        nextArrow.addEventListener("click", function() {
+            if (currentIndex < images.length - 1) {
+                currentIndex++
+                showImage(currentIndex, true)
+            }
+        })
+    }
 
   
     const gifs = document.querySelectorAll("img.gif");
@@ -282,9 +308,9 @@ document.addEventListener('DOMContentLoaded', function () {
         entries.forEach(entry => {
             const gif = entry.target;
             if (!entry.isIntersecting) {
-                gif.src = gif.dataset.static; // Replace with static image
+                gif.src = gif.dataset.static;
             } else {
-                gif.src = gif.dataset.gif; // Replace with GIF
+                gif.src = gif.dataset.gif;
             }
         });
     });
