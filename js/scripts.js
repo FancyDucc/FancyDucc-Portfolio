@@ -31,19 +31,14 @@ document.addEventListener('DOMContentLoaded', function () {
               if (entry.isIntersecting && entry.intersectionRatio === 1) {
                 const lazyElement = entry.target;
   
-                setTimeout(() => {
-                  if (lazyElement.tagName === "IMG" || lazyElement.tagName === "VIDEO") {
+                if (lazyElement.tagName === "IMG" || lazyElement.tagName === "VIDEO") {
                     if (lazyElement.hasAttribute("data-src")) {
                       lazyElement.src = lazyElement.getAttribute("data-src");
                       lazyElement.removeAttribute("data-src");
                     }
-                    lazyElement.classList.add("visible-element");
-                  } else {
-                    lazyElement.classList.add("visible-element");
                   }
-  
-                  observer.unobserve(lazyElement);
-                }, 500);
+                  lazyElement.classList.add("visible-element");
+                  observer.unobserve(lazyElement);                  
               }
             });
           },
@@ -227,17 +222,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     localStorage.setItem('audioVolume', volume);
     }
-    
-    if (document.querySelectorAll(".portfolio-item").length > 0) {
-      VanillaTilt.init(document.querySelectorAll(".portfolio-item"), {
-          max: -10,
-          speed: 2000,
-          easing: "cubic-bezier(.03,.98,.52,.99)",
-          glare: true,
-          "max-glare": 0.1,
-      });
-    
-  }
+});
+
+window.onload = function() {
+    const portfolioItems = document.querySelectorAll(".portfolio-item");
+    if (portfolioItems.length > 0) {
+        VanillaTilt.init(portfolioItems, {
+            max: -10,
+            speed: 2000,
+            easing: "cubic-bezier(.03,.98,.52,.99)",
+            glare: true,
+            "max-glare": 0.1,
+        });
+    }
+
+    console.log("VanillaTilt initialized");
 
     const images = Array.from(document.querySelectorAll(".portfolio-image"))
     const lightbox = document.getElementById("lightbox")
@@ -301,34 +300,4 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
     }
-
-  
-    const gifs = document.querySelectorAll("img.gif");
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const gif = entry.target;
-            if (!entry.isIntersecting) {
-                gif.src = gif.dataset.static;
-            } else {
-                gif.src = gif.dataset.gif;
-            }
-        });
-    });
-    gifs.forEach(gif => observer.observe(gif));
-});
-
-window.addEventListener('load', () => {
-  const gifs = document.querySelectorAll('img.gif');
-  let index = 0;
-
-  function loadNextGif() {
-      if (index >= gifs.length) return;
-      const gif = gifs[index];
-      gif.src = gif.dataset.src;
-      index++;
-      setTimeout(loadNextGif, 200);
-  }
-  document.querySelectorAll('img.gif').forEach(img => {
-      img.src = img.dataset.src;
-  });
-});
+};
