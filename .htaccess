@@ -1,0 +1,3 @@
+AddType audio/mpeg .mp3
+AddType audio/wav .wav
+AddType audio/ogg .ogg

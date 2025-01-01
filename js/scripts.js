@@ -108,14 +108,20 @@ document.addEventListener('DOMContentLoaded', function () {
         toggleScrollToTopBtn();
     }
     const audioPlayers = document.querySelectorAll('.custom-audio-player');
-    let savedVolume = localStorage.getItem('audioVolume') || 1;
+let savedVolume = localStorage.getItem('audioVolume') || 1;
+console.log('Saved volume from localStorage:', savedVolume);
 
-    audioPlayers.forEach(function (playerContainer) {
-      const audio = playerContainer.nextElementSibling;
-      if (!audio || audio.tagName !== 'AUDIO') {
-          console.error('Audio element not found or incorrect tag for custom player container');
-          return;
-      }
+audioPlayers.forEach(function (playerContainer) {
+    const audio = playerContainer.nextElementSibling;
+    const audioSource = audio.querySelector("source").src;
+    const filename = audioSource.split("/").pop();
+    console.log('Initializing audio player:', filename);
+    if (!audio || audio.tagName !== 'AUDIO') {
+        console.error('Audio element not found or incorrect tag for custom player container:', filename);
+        return;
+    }
+    console.log('Audio element found:', filename);
+
     const seekSlider = playerContainer.querySelector('.seek-slider');
     const volumeSlider = playerContainer.querySelector('.volume-slider');
     const currentTimeElem = playerContainer.querySelector('.current-time');
@@ -126,76 +132,86 @@ document.addEventListener('DOMContentLoaded', function () {
     audio.volume = savedVolume;
     if (volumeSlider) {
         volumeSlider.value = savedVolume;
+        console.log('Volume slider initialized to:', savedVolume);
     }
 
     if (seekSlider) {
         audio.addEventListener('timeupdate', function () {
             seekSlider.value = (audio.currentTime / audio.duration) * 100;
+            console.log('Seek slider updated to:', seekSlider.value);
             if (currentTimeElem) {
                 currentTimeElem.textContent = formatTime(audio.currentTime);
+                console.log('Current time displayed as:', currentTimeElem.textContent);
             }
         });
         seekSlider.addEventListener('input', function () {
             audio.currentTime = (seekSlider.value / 100) * audio.duration;
-            updateVolumeSliderPosition()
+            console.log('Seek slider adjusted, new currentTime:', audio.currentTime);
+            updateVolumeSliderPosition();
         });
     }
 
     audio.addEventListener('loadedmetadata', function () {
         if (totalTimeElem) {
             totalTimeElem.textContent = formatTime(audio.duration);
+            console.log('Total time set to:', totalTimeElem.textContent);
         }
-        updateVolumeSliderPosition()
+        updateVolumeSliderPosition();
     });
 
     if (volumeSlider) {
         volumeSlider.addEventListener('input', function () {
             const newVolume = volumeSlider.value;
+            console.log('Volume slider changed to:', newVolume);
             setVolumeForAllPlayers(newVolume);
         });
     }
-      playPauseButton.addEventListener('click', () => {
-          if (audio.paused) {
-              audio.play();
-              playPauseButton.textContent = 'Pause';
-              updateVolumeSliderPosition();
-          } else {
-              audio.pause();
-              playPauseButton.textContent = 'Play';
-              updateVolumeSliderPosition();
-          }
-      });
-  
-      audio.addEventListener('ended', () => {
-          playPauseButton.textContent = 'Play';
-          updateVolumeSliderPosition();
-      });
-  
-      if (downloadButton) {
-          downloadButton.addEventListener("click", () => {
-              const audioSource = audio.querySelector("source").src;
-              const filename = audioSource.split("/").pop();
-  
-              if (audioSource) {
-                  fetch(audioSource)
-                      .then(response => {
-                          return response.blob();
-                      })
-                      .then(blob => {
-                          const url = URL.createObjectURL(blob);
-                          const link = document.createElement("a");
-                          link.href = url;
-                          link.download = filename;
-                          document.body.appendChild(link);
-                          link.click();
-                          document.body.removeChild(link);
-                          URL.revokeObjectURL(url);
-                          console.log("Download initiated");
-                      })
-                      .catch(error => console.error("Download error:", error));
-              }
-          });
-      }
+
+    playPauseButton.addEventListener('click', () => {
+        console.log('Button clicked, activating:', filename);
+        if (audio.paused) {
+            audio.play();
+            playPauseButton.textContent = 'Pause';
+            console.log('Audio playing');
+            updateVolumeSliderPosition();
+        } else {
+            audio.pause();
+            playPauseButton.textContent = 'Play';
+            console.log('Audio paused');
+            updateVolumeSliderPosition();
+        }
+    });
+
+    audio.addEventListener('ended', () => {
+        playPauseButton.textContent = 'Play';
+        console.log('Audio playback ended');
+        updateVolumeSliderPosition();
+    });
+
+    if (downloadButton) {
+        downloadButton.addEventListener("click", () => {
+            const audioSource = audio.querySelector("source").src;
+            const filename = audioSource.split("/").pop();
+
+            if (audioSource) {
+                console.log('Download button clicked, downloading:', filename);
+                fetch(audioSource)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = URL.createObjectURL(blob);
+                        const link = document.createElement("a");
+                        link.href = url;
+                        link.download = filename;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        URL.revokeObjectURL(url);
+                        console.log("Download completed for:", filename);
+                    })
+                    .catch(error => console.error("Download error:", error));
+            }
+        });
+    }
 
     function updateVolumeSliderPosition() {
         if (!seekSlider || !volumeSlider) return;
@@ -204,16 +220,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const offsetLeft = seekRect.left - playerRect.left;
 
         volumeSlider.style.left = `${offsetLeft}px`;
+        console.log('Volume slider position updated:', offsetLeft);
     }
 
     function formatTime(time) {
         const minutes = Math.floor(time / 60);
         const seconds = Math.floor(time % 60);
         return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
-    });
+    }
+});
 
-    function setVolumeForAllPlayers(volume) {
+function setVolumeForAllPlayers(volume) {
+    console.log('Setting volume for all players to:', volume);
     audioPlayers.forEach(function (playerContainer) {
         const audio = playerContainer.nextElementSibling;
         const volumeSlider = playerContainer.querySelector('.volume-slider');
@@ -221,7 +239,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (volumeSlider) volumeSlider.value = volume;
     });
     localStorage.setItem('audioVolume', volume);
-    }
+}
+
 });
 
 window.onload = function() {
