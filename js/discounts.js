@@ -63,7 +63,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
     }
-    updateDiscount(15, [
+    updateDiscount(25, [
         { name: 'vfx', description: 'VFX Discounts' },
+    ]);
+    updateDiscount(5, [
+        { name: 'building', description: 'Building Discounts' },
+    ]);
+    updateDiscount(10, [
+        { name: 'scripting', description: 'Scripting Discounts' },
     ]);
 });

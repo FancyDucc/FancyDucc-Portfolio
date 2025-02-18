@@ -30,6 +30,12 @@ document.addEventListener("DOMContentLoaded", function () {
         type: "file",
         link: "../assets/rbxm/WaveformGenerator.rbxm"
       },
+      {
+        title: "Fidelity Engineer",
+        description: "A full fidelity engineer plugin that can make setting CollisionFidelity and similar properties much easier.",
+        type: "link",
+        link: "https://devforum.roblox.com/t/fidelity-engineer-plugin-an-easier-and-more-modular-way-to-edit-fidelity/3452485"
+      },
   ];
 
   const freeStuffList = document.getElementById("free-stuff-list");
