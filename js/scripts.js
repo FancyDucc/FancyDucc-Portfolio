@@ -85,6 +85,108 @@ document.addEventListener('DOMContentLoaded', function () {
             gameList.appendChild(gameElement);
         });
     }
+
+    const topItems = document.querySelectorAll('#mainNavTop .nav-item');
+  const subNavContainer = document.getElementById('subNavContainer');
+  let currentSubNav = null; // which submenu is currently open
+  let transitionInProgress = false;
+
+  topItems.forEach(item => {
+    const submenuId = item.getAttribute('data-submenu');
+    const link = item.querySelector('.nav-link');
+  
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+  
+      // 1) If a transition is in progress, ignore any clicks
+      if (transitionInProgress) return;
+  
+      // 2) Otherwise proceed with your existing logic
+      if (currentSubNav === submenuId) {
+        // If user clicked the same open tab, animate closing
+        animateCloseSubNav();
+      } else {
+        // Otherwise, close the old one and open the new
+        animateCloseSubNav(() => {
+          openSubNav(submenuId);
+        });
+      }
+    });
+  });
+
+  function animateCloseSubNav(callback) {
+    if (currentSubNav) {
+      // Lock transitions
+      transitionInProgress = true;
+  
+      const oldSubNav = document.getElementById(currentSubNav);
+      const oldHeight = subNavContainer.scrollHeight + 'px';
+  
+      // Keep oldSubNav active until after the shrink
+      subNavContainer.style.maxHeight = oldHeight;
+  
+      setTimeout(() => {
+        subNavContainer.style.maxHeight = '0';
+      }, 10);
+  
+      subNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
+        if (e.target !== subNavContainer) return;
+        subNavContainer.removeEventListener('transitionend', handleTransitionEnd);
+  
+        if (oldSubNav) {
+          oldSubNav.classList.remove('active');
+        }
+        currentSubNav = null;
+  
+        // Unlock transitions
+        transitionInProgress = false;
+  
+        // Fire callback if needed
+        if (typeof callback === 'function') {
+          callback();
+        }
+      });
+    } else {
+      // If nothing is open, just call callback
+      if (typeof callback === 'function') {
+        callback();
+      }
+    }
+  }
+  
+  function openSubNav(submenuId) {
+    // Lock transitions
+    transitionInProgress = true;
+  
+    const newSubNav = document.getElementById(submenuId);
+    if (newSubNav) {
+      newSubNav.classList.add('active');
+  
+      // Temporarily set maxHeight to 'none' to measure
+      subNavContainer.style.maxHeight = 'none';
+      const fullHeight = subNavContainer.scrollHeight + 'px';
+  
+      // Reset to 0 to trigger the transition
+      subNavContainer.style.maxHeight = '0';
+  
+      setTimeout(() => {
+        subNavContainer.style.maxHeight = fullHeight;
+      }, 10);
+  
+      // When transition finishes, unlock
+      subNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
+        if (e.target !== subNavContainer) return;
+        subNavContainer.removeEventListener('transitionend', handleTransitionEnd);
+  
+        currentSubNav = submenuId;
+        transitionInProgress = false;
+      });
+    } else {
+      // If there's no subnav for some reason, unlock
+      transitionInProgress = false;
+    }
+  }  
+
     const scrollToTopBtn = document.getElementById("scrollToTopBtn");
     if (scrollToTopBtn) {
         const toggleScrollToTopBtn = () => {
@@ -245,18 +347,6 @@ function setVolumeForAllPlayers(volume) {
 
 window.onload = function() {
     const portfolioItems = document.querySelectorAll(".portfolio-item");
-    if (portfolioItems.length > 0) {
-        VanillaTilt.init(portfolioItems, {
-            max: -10,
-            speed: 2000,
-            easing: "cubic-bezier(.03,.98,.52,.99)",
-            glare: true,
-            "max-glare": 0.1,
-        });
-    }
-
-    console.log("VanillaTilt initialized");
-
     const images = Array.from(document.querySelectorAll(".portfolio-image"))
     const lightbox = document.getElementById("lightbox")
     const lightboxImg = document.getElementById("lightbox-img")
@@ -319,4 +409,37 @@ window.onload = function() {
             }
         })
     }
+
+    const toggleButtons = document.querySelectorAll(".toggle-description");
+toggleButtons.forEach(function(btn) {
+  const caption = btn.parentElement;
+  const extraDesc = caption.querySelector(".portfolio-extra-description");
+
+  if (extraDesc && extraDesc.textContent.trim() !== "") {
+    btn.style.display = "block";
+    btn.addEventListener("click", function() {
+      if (extraDesc.classList.contains("expanded")) {
+        extraDesc.style.height = extraDesc.scrollHeight + "px";
+
+        extraDesc.offsetHeight;
+        extraDesc.style.height = "0";
+        extraDesc.classList.remove("expanded");
+        btn.innerHTML = 'Show Description <span class="arrow">&#x25BC;</span>';
+      } else {
+        extraDesc.style.height = extraDesc.scrollHeight + "px";
+        extraDesc.classList.add("expanded");
+        btn.innerHTML = 'Hide Description <span class="arrow">&#x25B2;</span>';
+        extraDesc.addEventListener("transitionend", function handler() {
+          if (extraDesc.classList.contains("expanded")) {
+            extraDesc.style.height = "auto";
+          }
+          extraDesc.removeEventListener("transitionend", handler);
+        });
+      }
+    });
+  } else {
+    btn.style.display = "none";
+  }
+});
+
 };

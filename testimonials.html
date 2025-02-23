@@ -3,33 +3,72 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Fancy Ducc Portfolio - Game Development, Animation, Music, and more." />
-     <meta name="author" content="Fancy Ducc" />
-        <title>Fancy Ducc Portfolio</title>
+        <meta name="description" content="Fancy Ducc Portfolio - Home" />
+        <meta name="author" content="Fancy Ducc" />
+        <title>Fancy Ducc Portfolio - Home</title>
         <link rel="icon" href="assets/Ducc2D.png" />
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
     </head>
     <body id="page-top" style="background-color: #000000; color: #f0f0f0;">
-        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <nav class="navbar navbar-dark fixed-top" id="mainNav">
             <div class="container">
-                <a class="navbar-brand" href="index.html">
-                    <img src="assets/Ducc2D.png" alt="Logo" style="height: 30px; margin-right: 10px;">
-                    <span style="color: #5000e6;"><strong>Fancy Ducc Portfolio</strong></span>
-                </a>                
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> Menu <i class="fas fa-bars ms-1"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.html"><strong>Home</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="why-hire-me.html"><strong>Why Hire Me</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="games.html"><strong>Games</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="payments.html"><strong>Payments</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="testimonials.html"><strong>Testimonials</strong></a></li>
-                        <li class="nav-item"><a class="nav-link" href="freestuff.html"><strong>Free Stuff</strong></a></li>
-                    </ul>
+                <div class="row w-100">
+                    <div class="col text-center">
+                        <a class="navbar-brand" href="index.html">
+                            <img src="assets/img/DuccPFP.png" alt="Logo" style="height: 30px;" loading="lazy">
+                            <span style="color: #5000e6;"><strong>Fancy Ducc Portfolio</strong></span>
+                        </a>
+                    </div>
                 </div>
+                
+                <div class="row w-100">
+                    <div class="col-12">
+                        <ul class="navbar-nav flex-row text-uppercase justify-content-center py-3" id="mainNavTop">
+                            <li class="nav-item mx-3">
+                                <a class="nav-link" href="index.html"><strong>Home</strong></a>
+                            </li>
+                            <li class="nav-item mx-3" data-submenu="portfolioSubNav">
+                                <a class="nav-link" href="javascript:void(0);"><strong>Portfolio</strong></a>
+                            </li>
+                            <li class="nav-item mx-3" data-submenu="aboutSubNav">
+                                <a class="nav-link" href="javascript:void(0);"><strong>About Me</strong></a>
+                            </li>
+                            <li class="nav-item mx-3" data-submenu="servicesSubNav">
+                                <a class="nav-link" href="javascript:void(0);"><strong>Services</strong></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="row w-100">
+                    <div class="col-12">
+                        <div class="sub-nav-container w-100" id="subNavContainer">
+                            <ul class="sub-nav text-uppercase d-flex justify-content-center py-2" id="portfolioSubNav">
+                                <li class="nav-item"><a class="nav-link" href="portfolio-building.html"><strong>Building</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="portfolio-animating.html"><strong>Animation</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="portfolio-scripting.html"><strong>Scripting</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="portfolio-vfx.html"><strong>VFX</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="portfolio-music.html"><strong>Music</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="portfolio-modeling.html"><strong>Models</strong></a></li>
+                            </ul>
+                            
+                            <ul class="sub-nav text-uppercase d-flex justify-content-center py-2" id="aboutSubNav">
+                                <li class="nav-item"><a class="nav-link" href="why-hire-me.html"><strong>Why Hire Me</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="testimonials.html"><strong>Testimonials</strong></a></li>
+                            </ul>
+                            
+                            <ul class="sub-nav text-uppercase d-flex justify-content-center py-2" id="servicesSubNav">
+                                <li class="nav-item"><a class="nav-link" href="games.html"><strong>Games</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="payments.html"><strong>Payments</strong></a></li>
+                                <li class="nav-item"><a class="nav-link" href="free-stuff.html"><strong>Free Stuff</strong></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </nav>
         <header class="masthead">
@@ -129,7 +168,7 @@
             </div>
         </section>
         <div class="divider"></div>
-        <section class="page-section" id="contact" style="background-color: #111111; color: #f0f0f0;">
+        <section class="contact-page-section" id="contact">
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase"><span style="color: #f0f0f0;">Contact Me</span></h2>

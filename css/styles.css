@@ -304,9 +304,15 @@ button:not(:disabled),
 
 .divider {
   width: 100%;
-  height: 20px;
-  background: linear-gradient(90deg, #000000, #310094);
+  height: 30px;
+  background: rgba(0, 0, 0, 0);
   margin: 0px auto;
+}
+
+.wave-divider {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .img-fluid {
@@ -334,6 +340,21 @@ button:not(:disabled),
   margin-left: auto;
 }
 
+.center-container {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-right: auto;
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 @media (min-width: 576px) {
    .container {
     max-width: 540px;
@@ -359,6 +380,11 @@ button:not(:disabled),
     max-width: 1320px;
   }
 }
+
+.w-100 {
+  width: 100% !important;
+}
+
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -426,6 +452,12 @@ button:not(:disabled),
   .col-lg-6 {
     flex: 0 0 auto;
     width: 50%;
+  }
+  .col-lg-8 {
+    flex: 0 0 auto;
+    width: 40%;
+    display: flex;
+    justify-content: center;
   }
   .col-lg-10 {
     flex: 0 0 auto;
@@ -644,6 +676,11 @@ input[type="range"]::-moz-range-thumb {
 .collapse:not(.show) {
   display: none;
 }
+#navbarContent.collapse {
+  transition: max-height 0.35s ease;
+}
+
+
 
 .portfolio-item {
   background-color: #1a1a1a;
@@ -658,6 +695,24 @@ input[type="range"]::-moz-range-thumb {
 
 .portfolio-item:hover {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+}
+
+.portfolio-extra-description {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s ease;
+}
+
+.portfolio-extra-description.expanded {
+  max-height: 1000px; /* Adjust this value as needed */
+}
+.toggle-description {
+  background: none;
+  border: none;
+  color: #5000e6;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-top: 5px;
 }
 
 .nav {
@@ -700,7 +755,7 @@ input[type="range"]::-moz-range-thumb {
   --bs-navbar-disabled-color: rgba(0, 0, 0, 0.3);
   --bs-navbar-active-color: rgba(0, 0, 0, 0.9);
   --bs-navbar-brand-padding-y: 0.3125rem;
-  --bs-navbar-brand-margin-end: 1rem;
+  --bs-navbar-brand-margin-end: 0rem;
   --bs-navbar-brand-font-size: 1.25rem;
   --bs-navbar-brand-color: rgba(0, 0, 0, 0.9);
   --bs-navbar-brand-hover-color: rgba(0, 0, 0, 0.9);
@@ -713,8 +768,8 @@ input[type="range"]::-moz-range-thumb {
   --bs-navbar-toggler-border-radius: 0.375rem;
   --bs-navbar-toggler-focus-width: 0.25rem;
   --bs-navbar-toggler-transition: box-shadow 0.15s ease-in-out;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.4) !important; /* Slight black tint */
+  backdrop-filter: blur(10px) !important;     /* Keeps the frosted glass effect */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   position: relative;
   display: flex;
@@ -727,12 +782,12 @@ input[type="range"]::-moz-range-thumb {
   display: flex;
   flex-wrap: inherit;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 .navbar-brand {
   padding-top: var(--bs-navbar-brand-padding-y);
   padding-bottom: var(--bs-navbar-brand-padding-y);
-  margin-right: var(--bs-navbar-brand-margin-end);
+  margin-right: 0px;
   font-size: var(--bs-navbar-brand-font-size);
   color: var(--bs-navbar-brand-color);
   text-decoration: none;
@@ -750,7 +805,7 @@ input[type="range"]::-moz-range-thumb {
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
@@ -788,6 +843,46 @@ input[type="range"]::-moz-range-thumb {
   text-decoration: none;
   outline: 0;
   box-shadow: 0 0 0 var(--bs-navbar-toggler-focus-width);
+}
+
+/* Container that holds the submenus */
+.sub-nav-container {
+  /* Start collapsed */
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* Each submenu is hidden by default (we toggle .active in JS) */
+.sub-nav {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 0.95rem;
+  display: none; 
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  text-align: center; /* or left, if you prefer */
+}
+
+/* Submenu items displayed inline or spaced out */
+.sub-nav li {
+  display: inline-block;
+  margin: 0 15px; /* Adjust spacing as desired */
+}
+
+/* Show the sub-nav that’s "active" */
+.sub-nav.active {
+  display: block;
+}
+
+/* Example link styling inside submenus */
+.sub-nav .nav-link {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.sub-nav .nav-link:hover {
+  color: #5000e6;
 }
 
 #scrollToTopBtn {
@@ -853,6 +948,7 @@ input[type="range"]::-moz-range-thumb {
   opacity: 0;
   pointer-events: none;
 }
+
 @media (min-width: 992px) {
   .navbar-expand-lg {
     flex-wrap: nowrap;
@@ -873,6 +969,46 @@ input[type="range"]::-moz-range-thumb {
     display: none;
   }
 }
+
+@media (max-width: 992px) {
+  /* For main nav (as before) */
+  #mainNavTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px; /* Gap between main nav items */
+  }
+  #mainNavTop li {
+    margin: 0; /* Remove Bootstrap's mx-3 */
+  }
+
+  /* For sub nav container */
+  /* This ensures any active sub-nav lists line up with spacing */
+  .sub-nav-container {
+    display: flex;       /* So multiple sub-nav lists could stack nicely if needed */
+    flex-direction: column;
+    gap: 10px;           /* Space between different sub-nav ULs (if more than one is shown) */
+    align-items: center; /* Center them */
+  }
+
+  /* For each sub nav UL (when "active"), spread the list items with a 10px gap */
+  .sub-nav.active {
+    display: flex !important;  /* override display: block; */
+    justify-content: center;
+    gap: 10px;
+  }
+
+  /* Zero out any default margins on sub-nav <li> to rely purely on gap */
+  .sub-nav li {
+    margin: 0;
+  }
+}
+
+.navbar-nav.flex-row {
+  flex-direction: row !important;
+  justify-content: center !important;
+}
+
 
 .navbar-dark {
   --bs-navbar-color: rgba(255, 255, 255, 0.55);
@@ -1106,6 +1242,7 @@ input[type="range"]::-moz-range-thumb {
   --bs-text-opacity: 1;
   color: #6c757d !important;
 }
+
 @media (min-width: 992px) {
   .py-lg-0 {
     padding-top: 0 !important;
@@ -1129,8 +1266,57 @@ p {
 }
 
 .page-section {
+  background: url('../assets/img/webs/SectionBackground.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #f0f0f0;
   padding: 6rem 0;
 }
+
+.contact-page-section {
+  background: url('../assets/img/map-image.png') no-repeat center;
+  background-size: contain;
+  color: #f0f0f0;
+  padding: 6rem 0;
+  z-index: -2;
+}
+
+.contact-icon {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  transition: transform 0.3s ease-in-out;
+  overflow: visible;
+}
+
+.contact-icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: url('../assets/img/other/Glow.png') no-repeat center center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.contact-icon:hover::after {
+  opacity: 1;
+}
+
+.contact-icon img {
+  width: auto;
+  height: auto;
+  transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+
+.contact-icon:hover img {
+  transform: scale(1.15);
+}
+
 .page-section h2.section-heading, .page-section .section-heading.h2 {
   font-size: 2.5rem;
   margin-top: 0;
@@ -1147,6 +1333,51 @@ p {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1.125rem;
   font-weight: 700;
+}
+
+.body-txt {
+  padding: 1.25rem 2.5rem;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.dualitystats {
+  margin: 30px 0;
+  padding: 15px;
+  background-color: #262626;
+  border-radius: 8px;
+}
+.dualitystats p {
+  margin: 8px 0;
+}
+.abilities-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.abilities-table th,
+
+.abilities-table td {
+  border: 1px solid rgb(255, 255, 255);
+  padding: 12px;
+  vertical-align: top;
+}
+.abilities-table thead tr {
+  background-color: rgba(0, 0, 0, 0);
+}
+.abilities-table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.abilities-table th {
+  font-weight: bold;
+  text-align: left;
+}
+.table-container {
+  overflow-x: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+  margin-bottom: 40px;
 }
 
 #mainNav {
@@ -1211,7 +1442,7 @@ header.masthead {
   color: #fff;
   min-height: 40vh;
   max-height: 40vh;
-  background: linear-gradient(270deg, #310094, #000000);
+  background: rgba(0, 0, 0, 0);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
@@ -1243,7 +1474,7 @@ header.masthead .masthead-subheading {
   font-style: italic;
   line-height: 1.5rem;
   margin-bottom: 25px;
-  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 header.masthead .masthead-heading {
   font-size: 3.25rem;
@@ -1292,18 +1523,13 @@ header.masthead .masthead-heading {
   font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-section#contact {
-  background-color: #212529;
-  background-image: url("../assets/img/map-image.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
-section#contact .section-heading {
-  color: #fff;
-}
-
 .footer {
   text-align: center;
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+  background: url('../assets/img/webs/Background.png') no-repeat center center fixed;
+  background-size: cover;
 }
