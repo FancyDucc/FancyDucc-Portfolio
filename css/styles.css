@@ -183,11 +183,14 @@ small, .small {
 
 a {
   color: var(--bs-link-color);
-  text-decoration: underline;
+  text-decoration: none;
+  transition: color 0.4s ease;
 }
+
 a:hover {
-  color: var(--bs-link-hover-color);
+  color: #5000e6;
 }
+
 
 a:not([href]):not([class]), a:not([href]):not([class]):hover {
   color: inherit;
@@ -329,6 +332,13 @@ button:not(:disabled),
 .hover-link:hover {
   color: #ffffff !important;
 }
+
+.hover-link-white {
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: color 0.4s ease !important;
+}
+
 
 .container {
   --bs-gutter-x: 1.5rem;
@@ -880,7 +890,7 @@ input[type="range"]::-moz-range-thumb {
 .sub-nav .nav-link {
   color: #ffffff;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.4s ease;
 }
 .sub-nav .nav-link:hover {
   color: #5000e6;
@@ -1244,6 +1254,33 @@ input[type="range"]::-moz-range-thumb {
   color: #6c757d !important;
 }
 
+#emergency-tabs {
+  margin: 2rem auto;
+  max-width: 800px;
+  background-color: rgba(0, 0, 0, 0);
+}
+#emergency-tabs .nav-tabs .nav-link {
+  color: #000000;
+  font-weight: bold;
+}
+#emergency-tabs .nav-tabs .nav-link.active {
+  background-color: #5000e6;
+  border-color: #5000e6;
+}
+#emergency-tabs .list-group-item {
+  border: none;
+  color: #f0f0f0;
+}
+#emergency-tabs .list-group-item {
+  transition: color 0.4s ease;
+}
+
+#emergency-tabs .list-group-item:hover {
+  color: #5000e6;
+  background-color: transparent;
+}
+
+
 @media (min-width: 992px) {
   .py-lg-0 {
     padding-top: 0 !important;
@@ -1408,9 +1445,11 @@ p {
   font-size: 0.95rem;
   color: #fff;
   letter-spacing: 0.0625em;
+  transition: color 0.4s ease;
 }
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
   color: #5100ff;
+  text-decoration: none; /* No underline */
 }
 
 @media (min-width: 992px) {
