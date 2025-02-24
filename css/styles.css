@@ -216,24 +216,15 @@ img {
   vertical-align: middle;
 }
 
-button {
-  border-radius: 0;
-}
-
 button:focus:not(:focus-visible) {
   outline: 0;
 }
 
 input,
 button {
-  margin: 0;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-
-button {
-  text-transform: none;
+  all: unset;
+  cursor: pointer;
+  display: inline;
 }
 
 [role=button] {
@@ -452,7 +443,7 @@ button:not(:disabled),
   .col-lg-5 {
     flex: 0 0 auto;
     width: 33.33333333%;
-    background-color: #1a1a1a;
+    background-color: rgb(12, 12, 12);
     border-radius: 10px;
     padding: 15px;
     box-shadow: 0 12px 12px rgba(0, 0, 0, 0.3);
@@ -521,7 +512,7 @@ input[type="range"]::-moz-range-thumb {
 .custom-audio-player {
   display: flex;
   align-items: center;
-  background: #1a1a1a;
+  background: rgb(12, 12, 12);
   padding: 10px;
   border-radius: 8px;
   color: #f0f0f0;
@@ -693,7 +684,7 @@ input[type="range"]::-moz-range-thumb {
 
 
 .portfolio-item {
-  background-color: #1a1a1a;
+  background-color: rgb(12, 12, 12);
   border-radius: 15px;
   padding-top: 56.25%;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
@@ -1132,9 +1123,13 @@ input[type="range"]::-moz-range-thumb {
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none; 
   transition: opacity 0.3s ease-in-out;
+  z-index: 1101;
+  padding: 10px;
 }
 .lightbox-overlay.active {
-  opacity: 1; pointer-events: auto;
+  opacity: 1; 
+  pointer-events: auto;
+
 }
 .lightbox-img {
   max-width: 90%;
@@ -1142,11 +1137,14 @@ input[type="range"]::-moz-range-thumb {
   opacity: 0;
   transform: scale(0.95);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  border: 3px solid white; /* Change color as needed */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); /* Optional glow effect */
 }
 .lightbox-overlay.active .lightbox-img {
   opacity: 1;
   transform: scale(1.05);
 }
+
 .lightbox-arrow {
   position: absolute; top: 50%;
   transform: translateY(-50%);

@@ -346,69 +346,63 @@ function setVolumeForAllPlayers(volume) {
 });
 
 window.onload = function() {
-    const portfolioItems = document.querySelectorAll(".portfolio-item");
-    const images = Array.from(document.querySelectorAll(".portfolio-image"))
-    const lightbox = document.getElementById("lightbox")
-    const lightboxImg = document.getElementById("lightbox-img")
-    const prevArrow = document.getElementById("lightbox-prev")
-    const nextArrow = document.getElementById("lightbox-next")
-    let currentIndex = -1
+  const portfolioItems = document.querySelectorAll(".portfolio-item");
+  const images = Array.from(document.querySelectorAll(".portfolio-image"))
+  const lightbox = document.getElementById("lightbox")
+  const lightboxImg = document.getElementById("lightbox-img")
+  const prevArrow = document.getElementById("lightbox-prev")
+  const nextArrow = document.getElementById("lightbox-next")
+  let currentIndex = -1
 
-    if (lightbox && lightboxImg && images.length > 0) {
-        images.forEach((image, index) => {
-            image.addEventListener("click", function() {
-                currentIndex = index
-                showImage(index, false)
-                lightbox.classList.add("active")
-            })
-        })
+  if (lightbox && lightboxImg && images.length > 0) {
+      images.forEach((image, index) => {
+          image.addEventListener("click", function() {
+              currentIndex = index
+              showImage(index, false)
+              lightbox.classList.add("active")
+          })
+      })
 
-        function showImage(index, fade) {
-            if (index < 0 || index >= images.length) return
-            const newSrc = images[index].src
-            if (fade) {
-                lightboxImg.style.opacity = "0"
-                setTimeout(() => {
-                    lightboxImg.src = newSrc
-                    lightboxImg.style.opacity = "1"
-                }, 300)
-            } else {
-                lightboxImg.src = newSrc
-                lightboxImg.style.opacity = "1"
-            }
+      function showImage(index, fade) {
+          if (index < 0 || index >= images.length) return
+          const newSrc = images[index].src
+          if (fade) {
+              lightboxImg.style.opacity = "0"
+              setTimeout(() => {
+                  lightboxImg.src = newSrc
+                  lightboxImg.style.opacity = "1"
+              }, 300)
+          } else {
+              lightboxImg.src = newSrc
+              lightboxImg.style.opacity = "1"
+          }
 
-            if (index > 0) {
-                prevArrow.classList.add("show")
-            } else {
-                prevArrow.classList.remove("show")
-            }
+          prevArrow.classList.toggle("show", index > 0)
+          nextArrow.classList.toggle("show", index < images.length - 1)
+      }
 
-            if (index < images.length - 1) {
-                nextArrow.classList.add("show")
-            } else {
-                nextArrow.classList.remove("show")
-            }
-        }
-
-        lightbox.addEventListener("click", function(e) {
-            if (e.target === lightbox || e.target === prevArrow || e.target === nextArrow) return
+      lightbox.addEventListener("click", function(e) {
+        if (!e.target.classList.contains("lightbox-arrow")) {
             lightbox.classList.remove("active")
-        })
+        }
+    })
 
-        prevArrow.addEventListener("click", function() {
-            if (currentIndex > 0) {
-                currentIndex--
-                showImage(currentIndex, true)
-            }
-        })
+      prevArrow.addEventListener("click", function(e) {
+          e.stopPropagation()
+          if (currentIndex > 0) {
+              currentIndex--
+              showImage(currentIndex, true)
+          }
+      })
 
-        nextArrow.addEventListener("click", function() {
-            if (currentIndex < images.length - 1) {
-                currentIndex++
-                showImage(currentIndex, true)
-            }
-        })
-    }
+      nextArrow.addEventListener("click", function(e) {
+          e.stopPropagation()
+          if (currentIndex < images.length - 1) {
+              currentIndex++
+              showImage(currentIndex, true)
+          }
+      })
+  }
 
     const toggleButtons = document.querySelectorAll(".toggle-description");
 toggleButtons.forEach(function(btn) {
