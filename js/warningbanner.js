@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     if (!bannerEnabled) return;
-  
+    console.log("banner is enabled")
     var banner = document.createElement("div");
     banner.id = "warningBanner";
     banner.style.position = "fixed";
@@ -24,20 +24,23 @@ document.addEventListener("DOMContentLoaded", function() {
     banner.style.color = "#ffffff";
     banner.style.padding = "10px 0";
     banner.style.zIndex = "1100";
-  
+    console.log("created bannerr")
     banner.innerHTML = defaultBannerContent;
-  
+    console.log("created banner inner html content")
     document.body.insertBefore(banner, document.body.firstChild);
   
     var mainNav = document.getElementById("mainNav");
     if (mainNav) {
+      console.log("positioned")
       mainNav.style.top = banner.offsetHeight + "px";
     }
   });
 
+
   function updateWarningBannerContent(newContent) {
     var bannerTextElem = document.getElementById("warningBannerText");
     if (bannerTextElem) {
+      console.log("updated")
       bannerTextElem.innerHTML = newContent;
     }
   }
@@ -48,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
       banner.style.display = show ? "block" : "none";
       var mainNav = document.getElementById("mainNav");
       if (mainNav) {
+        console.log("toggled")
         mainNav.style.top = show ? banner.offsetHeight + "px" : "0px";
       }
     }

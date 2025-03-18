@@ -11,6 +11,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
         <link href="css/styles.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+        <script src="js/warningBanner.js"></script>
     </head>
 
     <body id="page-top" style="background-color: #000000; color: #f0f0f0;">
@@ -28,9 +29,7 @@
                 <div class="row w-100">
                     <div class="col-12">
                         <ul class="navbar-nav flex-row text-uppercase justify-content-center py-3" id="mainNavTop">
-                            <li class="nav-item mx-3">
-                                <button class="nav-link" href="index.html"><strong>Home</strong></button>
-                            </li>
+                            <li class="nav-item"><a class="nav-link" href="index.html"><strong>Home</strong></a></li>
                             <li class="nav-item mx-3" data-submenu="portfolioSubNav">
                                 <button class="nav-link"><strong>Portfolio</strong></button>
                             </li>
@@ -148,6 +147,10 @@
                             <video class="img-fluid" src="assets/img/video/cutscene.mp4" alt="Fight Cutscene"  controls></video>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Fight Cutscene Testing</div>
+                                <div class="portfolio-extra-description">
+                                    <p>This is very old...</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
                             </div>
                         </div>                        
                     </div>
@@ -156,6 +159,11 @@
                             <video class="img-fluid" src="assets/img/video/closet.mp4" alt="Closet"  controls></video>
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Closet Hiding Animations</div>
+                                <div class="portfolio-extra-description">
+                                    <p>These animations were made for a DOORS Fangame called Unseen Floors</p>
+                                    <p>Ignore the music, I was jammin.</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
                             </div>
                         </div>                        
                     </div>
@@ -165,7 +173,7 @@
                             <div class="portfolio-caption">
                                 <div class="portfolio-caption-heading">Paradox Cutscene</div>
                                 <div class="portfolio-extra-description">
-                                    <p>This was a cutscene made for the popular Doors fangame; Paradox</p>
+                                    <p>This was a cutscene made for the popular DOORS Fangame; Paradox</p>
                                     <p>It was completely revamped and remade by me and another animator on the team.</p>
                                     <p>I did all of the VFX, Camera work, animation on Grumble, Seek, the trees, and the players with another animator helping me on the 4th and 3rd player animation.</p>
                                 </div>
@@ -175,19 +183,85 @@
                     </div> 
                     <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                         <div class="portfolio-item">
-                            <video class="img-fluid" src="assets/img/video/heli_land.mp4" alt="Helicopter Land"  controls></video>
                             <video class="img-fluid" src="assets/img/video/heli_leave.mp4" alt="Helicopter Leave"  controls></video>
                             <div class="portfolio-caption">
-                                <div class="portfolio-caption-heading">Helicopter Animations</div>
+                                <div class="portfolio-caption-heading">Helicopter Leave</div>
                                 <div class="portfolio-extra-description">
                                     <p>This is a cutscene made for an up-and-coming game called Unpaid Workers.</p>
-                                    <p>I did all of the Camera work, animation, and sound design.</p>
+                                    <p>I did all of the camera work, animation, and sound design.</p>
                                     <p>Fun Fact: nearly 6 hours of research was put into how helicopters land and behave to make this animation.</p>
                                 </div>
                                 <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
                             </div>
                         </div>                        
                     </div> 
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="portfolio-item">
+                            <video class="img-fluid" src="assets/img/video/heli_land.mp4" alt="Helicopter Land"  controls></video>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Helicopter Land</div>
+                                <div class="portfolio-extra-description">
+                                    <p>This is a cutscene made for an up-and-coming game called Unpaid Workers.</p>
+                                    <p>I did all of the camera work, animation, and sound design.</p>
+                                    <p>Fun Fact: nearly 6 hours of research was put into how helicopters land and behave to make this animation.</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
+                            </div>
+                        </div>                        
+                    </div> 
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="portfolio-item">
+                            <video class="img-fluid" src="assets/img/video/seek_rise.mp4" alt="Seek Rise"  controls></video>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Seek Rise</div>
+                                <div class="portfolio-extra-description">
+                                    <p>This is for an unreleased DOORS Fangame called Unseen Floors.</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
+                            </div>
+                        </div>                        
+                    </div> 
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="portfolio-item">
+                            <video class="img-fluid" src="assets/img/video/singularity_cutscene.mp4" alt="Seek Rise"  controls></video>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Singularity Reveal Cutscene</div>
+                                <div class="portfolio-extra-description">
+                                    <p>This was a cutscene made for the popular DOORS Fangame; Paradox</p>
+                                    <p>It was done fully by me in about 3-4 hours.</p>
+                                    <p>I did all animation, camera work, and sound design.</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
+                            </div>
+                        </div>                        
+                    </div> 
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="portfolio-item">
+                            <video class="img-fluid" src="assets/img/video/duality_attacks.mp4" alt="Seek Rise"  controls></video>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Duality Attack Sets</div>
+                                <div class="portfolio-extra-description">
+                                    <p>These were for a fanmade killer of Forsaken.</p>
+                                    <p>All of these are not official and will likely never be in Forsaken itself.</p>
+                                    <p>I've made a separate page about Duality you can see <a href="dualityidea.html" class="hover-link">Here</a>.</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
+                            </div>
+                        </div>                        
+                    </div> 
+                    <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                        <div class="portfolio-item">
+                            <video class="img-fluid" src="assets/img/video/unseen_floors_sneak_peek.mp4" alt="Seek Rise"  controls></video>
+                            <div class="portfolio-caption">
+                                <div class="portfolio-caption-heading">Unseen Floors Sneak Peek</div>
+                                <div class="portfolio-extra-description">
+                                    <p>This cutscene was made for an up-and-coming DOORS Fangame called Unseen Floors.</p>
+                                    <p>This was featured in <a href="https://www.youtube.com/watch?v=FaDtjOogoEA&t=191s" class="hover-link">Doors Direct</a>.</p>
+                                </div>
+                                <button class="toggle-description" style="display: none;">Show Description <span class="arrow">&#x25BC;</span></button>
+                            </div>
+                        </div>                        
+                    </div>
                 </div>
             </div>
         </section>
@@ -229,8 +303,8 @@
         </footer>
         <script rel="preload" async src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
-        <script async src="js/scripts.js" defer></script>  
-        <script src="js/warningBanner.js"></script>
+        <script src="js/scripts.js"></script>   
+        
     </body>
     <div id="lightbox" class="lightbox-overlay">
         <div id="lightbox-prev" class="lightbox-arrow lightbox-arrow-left">&lsaquo;</div>

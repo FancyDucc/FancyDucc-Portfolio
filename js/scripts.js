@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+  console.log("DOM loaded");
     const games = [
         { title: "Paradox", start: "2024-11", end: "Present", description: "Developer for a DOORS fangame known as Paradox, I was a Builder, Scripter, Animator, Sound Designer, and VFX Artist", link: "https://www.roblox.com/games/15185420347/DEMO-Paradox-DOORS" },
         { title: "Sane", start: "2024-10", end: "Present", description: "Creator and owner of a simplistic but lore filled horror game. Actively Under Development", link: null },
@@ -23,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     const lazyElements = document.querySelectorAll("img[loading='lazy'], video, .portfolio-item, .custom-audio-player");
-
+    console.log("hello?");
     if ("IntersectionObserver" in window) {
         const lazyObserver = new IntersectionObserver(
           (entries, observer) => {
@@ -62,31 +63,41 @@ document.addEventListener('DOMContentLoaded', function () {
     }   
 
     function formatDate(dateStr) {
-        const [year, month] = dateStr.split('-');
-        return new Date(year, month - 1);
-    }
-    games.sort((a, b) => formatDate(b.start) - formatDate(a.start));
-    const gameList = document.getElementById("game-list");
-    if (gameList) {
-        games.forEach(game => {
-            const gameElement = document.createElement("div");
-            gameElement.classList.add("col-lg-12", "mb-4");
-            gameElement.innerHTML = `
-                <div class="card fade-in-item" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
-                    <div class="card-body">
-                    ${game.link ? `<a href="${game.link}" target="_blank" class="hover-link" style="text-decoration: none; color: rgb(80, 0, 230);">
-                        <h5 class="card-title" style="color: inherit;"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
-                        <p class="card-text" style="color: inherit;"><strong>${game.description}</strong></p>
-                    </a>` : `<h5 class="card-title" style="color: rgb(80, 0, 230);"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
-                    <p class="card-text" style="color: rgb(80, 0, 230);"><strong>${game.description}<strong> <span style="font-size: 0.9em; color: #888;">(Unplayable)</span></p>`}
-                    </div>
-                </div>
-            `;
-            gameList.appendChild(gameElement);
-        });
-    }
+      const [year, month] = dateStr.split('-');
+      return new Date(year, month - 1);
+  }
+  console.log("wtf");
+  games.sort((a, b) => formatDate(b.start) - formatDate(a.start));
+  console.log("trying game list");
+  const gameList = document.getElementById("game-list");
+  if (gameList) {
+      console.log("got game list");
+      games.forEach(game => {
+          const gameElement = document.createElement("div");
+          gameElement.classList.add("col-lg-12", "mb-4");
+          gameElement.innerHTML = `
+              <div class="card fade-in-item" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
+                  <div class="card-body">
+                      ${game.link ? `
+                      <a href="${game.link}" target="_blank" class="hover-link" style="text-decoration: none; color: rgb(80, 0, 230);">
+                          <h5 class="card-title" style="color: inherit;"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
+                          <p class="card-text" style="color: inherit;"><strong>${game.description}</strong></p>
+                      </a>
+                      ` : `
+                      <h5 class="card-title" style="color: rgb(80, 0, 230);"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
+                      <p class="card-text" style="color: rgb(80, 0, 230);"><strong>${game.description}</strong> <span style="font-size: 0.9em; color: #888;">(Unplayable)</span></p>
+                      `}
+                  </div>
+              </div>
+          `;
+          console.log("done loading game: ", gameElement);
+          gameList.appendChild(gameElement);
+      });
+  } else {
+      console.log("game list unsuccessful");
+  }
 
-    const topItems = document.querySelectorAll('#mainNavTop .nav-item');
+  const topItems = document.querySelectorAll('#mainNavTop .nav-item');
   const subNavContainer = document.getElementById('subNavContainer');
   let currentSubNav = null; // which submenu is currently open
   let transitionInProgress = false;
