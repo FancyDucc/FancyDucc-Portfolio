@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function Fetch() {
         console.log("Fetching...")
-        const apiKey = 'AIzaSyAag06XeSIVW4fNO3WhXTGgpoOJ7B04FPA';
+        const apiKey = 'AIzaSyAag06XeSIVW4fNO3WhXTGgpoOJ7B04FPA'; // lol don't even try using this, it only works for this website and google calander.
         const calendarId = '2b1114ee4cab660a0a3f167d7b072941805950a9e6c42ba643a3aea29efa02b3@group.calendar.google.com';
         const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}`;
         try {
