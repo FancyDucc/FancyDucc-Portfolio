@@ -705,7 +705,7 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .portfolio-extra-description.expanded {
-  max-height: 1000px; /* Adjust this value as needed */
+  max-height: 1000px;
 }
 .toggle-description {
   background: none;
@@ -714,6 +714,46 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
   font-size: 0.9em;
   margin-top: 5px;
+}
+
+.process-list {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.process-list li {
+  margin-bottom: 1rem;
+}
+
+.process-toggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+.arrow {
+  transition: transform 0.4s;
+}
+
+.arrow.rotated {
+  transform: rotate(180deg);
+}
+
+.process-description {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.process-description p {
+  margin: 0;
+  padding: 0.5rem 0;
 }
 
 .nav {
@@ -909,6 +949,7 @@ input[type="range"]::-moz-range-thumb {
   width: auto;
   text-align: center;
   max-width: max-content;
+  z-index: 999;
 }
 
 #scrollToTopBtn:hover {
@@ -919,35 +960,31 @@ input[type="range"]::-moz-range-thumb {
 
 @keyframes popIn {
   0% {
-      transform: translateX(-50%) scale(0);
       opacity: 0;
   }
   100% {
-      transform: translateX(-50%) scale(1);
       opacity: 1;
   }
 }
 
 @keyframes popOut {
   0% {
-      transform: translateX(-50%) scale(1);
       opacity: 1;
   }
   100% {
-      transform: translateX(-50%) scale(0);
       opacity: 0;
   }
 }
 
 #scrollToTopBtn.show {
   display: block;
-  animation: popIn 0.5s ease-out forwards;
+  animation: popIn 0.25s ease-out forwards;
   opacity: 1;
 }
 
 #scrollToTopBtn.hide {
   display: block;
-  animation: popOut 0.5s ease-in forwards;
+  animation: popOut 0.25s ease-in forwards;
   opacity: 0;
   pointer-events: none;
 }
@@ -1007,11 +1044,11 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
+
 .navbar-nav.flex-row {
   flex-direction: row !important;
   justify-content: center !important;
 }
-
 
 .navbar-dark {
   --bs-navbar-color: rgba(255, 255, 255, 0.55);
@@ -1245,6 +1282,14 @@ input[type="range"]::-moz-range-thumb {
   text-align: center !important;
 }
 
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
 .text-uppercase {
   text-transform: uppercase !important;
 }
@@ -1309,6 +1354,14 @@ p {
   color: #f0f0f0;
   padding: 6rem 0;
 }
+
+.content-page-section {
+  background: url('../assets/img/webs/SectionBackground.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #f0f0f0;
+  padding: 6rem 6rem;
+}
+
 
 .contact-page-section {
   background: url('../assets/img/map-image.png') no-repeat center;

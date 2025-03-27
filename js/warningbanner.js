@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var bannerEnabled = true;
+    var bannerEnabled = false;
     var defaultBannerContent = '<div class="container text-center" style="color: rgb(255, 255, 255);">' +
       '<span id="warningBannerText">This entire website is under a full redesign and because it is all frontend coded, I need do everything manually; So expect things to not work. Go here for temporary navigation if the navigation bar is not working: ' +
       '<a href="temporarynavigation.html" class="hover-link-white" style="text-decoration:underline;">Temporary Navigation</a>' +

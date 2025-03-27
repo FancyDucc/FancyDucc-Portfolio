@@ -1,450 +1,334 @@
 document.addEventListener('DOMContentLoaded', function () {
-  console.log("DOM loaded");
-    const games = [
-        { title: "Paradox", start: "2024-11", end: "Present", description: "Developer for a DOORS fangame known as Paradox, I was a Builder, Scripter, Animator, Sound Designer, and VFX Artist", link: "https://www.roblox.com/games/15185420347/DEMO-Paradox-DOORS" },
-        { title: "Sane", start: "2024-10", end: "Present", description: "Creator and owner of a simplistic but lore filled horror game. Actively Under Development", link: null },
-        { title: "Throw Bricks At People", start: "2024-07", end: "2024-11", description: "Main developer in a full and large team. I still periodically help out with the game when it is needed.", link: null },
-        { title: "Inbetween", start: "2024-04", end: "2024-07", description: "Inspired by Interliminality, full 11 section game with a story, I was the main creator, collaborating with friends", link: null },
-        { title: "Interliminality", start: "2024-03", end: "2024-04", description: "Second large impact and role for a large game, I enjoyed the time I worked on this game, I was an Animator, Scripter, Builder and Music artist", link: "https://www.roblox.com/games/14237585680/5-24-24-Interliminality-ALPHA-1-1-5" },
-        { title: "Blade Ball", start: "2024-02", end: "2024-02", description: "Offered to help fix any possible lag and difficulties with server-adjustments, I gave a recommendation for a sword that got added though", link: "https://www.roblox.com/games/13772394625/UPD-Blade-Ball" },
-        { title: "Terra-Isle", start: "2024-02", end: "2024-02", description: "Only creator, made in 13 hours without breaks, currently my most impressive Roblox game.", link: "https://www.roblox.com/games/16404803992/Terra-Isle" },
-        { title: "Enigma", start: "2023-07", end: "2023-11", description: "My first game that had a story, ideas, and full set plan. Sadly Roblox had other plans and removed the game for a DMCA strike, only later that month reopening the game again", link: null },
-        { title: "Cozy Cuddle", start: "2023-06", end: "2023-06", description: "Second collaboration with a large horror game group, I was a scripter, animator, and UI designer, I quit soon after joining as the work environment was unfriendly and development was far far too slow", link: null },
-        { title: "The Bunker", start: "2023-08", end: "2024-01", description: "A game collaborated with Vizion, a close friend and a fellow game developer, this game was made throughout teaching my friend how to make a game and to actually make one on the way", link: "https://www.roblox.com/games/14350543850/The-Bunker-HORROR-Pre-Alpha" },
-        { title: "Cutscene", start: "2023-06", end: "2023-06", description: "My first cutscene game, I am still very proud of this project, I made this to challenge my animation abilities, this entire thing was made in 2 days, 8 hours of animating, 3 hours of voice acting and sound design", link: "https://www.roblox.com/games/13695671920/Cutscene" },
-        { title: "Quantum Decay", start: "2023-07", end: "2023-07", description: "Entire main menu, sound design, systems and the entire game made in 48 hours, no reason, just boredom.", link: "https://www.roblox.com/games/14084341057/Quantum-Decay" },
-        { title: "Totally Epic Sword Battles", start: "2023-03", end: "2023-06", description: "Sword game, duo collaboration, main developer", link: null },
-        { title: "The Frontrooms", start: "2022-11", end: "2022-12", description: "My second horror game, was made when the backrooms started to pop up everywhere, decided to get on the train", link: null },
-        { title: "Noob Attack", start: "2022-02", end: "2022-06", description: "Almost a full game, inspired by Defend the Statue and got the original creator of DtS on board, almost made it to release, was the main developer.", link: null },
-        { title: "Melee Blitz", start: "2021-06", end: "2021-11", description: "First collaboration with a studio, I was the main animator and a map designer", link: null },
-        { title: "The Island", start: "2021-03", end: "2021-03", description: "My first showcase game, this was to challenge myself and to get a base idea on how to use studios technology and how to push it", link: "https://www.roblox.com/games/6573164158/The-Island" },
-        { title: "Vindigo", start: "2020-12", end: "2021-01", description: "Second horror game that nearly finished, made it quite far in development but burnout was the death of it.", link: null },
-        { title: "Planet Artifact", start: "2020-11", end: "2020-11", description: "First attempt at an open world game, did not get past alpha.", link: null },
-        { title: "What Happened", start: "2020-06", end: "2020-07", description: "My very first solo horror game, the single project that kickstarted my entire lifestyle, hobby, and career.", link: "https://www.roblox.com/games/5212171853/What-Happened-Pre-Beta" }
-    ];
+  console.log("DOM moment");
 
-    const lazyElements = document.querySelectorAll("img[loading='lazy'], video, .portfolio-item, .custom-audio-player");
-    console.log("hello?");
-    if ("IntersectionObserver" in window) {
-        const lazyObserver = new IntersectionObserver(
-          (entries, observer) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting && entry.intersectionRatio === 1) {
-                const lazyElement = entry.target;
-  
-                if (lazyElement.tagName === "IMG" || lazyElement.tagName === "VIDEO") {
-                    if (lazyElement.hasAttribute("data-src")) {
-                      lazyElement.src = lazyElement.getAttribute("data-src");
-                      lazyElement.removeAttribute("data-src");
-                    }
-                  }
-                  lazyElement.classList.add("visible-element");
-                  observer.unobserve(lazyElement);                  
+  const LazyElements = document.querySelectorAll("img[loading='lazy'], video, .portfolio-item, .custom-audio-player");
+  const TopNavItems = document.querySelectorAll('#mainNavTop .nav-item');
+  const SubNavContainer = document.getElementById('subNavContainer');
+  const ScrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+  let CurrentSubNav = null;
+  let TransitionInProgress = false;
+
+  // lazy loading
+  console.log("hello?");
+  if ("IntersectionObserver" in window) {
+    const LazyObserver = new IntersectionObserver(
+      (Entries, Observer) => {
+        Entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio === 1) {
+            const LazyElement = entry.target;
+            if (LazyElement.tagName === "IMG" || LazyElement.tagName === "VIDEO") {
+              if (LazyElement.hasAttribute("data-src")) {
+                LazyElement.src = LazyElement.getAttribute("data-src");
+                LazyElement.removeAttribute("data-src");
               }
-            });
-          },
-          { threshold: 1 }
-        );
-  
-      lazyElements.forEach(element => {
-        element.classList.add("hidden-element");
-        lazyObserver.observe(element);
-      });
-    } else {
-      lazyElements.forEach(element => {
-        if (element.tagName === "IMG" || element.tagName === "VIDEO") {
-          if (element.hasAttribute("data-src")) {
-            element.src = element.getAttribute("data-src");
-            element.removeAttribute("data-src");
+            }
+            LazyElement.classList.add("visible-element");
+            Observer.unobserve(LazyElement);
           }
-        }
-        element.classList.add("visible-element");
-      });
-    }   
+        });
+      },
+      { threshold: 1 }
+    );
 
-    function formatDate(dateStr) {
-      const [year, month] = dateStr.split('-');
-      return new Date(year, month - 1);
-  }
-  console.log("wtf");
-  games.sort((a, b) => formatDate(b.start) - formatDate(a.start));
-  console.log("trying game list");
-  const gameList = document.getElementById("game-list");
-  if (gameList) {
-      console.log("got game list");
-      games.forEach(game => {
-          const gameElement = document.createElement("div");
-          gameElement.classList.add("col-lg-12", "mb-4");
-          gameElement.innerHTML = `
-              <div class="card fade-in-item" style="background-color: #1a1a1a; border-radius: 10px; padding: 20px; color: #f0f0f0;">
-                  <div class="card-body">
-                      ${game.link ? `
-                      <a href="${game.link}" target="_blank" class="hover-link" style="text-decoration: none; color: rgb(80, 0, 230);">
-                          <h5 class="card-title" style="color: inherit;"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
-                          <p class="card-text" style="color: inherit;"><strong>${game.description}</strong></p>
-                      </a>
-                      ` : `
-                      <h5 class="card-title" style="color: rgb(80, 0, 230);"><strong>${game.title} (${game.start} - ${game.end})</strong></h5>
-                      <p class="card-text" style="color: rgb(80, 0, 230);"><strong>${game.description}</strong> <span style="font-size: 0.9em; color: #888;">(Unplayable)</span></p>
-                      `}
-                  </div>
-              </div>
-          `;
-          console.log("done loading game: ", gameElement);
-          gameList.appendChild(gameElement);
-      });
+    LazyElements.forEach(element => {
+      element.classList.add("hidden-element");
+      LazyObserver.observe(element);
+    });
   } else {
-      console.log("game list unsuccessful");
+    LazyElements.forEach(element => {
+      if (element.tagName === "IMG" || element.tagName === "VIDEO") {
+        if (element.hasAttribute("data-src")) {
+          element.src = element.getAttribute("data-src");
+          element.removeAttribute("data-src");
+        }
+      }
+      element.classList.add("visible-element");
+    });
   }
 
-  const topItems = document.querySelectorAll('#mainNavTop .nav-item');
-  const subNavContainer = document.getElementById('subNavContainer');
-  let currentSubNav = null; // which submenu is currently open
-  let transitionInProgress = false;
+  // nav menus
+  TopNavItems.forEach(item => {
+    const SubmenuId = item.getAttribute('data-submenu');
+    const Link = item.querySelector('.nav-link');
 
-  topItems.forEach(item => {
-    const submenuId = item.getAttribute('data-submenu');
-    const link = item.querySelector('.nav-link');
-  
-    link.addEventListener('click', function(e) {
+    Link.addEventListener('click', function (e) {
       e.preventDefault();
-  
-      // 1) If a transition is in progress, ignore any clicks
-      if (transitionInProgress) return;
-  
-      // 2) Otherwise proceed with your existing logic
-      if (currentSubNav === submenuId) {
-        // If user clicked the same open tab, animate closing
+      if (TransitionInProgress) return;
+      if (CurrentSubNav === SubmenuId) {
         animateCloseSubNav();
       } else {
-        // Otherwise, close the old one and open the new
         animateCloseSubNav(() => {
-          openSubNav(submenuId);
+          openSubNav(SubmenuId);
         });
       }
     });
   });
 
   function animateCloseSubNav(callback) {
-    if (currentSubNav) {
-      // Lock transitions
-      transitionInProgress = true;
-  
-      const oldSubNav = document.getElementById(currentSubNav);
-      const oldHeight = subNavContainer.scrollHeight + 'px';
-  
-      // Keep oldSubNav active until after the shrink
-      subNavContainer.style.maxHeight = oldHeight;
-  
+    if (CurrentSubNav) {
+      TransitionInProgress = true;
+      const OldSubNav = document.getElementById(CurrentSubNav);
+      const OldHeight = SubNavContainer.scrollHeight + 'px';
+      SubNavContainer.style.maxHeight = OldHeight;
+
       setTimeout(() => {
-        subNavContainer.style.maxHeight = '0';
+        SubNavContainer.style.maxHeight = '0';
       }, 10);
-  
-      subNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
-        if (e.target !== subNavContainer) return;
-        subNavContainer.removeEventListener('transitionend', handleTransitionEnd);
-  
-        if (oldSubNav) {
-          oldSubNav.classList.remove('active');
+
+      SubNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
+        if (e.target !== SubNavContainer) return;
+        SubNavContainer.removeEventListener('transitionend', handleTransitionEnd);
+        if (OldSubNav) {
+          OldSubNav.classList.remove('active');
         }
-        currentSubNav = null;
-  
-        // Unlock transitions
-        transitionInProgress = false;
-  
-        // Fire callback if needed
+        CurrentSubNav = null;
+        TransitionInProgress = false;
         if (typeof callback === 'function') {
           callback();
         }
       });
     } else {
-      // If nothing is open, just call callback
       if (typeof callback === 'function') {
         callback();
       }
     }
   }
-  
+
   function openSubNav(submenuId) {
-    // Lock transitions
-    transitionInProgress = true;
-  
-    const newSubNav = document.getElementById(submenuId);
-    if (newSubNav) {
-      newSubNav.classList.add('active');
-  
-      // Temporarily set maxHeight to 'none' to measure
-      subNavContainer.style.maxHeight = 'none';
-      const fullHeight = subNavContainer.scrollHeight + 'px';
-  
-      // Reset to 0 to trigger the transition
-      subNavContainer.style.maxHeight = '0';
-  
+    TransitionInProgress = true;
+    const NewSubNav = document.getElementById(submenuId);
+    if (NewSubNav) {
+      NewSubNav.classList.add('active');
+      SubNavContainer.style.maxHeight = 'none';
+      const FullHeight = SubNavContainer.scrollHeight + 'px';
+      SubNavContainer.style.maxHeight = '0';
+
       setTimeout(() => {
-        subNavContainer.style.maxHeight = fullHeight;
+        SubNavContainer.style.maxHeight = FullHeight;
       }, 10);
-  
-      // When transition finishes, unlock
-      subNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
-        if (e.target !== subNavContainer) return;
-        subNavContainer.removeEventListener('transitionend', handleTransitionEnd);
-  
-        currentSubNav = submenuId;
-        transitionInProgress = false;
+
+      SubNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
+        if (e.target !== SubNavContainer) return;
+        SubNavContainer.removeEventListener('transitionend', handleTransitionEnd);
+        CurrentSubNav = submenuId;
+        TransitionInProgress = false;
       });
     } else {
-      // If there's no subnav for some reason, unlock
-      transitionInProgress = false;
+      TransitionInProgress = false;
     }
-  }  
+  }
 
-    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-    if (scrollToTopBtn) {
-        const toggleScrollToTopBtn = () => {
-            if (window.scrollY > 50) {
-                scrollToTopBtn.classList.add('show');
-                scrollToTopBtn.classList.remove('hide');
-            } else {
-                scrollToTopBtn.classList.add('hide');
-                scrollToTopBtn.classList.remove('show');
-            }
-        };
+  // scrroll to top
+  if (ScrollToTopBtn) {
+    let Previous = window.scrollY;
+    let Scrolling = false;
+    let scrollAnimationFrame;
 
-        const scrollToTop = () => {
-            window.scrollTo({
-                top: 0,
-            });
-        };
+    const CancelScroll = () => {
+      if (Scrolling) {
+        Scrolling = false;
+        cancelAnimationFrame(scrollAnimationFrame);
+        window.removeEventListener("wheel", onUserScroll, { passive: true });
+        window.removeEventListener("touchmove", onUserScroll, { passive: true });
+      }
+    };
+  
+    const onUserScroll = () => {
+      CancelScroll();
+    };
 
-        window.addEventListener("scroll", toggleScrollToTopBtn);
-        scrollToTopBtn.addEventListener("click", scrollToTop);
-        toggleScrollToTopBtn();
-    }
-    const audioPlayers = document.querySelectorAll('.custom-audio-player');
-let savedVolume = localStorage.getItem('audioVolume') || 1;
-console.log('Saved volume from localStorage:', savedVolume);
-
-audioPlayers.forEach(function (playerContainer) {
-    const audio = playerContainer.nextElementSibling;
-    const audioSource = audio.querySelector("source").src;
-    const filename = audioSource.split("/").pop();
-    console.log('Initializing audio player:', filename);
-    if (!audio || audio.tagName !== 'AUDIO') {
-        console.error('Audio element not found or incorrect tag for custom player container:', filename);
-        return;
-    }
-    console.log('Audio element found:', filename);
-
-    const seekSlider = playerContainer.querySelector('.seek-slider');
-    const volumeSlider = playerContainer.querySelector('.volume-slider');
-    const currentTimeElem = playerContainer.querySelector('.current-time');
-    const totalTimeElem = playerContainer.querySelector('.total-time');
-    const playPauseButton = playerContainer.querySelector('.play-pause-button');
-    const downloadButton = playerContainer.querySelector('.download-button');
-
-    audio.volume = savedVolume;
-    if (volumeSlider) {
-        volumeSlider.value = savedVolume;
-        console.log('Volume slider initialized to:', savedVolume);
-    }
-
-    if (seekSlider) {
-        audio.addEventListener('timeupdate', function () {
-            seekSlider.value = (audio.currentTime / audio.duration) * 100;
-            console.log('Seek slider updated to:', seekSlider.value);
-            if (currentTimeElem) {
-                currentTimeElem.textContent = formatTime(audio.currentTime);
-                console.log('Current time displayed as:', currentTimeElem.textContent);
-            }
-        });
-        seekSlider.addEventListener('input', function () {
-            audio.currentTime = (seekSlider.value / 100) * audio.duration;
-            console.log('Seek slider adjusted, new currentTime:', audio.currentTime);
-            updateVolumeSliderPosition();
-        });
-    }
-
-    audio.addEventListener('loadedmetadata', function () {
-        if (totalTimeElem) {
-            totalTimeElem.textContent = formatTime(audio.duration);
-            console.log('Total time set to:', totalTimeElem.textContent);
-        }
-        updateVolumeSliderPosition();
-    });
-
-    if (volumeSlider) {
-        volumeSlider.addEventListener('input', function () {
-            const newVolume = volumeSlider.value;
-            console.log('Volume slider changed to:', newVolume);
-            setVolumeForAllPlayers(newVolume);
-        });
-    }
-
-    playPauseButton.addEventListener('click', () => {
-        console.log('Button clicked, activating:', filename);
-        if (audio.paused) {
-            audio.play();
-            playPauseButton.textContent = 'Pause';
-            console.log('Audio playing');
-            updateVolumeSliderPosition();
+    const ToTheTop = () => {
+      CancelScroll();
+      Scrolling = true;
+      const Start = window.scrollY;
+      const Duration = 800;
+      const StartTime = performance.now();
+  
+      window.addEventListener("wheel", CancelScroll, { passive: true });
+      window.addEventListener("touchmove", CancelScroll, { passive: true });
+  
+      const step = (CurrentTime) => {
+        if (!Scrolling) return;
+        const Elapsed = CurrentTime - StartTime;
+        const Progress = Math.min(Elapsed / Duration, 1);
+        const Ease = 1 - Math.pow(1 - Progress, 3);
+        const NewPosition = Start * (1 - Ease);
+        window.scrollTo(0, NewPosition);
+  
+        if (Progress < 1 && Scrolling) {
+          scrollAnimationFrame = requestAnimationFrame(step);
         } else {
-            audio.pause();
-            playPauseButton.textContent = 'Play';
-            console.log('Audio paused');
-            updateVolumeSliderPosition();
+          Scrolling = false;
+          window.removeEventListener("wheel", CancelScroll, { passive: true });
+          window.removeEventListener("touchmove", CancelScroll, { passive: true });
         }
-    });
-
-    audio.addEventListener('ended', () => {
-        playPauseButton.textContent = 'Play';
-        console.log('Audio playback ended');
-        updateVolumeSliderPosition();
-    });
-
-    if (downloadButton) {
-        downloadButton.addEventListener("click", () => {
-            const audioSource = audio.querySelector("source").src;
-            const filename = audioSource.split("/").pop();
-
-            if (audioSource) {
-                console.log('Download button clicked, downloading:', filename);
-                fetch(audioSource)
-                    .then(response => response.blob())
-                    .then(blob => {
-                        const url = URL.createObjectURL(blob);
-                        const link = document.createElement("a");
-                        link.href = url;
-                        link.download = filename;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        URL.revokeObjectURL(url);
-                        console.log("Download completed for:", filename);
-                    })
-                    .catch(error => console.error("Download error:", error));
-            }
-        });
-    }
-
-    function updateVolumeSliderPosition() {
-        if (!seekSlider || !volumeSlider) return;
-        const seekRect = seekSlider.getBoundingClientRect();
-        const playerRect = playerContainer.getBoundingClientRect();
-        const offsetLeft = seekRect.left - playerRect.left;
-
-        volumeSlider.style.left = `${offsetLeft}px`;
-        console.log('Volume slider position updated:', offsetLeft);
-    }
-
-    function formatTime(time) {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-});
-
-function setVolumeForAllPlayers(volume) {
-    console.log('Setting volume for all players to:', volume);
-    audioPlayers.forEach(function (playerContainer) {
-        const audio = playerContainer.nextElementSibling;
-        const volumeSlider = playerContainer.querySelector('.volume-slider');
-        if (audio && audio.tagName === 'AUDIO') audio.volume = volume;
-        if (volumeSlider) volumeSlider.value = volume;
-    });
-    localStorage.setItem('audioVolume', volume);
-}
-
-});
-
-window.onload = function() {
-  const portfolioItems = document.querySelectorAll(".portfolio-item");
-  const images = Array.from(document.querySelectorAll(".portfolio-image"))
-  const lightbox = document.getElementById("lightbox")
-  const lightboxImg = document.getElementById("lightbox-img")
-  const prevArrow = document.getElementById("lightbox-prev")
-  const nextArrow = document.getElementById("lightbox-next")
-  let currentIndex = -1
-
-  if (lightbox && lightboxImg && images.length > 0) {
-      images.forEach((image, index) => {
-          image.addEventListener("click", function() {
-              currentIndex = index
-              showImage(index, false)
-              lightbox.classList.add("active")
-          })
-      })
-
-      function showImage(index, fade) {
-          if (index < 0 || index >= images.length) return
-          const newSrc = images[index].src
-          if (fade) {
-              lightboxImg.style.opacity = "0"
-              setTimeout(() => {
-                  lightboxImg.src = newSrc
-                  lightboxImg.style.opacity = "1"
-              }, 300)
-          } else {
-              lightboxImg.src = newSrc
-              lightboxImg.style.opacity = "1"
-          }
-
-          prevArrow.classList.toggle("show", index > 0)
-          nextArrow.classList.toggle("show", index < images.length - 1)
-      }
-
-      lightbox.addEventListener("click", function(e) {
-        if (!e.target.classList.contains("lightbox-arrow")) {
-            lightbox.classList.remove("active")
-        }
-    })
-
-      prevArrow.addEventListener("click", function(e) {
-          e.stopPropagation()
-          if (currentIndex > 0) {
-              currentIndex--
-              showImage(currentIndex, true)
-          }
-      })
-
-      nextArrow.addEventListener("click", function(e) {
-          e.stopPropagation()
-          if (currentIndex < images.length - 1) {
-              currentIndex++
-              showImage(currentIndex, true)
-          }
-      })
-  }
-
-    const toggleButtons = document.querySelectorAll(".toggle-description");
-toggleButtons.forEach(function(btn) {
-  const caption = btn.parentElement;
-  const extraDesc = caption.querySelector(".portfolio-extra-description");
-
-  if (extraDesc && extraDesc.textContent.trim() !== "") {
-    btn.style.display = "block";
-    btn.addEventListener("click", function() {
-      if (extraDesc.classList.contains("expanded")) {
-        extraDesc.style.height = extraDesc.scrollHeight + "px";
-
-        extraDesc.offsetHeight;
-        extraDesc.style.height = "0";
-        extraDesc.classList.remove("expanded");
-        btn.innerHTML = 'Show Description <span class="arrow">&#x25BC;</span>';
+      };
+  
+      scrollAnimationFrame = requestAnimationFrame(step);
+    };
+  
+    const Toggle = () => {
+      let Current = window.scrollY;
+      const Height = document.documentElement.scrollHeight;
+      const WindowHeight = window.innerHeight;
+      const NearBottom = (WindowHeight + Current) >= (0.9 * Height);
+  
+      if (NearBottom) {
+        ScrollToTopBtn.classList.add('show');
+        ScrollToTopBtn.classList.remove('hide');
       } else {
-        extraDesc.style.height = extraDesc.scrollHeight + "px";
-        extraDesc.classList.add("expanded");
-        btn.innerHTML = 'Hide Description <span class="arrow">&#x25B2;</span>';
-        extraDesc.addEventListener("transitionend", function handler() {
-          if (extraDesc.classList.contains("expanded")) {
-            extraDesc.style.height = "auto";
+        if (Current < Previous && Current > 50) {
+          ScrollToTopBtn.classList.add('show');
+          ScrollToTopBtn.classList.remove('hide');
+        } else {
+          ScrollToTopBtn.classList.add('hide');
+          ScrollToTopBtn.classList.remove('show');
+        }
+      }
+      Previous = Current;
+    };
+  
+    window.addEventListener("scroll", () => {
+      if (Scrolling) {
+        CancelScroll();
+      }
+      Toggle();
+    });
+  
+    ScrollToTopBtn.addEventListener("click", ToTheTop);
+    Toggle();
+  }  
+});
+
+window.onload = function () {
+  const PortfolioItems = document.querySelectorAll(".portfolio-item");
+  const Images = Array.from(document.querySelectorAll(".portfolio-image"));
+  const Lightbox = document.getElementById("lightbox");
+  const LightboxImg = document.getElementById("lightbox-img");
+  const PrevArrow = document.getElementById("lightbox-prev");
+  const NextArrow = document.getElementById("lightbox-next");
+  let CurrentIndex = -1;
+
+  if (Lightbox && LightboxImg && Images.length > 0) {
+    Images.forEach((image, index) => {
+      image.addEventListener("click", function () {
+        CurrentIndex = index;
+        showImage(index, false);
+        Lightbox.classList.add("active");
+      });
+    });
+
+    function showImage(index, fade) {
+      if (index < 0 || index >= Images.length) return;
+      const newSrc = Images[index].src;
+      if (fade) {
+        LightboxImg.style.opacity = "0";
+        setTimeout(() => {
+          LightboxImg.src = newSrc;
+          LightboxImg.style.opacity = "1";
+        }, 300);
+      } else {
+        LightboxImg.src = newSrc;
+        LightboxImg.style.opacity = "1";
+      }
+      PrevArrow.classList.toggle("show", index > 0);
+      NextArrow.classList.toggle("show", index < Images.length - 1);
+    }
+
+    Lightbox.addEventListener("click", function (e) {
+      if (!e.target.classList.contains("lightbox-arrow")) {
+        Lightbox.classList.remove("active");
+      }
+    });
+
+    PrevArrow.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (CurrentIndex > 0) {
+        CurrentIndex--;
+        showImage(CurrentIndex, true);
+      }
+    });
+
+    NextArrow.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (CurrentIndex < Images.length - 1) {
+        CurrentIndex++;
+        showImage(CurrentIndex, true);
+      }
+    });
+  }
+
+  const ToggleButtons = document.querySelectorAll(".toggle-description");
+  ToggleButtons.forEach(function (btn) {
+    const Caption = btn.parentElement;
+    const ExtraDesc = Caption.querySelector(".portfolio-extra-description");
+
+    if (ExtraDesc && ExtraDesc.textContent.trim() !== "") {
+      btn.style.display = "block";
+      btn.addEventListener("click", function () {
+        if (ExtraDesc.classList.contains("expanded")) {
+          ExtraDesc.style.height = ExtraDesc.scrollHeight + "px";
+          ExtraDesc.offsetHeight;
+          ExtraDesc.style.height = "0";
+          ExtraDesc.classList.remove("expanded");
+          btn.innerHTML = 'Show Description <span class="arrow">&#x25BC;</span>';
+        } else {
+          ExtraDesc.style.height = ExtraDesc.scrollHeight + "px";
+          ExtraDesc.classList.add("expanded");
+          btn.innerHTML = 'Hide Description <span class="arrow">&#x25B2;</span>';
+          ExtraDesc.addEventListener("transitionend", function handler() {
+            if (ExtraDesc.classList.contains("expanded")) {
+              ExtraDesc.style.height = "auto";
+            }
+            ExtraDesc.removeEventListener("transitionend", handler);
+          });
+        }
+      });
+    } else {
+      btn.style.display = "none";
+    }
+  });
+
+  const Toggles = document.querySelectorAll('.process-toggle');
+  let IsAnimating = false;
+
+  Toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      if (IsAnimating) return;
+      IsAnimating = true;
+
+      const Arrow = toggle.querySelector('.arrow');
+      const Desc = toggle.nextElementSibling;
+      if (!Desc) return;
+      const IsCollapsed = !Desc.style.maxHeight || Desc.style.maxHeight === '0px';
+
+      if (IsCollapsed) {
+        Arrow.classList.add('rotated');
+        Desc.style.transition = 'none';
+        Desc.style.maxHeight = '-10px';
+        Desc.offsetHeight;
+        Desc.style.transition = 'max-height 0.4s ease';
+        Desc.style.maxHeight = Desc.scrollHeight + 'px';
+        Desc.addEventListener('transitionend', function handler(e) {
+          if (e.target === Desc) {
+            Desc.style.maxHeight = 'none';
+            Desc.removeEventListener('transitionend', handler);
+            IsAnimating = false;
           }
-          extraDesc.removeEventListener("transitionend", handler);
+        });
+      } else {
+        Arrow.classList.remove('rotated');
+        Desc.style.maxHeight = Desc.scrollHeight + 'px';
+        Desc.offsetHeight;
+        Desc.style.maxHeight = '0px';
+        Desc.addEventListener('transitionend', function handler(e) {
+          if (e.target === Desc) {
+            Desc.removeEventListener('transitionend', handler);
+            IsAnimating = false;
+          }
         });
       }
     });
-  } else {
-    btn.style.display = "none";
-  }
-});
-
+  });
 };

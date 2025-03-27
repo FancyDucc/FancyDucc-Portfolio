@@ -66,4 +66,7 @@ document.addEventListener("DOMContentLoaded", function() {
     updateDiscount(30, [
         { name: 'vfx', description: 'VFX Discounts' },
     ]);
+    updateDiscount(60, [
+        { name: 'building', description: 'gergerger' },
+    ]);
 });
