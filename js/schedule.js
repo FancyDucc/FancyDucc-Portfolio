@@ -69,10 +69,4 @@ document.addEventListener('DOMContentLoaded', () => {
     Init();
 
     calendarInstance.refetchEvents()
-
-    CallLoop(() => {
-        if (calendarInstance) {
-            calendarInstance.refetchEvents();
-        }
-    }, 300000);
 });

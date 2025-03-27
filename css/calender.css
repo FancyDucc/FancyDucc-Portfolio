@@ -126,6 +126,13 @@
     left: 5px !important;
   }
 
+  .fc .fc-timegrid-now-indicator-arrow {
+    border-color: #ffffff;
+    margin-top: -5px !important;
+    position: absolute !important;
+    z-index: 4 !important;
+  }
+
   .fc .fc-daygrid-day {
     border: 1px solid rgba(81, 0, 230, 0.425) !important;
     background-color: transparent !important;
