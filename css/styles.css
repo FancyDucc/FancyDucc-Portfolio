@@ -1556,6 +1556,17 @@ header.masthead {
   text-align: center;
 }
 
+.masthead-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
