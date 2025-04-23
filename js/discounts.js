@@ -66,7 +66,4 @@ document.addEventListener("DOMContentLoaded", function() {
     updateDiscount(30, [
         { name: 'vfx', description: 'VFX' },
     ]);
-    updateDiscount(60, [
-        { name: 'building', description: 'Building' },
-    ]);
 });
