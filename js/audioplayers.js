@@ -1,24 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
+  const clamp = v => v < 0 ? 0 : v > 1 ? 1 : v;
   const AudioPlayers = document.querySelectorAll('.custom-audio-player');
-  let SavedVolume = localStorage.getItem('audioVolume') || 1;
-  
+  let SavedVolume = clamp(parseFloat(localStorage.getItem('audioVolume')) || 1);
+
   AudioPlayers.forEach(function (PlayerContainer) {
     const Audio = PlayerContainer.nextElementSibling;
-    const AudioSource = Audio.querySelector("source").src;
-    const Filename = AudioSource.split("/").pop();
-    console.log('Initializing audio player:', Filename);
-    if (!Audio || Audio.tagName !== 'AUDIO') {
-      console.error('Audio element not found or incorrect tag for custom player container:', Filename);
-      return;
-    }
-
     const SeekSlider = PlayerContainer.querySelector('.seek-slider');
     const VolumeSlider = PlayerContainer.querySelector('.volume-slider');
     const CurrentTimeElem = PlayerContainer.querySelector('.current-time');
     const TotalTimeElem = PlayerContainer.querySelector('.total-time');
     const PlayPauseButton = PlayerContainer.querySelector('.play-pause-button');
     const DownloadButton = PlayerContainer.querySelector('.download-button');
-      
+
     Audio.volume = SavedVolume;
     if (VolumeSlider) {
       VolumeSlider.value = SavedVolume;
@@ -47,21 +40,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (VolumeSlider) {
       VolumeSlider.addEventListener('input', function () {
-        const NewVolume = parseFloat(VolumeSlider.value);
+        const NewVolume = clamp(parseFloat(VolumeSlider.value));
         AudioPlayers.forEach(function (PlayerContainer) {
           const Audio = PlayerContainer.nextElementSibling;
           if (Audio && Audio.tagName === 'AUDIO') {
             ChangeVolume(Audio, NewVolume, 100);
           }
-          const VolumeSlider = PlayerContainer.querySelector('.volume-slider');
-          if (VolumeSlider) VolumeSlider.value = NewVolume;
+          const VolSlider = PlayerContainer.querySelector('.volume-slider');
+          if (VolSlider) VolSlider.value = NewVolume;
         });
         localStorage.setItem('audioVolume', NewVolume);
-      });      
+      });
     }
 
     PlayPauseButton.addEventListener('click', () => {
-      console.log('Button clicked, activating:', Filename);
       if (Audio.paused) {
         Audio.play();
         PlayPauseButton.textContent = 'Pause';
@@ -82,23 +74,18 @@ document.addEventListener('DOMContentLoaded', function () {
       DownloadButton.addEventListener("click", () => {
         const AudioSrc = Audio.querySelector("source").src;
         const Fname = AudioSrc.split("/").pop();
-        if (AudioSrc) {
-          console.log('Download button clicked, downloading:', Fname);
-          fetch(AudioSrc)
-            .then(response => response.blob())
-            .then(blob => {
-              const Url = URL.createObjectURL(blob);
-              const Link = document.createElement("a");
-              Link.href = Url;
-              Link.download = Fname;
-              document.body.appendChild(Link);
-              Link.click();
-              document.body.removeChild(Link);
-              URL.revokeObjectURL(Url);
-              console.log("Download completed for:", Fname);
-            })
-            .catch(error => console.error("Download error:", error));
-        }
+        fetch(AudioSrc)
+          .then(response => response.blob())
+          .then(blob => {
+            const Url = URL.createObjectURL(blob);
+            const Link = document.createElement("a");
+            Link.href = Url;
+            Link.download = Fname;
+            document.body.appendChild(Link);
+            Link.click();
+            document.body.removeChild(Link);
+            URL.revokeObjectURL(Url);
+          });
       });
     }
 
@@ -117,14 +104,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
-  
   function ChangeVolume(audioElement, targetVolume, duration = 100) {
-    const volume = audioElement.volume;
+    const start = audioElement.volume;
+    const end = clamp(targetVolume);
     let step = 0;
-  
     const intervalId = setInterval(() => {
       step++;
-      audioElement.volume = volume + (targetVolume - volume) / 25 * step;
+      audioElement.volume = clamp(start + (end - start) / 25 * step);
       if (step >= 25) {
         clearInterval(intervalId);
       }
