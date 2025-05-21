@@ -1656,28 +1656,28 @@ header.masthead .masthead-heading {
 }
 
 .notice-container {
-  margin: 2rem 0;
-  padding: 1rem;
-  background: #1a1a1a;
-  border-left: 4px solid #ff3e3e;
-  border-radius: 4px;
+  margin: 2rem 0 !important; 
+  padding: 1rem !important;
+  background: #1a1a1a !important;
+  border-left: 4px solid #ff3e3e !important;
+  border-radius: 4px !important;
 }
 
 .notice-container ul {
-  margin: 0;
-  padding: 0;
-  list-style: inside;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: inside !important;
 }
 
 .notice-container li {
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-  line-height: 1.4;
-  color: #ffffff;
+  margin-bottom: 0.5rem !important;
+  font-size: 1rem !important;
+  line-height: 1.4 !important;
+  color: #ffffff !important;
 }
 
 .notice-container strong {
-  color: #ff5d5d;
+  color: #ff5d5d !important;
 }
 
 #portfolio .portfolio-item {
