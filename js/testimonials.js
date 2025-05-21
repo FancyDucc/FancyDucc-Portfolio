@@ -2,12 +2,12 @@ const testimonials = [
   {
     author: "JustPlain",
     stars: 4.5,
-    text: "You are a really good friend to work with, you have some other nicer qualities you don't mention, but you are nice to work with and are helpful."
+    text: "you are a really good friend to work with, you have some other nicer things you don't mention, but you are nice to work with and are helpful."
   },
   {
     author: "TuxLinux",
-    stars: 4,
-    text: "i have worked with you on a few games, and you always get me good work, animations are very good, your buildings are very good also"
+    stars: 5,
+    text: "literally just the best at everything, HIRE THIS MAN"
   },
   {
     author: "Z1mbe",
@@ -25,6 +25,11 @@ const testimonials = [
     text: "Literally for less than 2 hours made the task, after payment once gave the file and helped to understand the scripts."
   },
   {
+    author: "Pingolein",
+    stars: 5,
+    text: "Service was fast, extremely good results, and overall just extremely skilled at LITERALLY EVERYTHING!"
+  },
+  {
     author: "RealAndresYas110",
     stars: 4.5,
     text: "your 3D modeling isn't perfect, but it isn't bad by any means, it's still good"
@@ -37,7 +42,7 @@ const testimonials = [
   {
     author: "Polyograthyms",
     stars: 5,
-    text: "Working with you was very nice, you were dedicated through the full game and tbh were the funniest person on the team by far. You are also very creative, which isn't very common anymore."
+    text: "working with you was very nice, you were dedicated through any task i gave you"
   }
 ];
 

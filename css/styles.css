@@ -103,7 +103,7 @@ body {
   color: var(--bs-body-color);
   text-align: var(--bs-body-text-align);
   background-color: var(--bs-body-bg);
-  -text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -1654,6 +1654,32 @@ header.masthead .masthead-heading {
     margin-bottom: 4rem;
   }
 }
+
+.notice-container {
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #1a1a1a;
+  border-left: 4px solid #ff3e3e;
+  border-radius: 4px;
+}
+
+.notice-container ul {
+  margin: 0;
+  padding: 0;
+  list-style: inside;
+}
+
+.notice-container li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: #ffffff;
+}
+
+.notice-container strong {
+  color: #ff5d5d;
+}
+
 #portfolio .portfolio-item {
   max-width: 26rem;
   margin-left: auto;
