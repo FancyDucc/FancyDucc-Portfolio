@@ -2,12 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log("DOM moment");
 
   const LazyElements = document.querySelectorAll("img[loading='lazy'], video, .portfolio-item, .custom-audio-player");
-  const TopNavItems = document.querySelectorAll('#mainNavTop .nav-item');
-  const SubNavContainer = document.getElementById('subNavContainer');
   const ScrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-  let CurrentSubNav = null;
-  let TransitionInProgress = false;
 
   // lazy loading
   console.log("hello?");
@@ -45,78 +40,6 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       element.classList.add("visible-element");
     });
-  }
-
-  // nav menus
-  TopNavItems.forEach(item => {
-    const SubmenuId = item.getAttribute('data-submenu');
-    const Link = item.querySelector('.nav-link');
-
-    Link.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (TransitionInProgress) return;
-      if (CurrentSubNav === SubmenuId) {
-        animateCloseSubNav();
-      } else {
-        animateCloseSubNav(() => {
-          openSubNav(SubmenuId);
-        });
-      }
-    });
-  });
-
-  function animateCloseSubNav(callback) {
-    if (CurrentSubNav) {
-      TransitionInProgress = true;
-      const OldSubNav = document.getElementById(CurrentSubNav);
-      const OldHeight = SubNavContainer.scrollHeight + 'px';
-      SubNavContainer.style.maxHeight = OldHeight;
-
-      setTimeout(() => {
-        SubNavContainer.style.maxHeight = '0';
-      }, 10);
-
-      SubNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
-        if (e.target !== SubNavContainer) return;
-        SubNavContainer.removeEventListener('transitionend', handleTransitionEnd);
-        if (OldSubNav) {
-          OldSubNav.classList.remove('active');
-        }
-        CurrentSubNav = null;
-        TransitionInProgress = false;
-        if (typeof callback === 'function') {
-          callback();
-        }
-      });
-    } else {
-      if (typeof callback === 'function') {
-        callback();
-      }
-    }
-  }
-
-  function openSubNav(submenuId) {
-    TransitionInProgress = true;
-    const NewSubNav = document.getElementById(submenuId);
-    if (NewSubNav) {
-      NewSubNav.classList.add('active');
-      SubNavContainer.style.maxHeight = 'none';
-      const FullHeight = SubNavContainer.scrollHeight + 'px';
-      SubNavContainer.style.maxHeight = '0';
-
-      setTimeout(() => {
-        SubNavContainer.style.maxHeight = FullHeight;
-      }, 10);
-
-      SubNavContainer.addEventListener('transitionend', function handleTransitionEnd(e) {
-        if (e.target !== SubNavContainer) return;
-        SubNavContainer.removeEventListener('transitionend', handleTransitionEnd);
-        CurrentSubNav = submenuId;
-        TransitionInProgress = false;
-      });
-    } else {
-      TransitionInProgress = false;
-    }
   }
 
   // scrroll to top
