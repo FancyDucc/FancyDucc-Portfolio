@@ -1,4 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
+    setInterval(() => {
+        const offset= 0;
+        const now = new Date();
+        const myTime = new Date(now.getTime() + (offset * 60 * 60 * 1000));
+        const format = myTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: "2-digit"})
+
+        document.getElementById("MyTime").textContent = `The time for me right now is: ${format}`;
+    }, 1000);
+
     const CalendarEl = document.getElementById('calendar');
     let calendarInstance;
 
