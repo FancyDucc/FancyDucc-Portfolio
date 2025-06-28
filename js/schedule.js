@@ -1,11 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => {
-        const offset= 0;
-        const now = new Date();
-        const myTime = new Date(now.getTime() + (offset * 60 * 60 * 1000));
-        const format = myTime.toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit', second: "2-digit"})
+    const now = new Date();
+    const myTime = new Date(now.getTime());
+    const formattedTime12 = myTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const formattedTime24 = myTime.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 
-        document.getElementById("MyTime").textContent = `The time for me right now is: ${format}`;
+    document.getElementById("MyTime").innerHTML = `
+      <span style="font-size: 1.5rem; font-weight: 700; background: linear-gradient(135deg, #5000e6, #9b00e6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 10px rgba(80, 0, 230, 0.8); display: block;">
+        The time for me right now is: ${formattedTime12}
+      </span>
+      <span style="font-size: 0.9rem; font-weight: 700; background: linear-gradient(135deg, #5000e6, #9b00e6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 5px rgba(80, 0, 230, 0.6); display: block; margin-top: 2px;">
+        Or: ${formattedTime24}
+      </span>
+    `;
     }, 1000);
 
     const CalendarEl = document.getElementById('calendar');
