@@ -1594,7 +1594,7 @@ p {
 }
 #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
   color: #5100ff;
-  text-decoration: none; /* No underline */
+  text-decoration: none;
 }
 
 @media (min-width: 992px) {
@@ -1621,8 +1621,8 @@ p {
   }
 }
 header.masthead {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
+  padding-top: 6rem;
+  padding-bottom: 3rem;
   text-align: center;
   color: #fff;
   min-height: 40vh;
@@ -1632,7 +1632,6 @@ header.masthead {
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
-  animation: gradientAnimation 3s ease infinite;
   overflow: hidden;
 }
 
@@ -1661,12 +1660,6 @@ header.masthead {
 
   z-index: 0;
   pointer-events: none;
-}
-
-@keyframes gradientAnimation {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 header.masthead .masthead-subheading {
@@ -1759,3 +1752,56 @@ body {
   background: url('../assets/img/webs/Background.png') no-repeat center center fixed;
   background-size: cover;
 }
+
+/* === SKILL STRIP =================================================== */
+#skill-strip{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  padding:1.4rem 0;                    /* a bit taller */
+  background:url('/assets/img/webs/SectionBackground.png') center/cover;
+  border-top:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  cursor:grab;
+}
+#skill-strip:active{cursor:grabbing;}
+
+.skill-track{
+  display:flex;
+  gap:2.75rem;                         /* even spacing */
+  white-space:nowrap;
+  will-change:transform;
+}
+
+.slice{ 
+  display:flex; 
+  gap:inherit; 
+}
+
+
+.skill{
+  font-family:"Montserrat",sans-serif;
+  font-weight:900;                     /* extra bold */
+  font-size:1.2rem;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+
+  /* chrome-style neon gradient text */
+  background:linear-gradient(90deg,#9d6bff 0%,#4f4bff 50%,#9d6bff 100%);
+  background-size:400% auto;           /* so it shimmers on scroll */
+  background-clip:text;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 6px rgba(80,0,230,.55);
+  pointer-events:none;                 /* never selectable */
+}
+#skill-strip, .skill {
+  user-select: none;          /* modern browsers  */
+  -webkit-user-select: none;  /* Safari / iOS     */
+  -ms-user-select: none;      /* old Edge / IE    */
+}
+
+/* make the gradient glide while the ribbon moves */
+.skill-track { animation: shimmer 5s linear infinite; }
+@keyframes shimmer{ to{ background-position-x:-1000%; } }
+/* ================================================================ */

@@ -1,0 +1,47 @@
+:root{
+  --accent : #5000e6;      /* brand purple */
+  --bg-1   : #000;         /* bg gradient stop 1 */
+  --bg-2   : #0a001d;      /* bg gradient stop 2 */
+  --fade-ms: 600;          /* fade speed */
+}
+
+/* ===== preloader ===== */
+.preloader{
+  position:fixed;inset:0;z-index:10000;
+  display:flex;flex-direction:column;gap:1.4rem;
+  justify-content:center;align-items:center;
+
+  /* animated radial background */
+  --size:400%;
+  background:radial-gradient(circle at 50% 120%,var(--bg-1) 0 35%,var(--bg-2) 100%);
+  background-size:var(--size) var(--size);
+  animation:bg-pan 8s linear infinite alternate;
+
+  opacity:0;
+    transition:
+    opacity   var(--fade-ms)ms ease,
+    transform var(--fade-ms)ms ease;
+  -webkit-user-select:none;user-select:none;
+}
+
+.preloader.fade-out{
+  opacity:0;
+  transform:scale(.5);
+}
+
+.preloader.show{opacity:1}
+.preloader.no-trans{transition:none}
+
+/* text */
+.loading-text{
+  font:700 1.6rem/1 "Montserrat",sans-serif;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+  background:linear-gradient(90deg,var(--accent) 0%,#9b00e6 50%,var(--accent) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:text-shine 2.5s linear infinite;
+}
+
+@keyframes text-shine{to{background-position:200% 0}}
+@keyframes bg-pan   {to{background-position:0 80%}}

@@ -28,15 +28,14 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <link href="/css/styles.css" rel="stylesheet">
+    <link href="/css/loader.css" rel="stylesheet">
     <script src="/js/warningbanner.js"></script>
     <script src="/js/includes.js"></script>
+    <script src="/js/loader.js"></script>
 </head>
 
 <body id="page-top" style="background-color: #000000; color: #f0f0f0;">
-  <div class="preloader">
-    <div class="spinner-border text-light" role="status" aria-hidden="true"></div>
-    <div class="preloader-text">loading…</div>
-  </div>
+
     <div id="navbar-overlay"></div>
     
     <header class="masthead">
@@ -130,6 +129,21 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
                     <div class="portfolio-item">
+                        <video class="img-fluid" src="/assets/img/video/dirty_combo.mp4" alt="Fight Combo"
+                            controls></video>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">R6 Fight Combo</div>
+                            <div class="portfolio-extra-description">
+                                <p>Made using my R6 blender IK rig</p>
+                                <p>Animation and Sound Design done in about 4 hours total</p>
+                            </div>
+                            <button class="toggle-description" style="display: none;">Show Description <span
+                                    class="arrow">&#x25BC;</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-4">
+                    <div class="portfolio-item">
                         <video class="img-fluid" src="/assets/img/video/cutscene_testing.mp4" alt="Bored Cutscene"
                             controls></video>
                         <div class="portfolio-caption">
@@ -148,11 +162,6 @@
                             controls></video>
                         <div class="portfolio-caption">
                             <div class="portfolio-caption-heading">Cool Run</div>
-                            <div class="portfolio-extra-description">
-                                <p>It's just a cool run.</p>
-                            </div>
-                            <button class="toggle-description" style="display: none;">Show Description <span
-                                    class="arrow">&#x25BC;</span></button>
                         </div>
                     </div>
                 </div>
