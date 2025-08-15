@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pac-Man (Python, PyScript)</title>
+
+  <!-- PyScript (runs Python in the browser). These are static CDN files. -->
+  <link rel="stylesheet" href="https://pyscript.net/releases/2025.7.3/core.css">
+  <script type="module" src="https://pyscript.net/releases/2025.7.3/core.js"></script>
+
+  <style>
+    :root { --fg:#f0f0f0; --bg:#000; --accent:#5000e6; --panel:#0c0c0c; }
+    html,body{height:100%;margin:0;background:#000;color:var(--fg);font-family:system-ui,Segoe UI,Roboto,Arial;}
+    .wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:24px}
+    .frame{position:relative;display:inline-block;background:#000;box-shadow:0 12px 24px rgba(0,0,0,.5);border-radius:12px;padding:12px}
+    canvas{display:block;image-rendering:pixelated;image-rendering:crisp-edges;touch-action:none}
+    .hud{display:flex;gap:16px;align-items:center;justify-content:center;font-weight:700}
+    .pill{background:var(--panel);padding:10px 14px;border-radius:10px;border:1px solid #222}
+    .btn{cursor:pointer;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 12px;font-weight:700}
+    .btn:active{transform:translateY(1px)}
+    .subtitle{opacity:.8;font-size:.95rem}
+    .toast{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+           font-weight:900;letter-spacing:.04em;color:#fff;text-shadow:0 0 12px rgba(0,0,0,.8);pointer-events:none}
+    .hide{display:none}
+    .credit{opacity:.6;font-size:.85rem}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hud">
+      <div class="pill">Score: <span id="score">0</span></div>
+      <div class="pill">Lives: <span id="lives">3</span></div>
+      <div class="pill">Level: <span id="level">1</span></div>
+      <button id="reset" class="btn">Reset</button>
+    </div>
+    <div class="subtitle">controls: arrows / wasd · r = quick reset · p = pause</div>
+
+    <div class="frame">
+      <canvas id="game" width="672" height="744" aria-label="Pac-Man"></canvas>
+      <div id="toast" class="toast hide"></div>
+    </div>
+  </div>
+
+  <script src="/py/pacman.py" type="py"></script>
+</body>
+</html>
