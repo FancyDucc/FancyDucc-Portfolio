@@ -1,0 +1,144 @@
+:root{
+  --lb-radius: 16px;
+  --lb-pad: 6px;
+  --lb-z: 11010;
+  --lb-bg: rgba(6,8,12,.78);
+  --lb-acc1:#5000e6; --lb-acc2:#9b00e6; --lb-acc3:#6eb2ff;
+}
+
+/* overlay — keep it mounted so transitions fire */
+.piLB {
+  position: fixed; inset: 0;
+  display: flex;                     /* ← always flex */
+  align-items: center; justify-content: center;
+  background: var(--lb-bg);
+  backdrop-filter: blur(10px) saturate(115%);
+  -webkit-backdrop-filter: blur(10px) saturate(115%);
+  z-index: var(--lb-z);
+  visibility: hidden;                /* ← hide instead of display none */
+  opacity: 0;
+  transition: opacity .35s cubic-bezier(.22,.61,.36,1), visibility 0s linear .35s;
+  cursor: zoom-out;
+}
+.piLB.is-open{
+  visibility: visible;
+  opacity: 1;
+  transition: opacity .35s cubic-bezier(.22,.61,.36,1), visibility 0s;
+}
+
+/* frame (gradient rim) */
+.piLB__frame{
+  position: relative;
+  padding: var(--lb-pad);
+  border-radius: calc(var(--lb-radius) + var(--lb-pad));
+  background: linear-gradient(135deg,var(--lb-acc1),var(--lb-acc2) 45%,var(--lb-acc3));
+  transform: translateY(14px) scale(.94);
+  opacity: 0;
+  transition:
+    transform .34s cubic-bezier(.18,.9,.24,1.22),
+    opacity   .32s cubic-bezier(.22,.61,.36,1);
+  box-shadow: 0 30px 90px rgba(0,0,0,.55);
+  will-change: transform, opacity;
+}
+.piLB.is-open .piLB__frame{ transform: none; opacity: 1; }
+
+/* image */
+.piLB__imgWrap{
+  position: relative;
+  overflow: visible;
+  border-radius: var(--lb-radius);
+  background: #000;
+}
+
+.piLB__img{
+  display:block; max-width: min(96vw, 1600px); max-height: 90vh;
+  border-radius: inherit;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;                /* better pointer tracking */
+  /* pointer-events: none;            ← REMOVE this line entirely */
+  transition: opacity .18s ease;
+}
+
+/* caption (left as-is, hidden by default) */
+.piLB__cap{
+  position:absolute; left:10px; bottom:10px;
+  font: 600 12px/1.2 system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:#e9e9f5; opacity:.85; text-shadow: 0 2px 10px rgba(0,0,0,.6);
+  display:none;
+}
+
+/* arrows */
+.piLB__arrow{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff; font-size: 26px; font-weight: 700;
+  cursor: pointer; user-select: none;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease, border-color .2s ease;
+  backdrop-filter: blur(6px);
+}
+.piLB:hover .piLB__arrow{ opacity: 1; pointer-events: auto; }
+.piLB__arrow:hover{ transform: translateY(-50%) scale(1.06);
+  background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.35); }
+.piLB__arrow--L{ left: 12px; }
+.piLB__arrow--R{ right: 12px; }
+
+@media (hover:none){
+  .piLB__arrow{ opacity:.85; }
+}
+
+/* magnifier lens */
+.piLB__lens{
+  position:absolute; inset:auto;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  box-shadow: 0 6px 24px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,255,255,.25);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 200%;
+  opacity: 0;
+  transform: translate3d(0,0,0) scale(.86);
+  filter: drop-shadow(0 6px 24px rgba(0,0,0,.45));
+  transition:
+    transform .16s cubic-bezier(.2,.9,.3,1.4),
+    opacity   .12s ease,
+    filter    .16s ease;
+  pointer-events: none;
+  cursor: none;
+}
+
+.piLB__lens.is-on{
+  opacity: 1;
+  transform: scale(1);
+  filter: drop-shadow(0 10px 32px rgba(0,0,0,.5));
+}
+
+.piLB__lens::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:50%;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.12);
+  transform: scale(.85);
+  opacity: 0;
+  transition: .18s ease;
+  pointer-events:none;
+}
+
+.piLB__lens::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:50%;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.08);
+}
+
+.piLB__lens.is-on::before{
+  transform: scale(1);
+  opacity: 1;
+}
+
+.piLB__img.is-fading{ opacity: 0; }

@@ -36,6 +36,12 @@ document.addEventListener("DOMContentLoaded", function () {
             type: "link",
             link: "https://devforum.roblox.com/t/fidelity-engineer-plugin-an-easier-and-more-modular-way-to-edit-fidelity/3452485"
         },
+        {
+            title: "R6 IK + FK Blender Rig",
+            description: "A very intuitive blender R6 rig for any kind of R6 animation, I update this frequently and check replies.",
+            type: "link",
+            link: "https://devforum.roblox.com/t/r6-ik-fk-blender-rig/3586405?u=aeresei"
+        },
     ];
 
     const freeStuffList = document.getElementById("free-stuff-list");
