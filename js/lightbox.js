@@ -1,11 +1,9 @@
-/* ===== Fancy Ducc Lightbox: gradient frame + blur + magnifier + arrows ===== */
 (() => {
   const SELECTOR = '.portfolio-image';
   const IMG_ATTR_FULL = 'data-full';
   const OPEN_ANIM_MS = 220;
   const FADE_MS = 160;
 
-  // Build overlay once
   const overlay = document.createElement('div');
   overlay.className = 'piLB';
   overlay.setAttribute('role','dialog');
@@ -108,7 +106,6 @@
     pre.src = nextSrc;
   }
 
-  // ===== Magnifier (press/hold) =====
   let zoom = 2.0;
   const minZoom = 1.5;
   const maxZoom = 5.0;
@@ -130,20 +127,16 @@
     const size = lens.offsetWidth;
     const half = size / 2;
 
-    // Clamp the *center* point to the image edges (lens can overflow visually)
     const cx = Math.max(r.left, Math.min(clientX, r.right));
     const cy = Math.max(r.top ,  Math.min(clientY, r.bottom));
 
-    // Position lens relative to the wrapper's coordinate space
     lens.style.left = (cx - wr.left - half) + 'px';
     lens.style.top  = (cy - wr.top  - half) + 'px';
 
-    // Background sizing in pixels (prevents the “mirror/crop” look)
     const zoomW = r.width  * zoom;
     const zoomH = r.height * zoom;
     lens.style.backgroundSize = `${zoomW}px ${zoomH}px`;
 
-    // Center the magnified area under the lens center
     const xRatio = (cx - r.left) / r.width;
     const yRatio = (cy - r.top ) / r.height;
     const bgX = xRatio * zoomW - half;
@@ -152,7 +145,6 @@
   }
 
 
-  // Desktop: hold left button to show lens and drag
   imgEl.addEventListener('pointerdown', (e) => {
     if (e.button !== 0) return;
     e.preventDefault();
@@ -172,21 +164,17 @@
     window.addEventListener('pointercancel', up, {passive:false});
   }, {passive:false});
 
-  // Disable default drag ghost on images
   imgEl.addEventListener('dragstart', (e) => e.preventDefault());
 
-  // Wheel zoom while lens is visible
   overlay.addEventListener('wheel', (e) => {
     if (lens.hidden) return;
     e.preventDefault();
     const d = Math.sign(e.deltaY);
     zoom = Math.max(minZoom, Math.min(maxZoom, zoom - d*0.2));
-    // use last known mouse position if available
     moveLens(e.clientX ?? (imgEl.getBoundingClientRect().left + imgEl.width/2),
              e.clientY ?? (imgEl.getBoundingClientRect().top  + imgEl.height/2));
   }, {passive:false});
 
-  // Touch: press & move; pinch to zoom
   let touching = false;
   let lastDist = 0;
   const dist = (t) => {
@@ -218,7 +206,6 @@
   imgEl.addEventListener('touchend', () => { touching = false; lensOff(); lastDist = 0; }, {passive:true});
   imgEl.addEventListener('touchcancel', () => { touching = false; lensOff(); lastDist = 0; }, {passive:true});
 
-  // ===== Open / Close / Navigate =====
   document.addEventListener('click', (e) => {
     const img = e.target.closest(SELECTOR);
     if (!img) return;
@@ -226,7 +213,6 @@
     openAt(getImages().indexOf(img));
   }, {passive:false});
 
-  // Close only when clicking the dimmed backdrop (NOT inside the frame)
   overlay.addEventListener('click', (e) => {
     if (e.target.closest('.piLB__frame')) return;
     close();
@@ -235,7 +221,6 @@
   prevBtn.addEventListener('click', (e) => { e.stopPropagation(); go(-1); });
   nextBtn.addEventListener('click', (e) => { e.stopPropagation(); go(+1); });
 
-  // keyboard
   document.addEventListener('keydown', (e) => {
     if (!overlay.classList.contains('is-open')) return;
     if (e.key === 'Escape') close();
@@ -243,7 +228,6 @@
     if (e.key === 'ArrowRight') go(+1);
   });
 
-  // swipe (simple)
   let sX = 0, sY = 0, swiping = false;
   overlay.addEventListener('pointerdown', (e) => { swiping = true; sX=e.clientX; sY=e.clientY; });
   overlay.addEventListener('pointerup', (e) => {

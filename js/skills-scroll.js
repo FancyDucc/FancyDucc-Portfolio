@@ -1,15 +1,14 @@
-/*  skills-scroll.js  —  no-snap ribbon (working version)  */
 document.addEventListener('DOMContentLoaded', async () => {
 
-  const SPEED = -90;           // px / s (negative = left)
-  const SNAP  = 120;           // easing after drag
+  const SPEED = -90;
+  const SNAP  = 120;
 
   const wrap  = document.getElementById('skill-strip');
   if (!wrap) return;
   const track = wrap.querySelector('.skill-track');
-  const baseHTML = track.innerHTML;            // markup for ONE slice
+  const baseHTML = track.innerHTML;
 
-  await document.fonts.ready;                  // wait for accurate widths
+  await document.fonts.ready;
 
   let sliceW = 0;
   let pos    = 0, vel = SPEED;
@@ -17,26 +16,20 @@ document.addEventListener('DOMContentLoaded', async () => {
   let lastT  = performance.now();
   let lastPtr= lastT;
 
-  /* -------------------------------------------------- */
   function retile () {
-
-    /* 1 · build the first slice and measure it -------- */
-    track.innerHTML = baseHTML;                // start fresh
-    const first = track.firstElementChild;     // <-- this one **is** in the DOM
+    track.innerHTML = baseHTML;
+    const first = track.firstElementChild;
     const gap   = parseFloat(getComputedStyle(track).gap) || 0;
     sliceW = first.getBoundingClientRect().width + gap;
 
-    /* 2 · clone until we cover >2× viewport ---------- */
     while (track.scrollWidth < innerWidth * 2 + sliceW)
       track.insertAdjacentHTML('beforeend', baseHTML);
 
-    /* 3 · keep the current pos inside new width ------ */
     pos = ((pos % sliceW) + sliceW) % sliceW - sliceW;
   }
   retile();
   addEventListener('resize', retile);
 
-  /* -------------------------------------------------- */
   const loop = t => {
     const dt = (t - lastT) / 1000;  lastT = t;
 
@@ -44,13 +37,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       vel += (SPEED - vel) * Math.min(1, SNAP * dt / Math.abs(SPEED));
       pos += vel * dt;
     }
-    pos = ((pos % sliceW) + sliceW) % sliceW - sliceW;   // perfect wrap
+    pos = ((pos % sliceW) + sliceW) % sliceW - sliceW;
     track.style.transform = `translate3d(${pos}px,0,0)`;
     requestAnimationFrame(loop);
   };
   requestAnimationFrame(loop);
 
-  /* -------------------------------------------------- */
   let id = null;
   wrap.addEventListener('pointerdown', e => {
     id   = e.pointerId;

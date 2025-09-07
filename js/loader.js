@@ -1,19 +1,16 @@
-/* smart loader v2 – stick around until *really* ready */
 (() => {
   const cssVar = n => getComputedStyle(document.documentElement)
                       .getPropertyValue(n).trim();
-  const FADE_MS   = +cssVar('--fade-ms')  || 600;
-  const MIN_SHOW  = 400;                        // ms
+  const FADE_MS   = +cssVar('--fade-ms')  || 300;
+  const MIN_SHOW  = 200;
   let startTime   = performance.now();
 
-  /* ---------- build element immediately ---------- */
   const loader = document.createElement('div');
   loader.id = 'loader';
   loader.className = 'preloader show no-trans';
   loader.innerHTML = '<span class="loading-text">loading…</span>';
   document.documentElement.prepend(loader);
 
-  /* ---------- track fetch() ---------- */
   let inFlightFetch = 0;
   const origFetch = window.fetch;
   window.fetch = (...args) => {
@@ -24,22 +21,19 @@
     });
   };
 
-  /* ---------- app-level ready hook ---------- */
   let explicitReady = false;
   window.appReady = () => { explicitReady = true; maybeDone(); };
 
-  /* ---------- wait for native resources ---------- */
   let nativeReady = false;
   window.addEventListener('load', async () => {
     await Promise.allSettled([
-      document.fonts?.ready,      // wait for web-fonts
-      decodeMedia()               // images & videos
+      document.fonts?.ready,
+      decodeMedia()
     ]);
     nativeReady = true;
     maybeDone();
   });
 
-  /* ---------- decode images + videos ---------- */
   async function decodeMedia(){
     const imgs   = Array.from(document.images);
     const vids   = Array.from(document.querySelectorAll('video'));
@@ -54,7 +48,6 @@
     ]);
   }
 
-  /* ---------- reveal page only when all clear ---------- */
   function maybeDone(){
     const elapsed = performance.now() - startTime;
     if (!nativeReady)          return;
@@ -65,14 +58,12 @@
       return;
     }
 
-    // fade out
     loader.classList.remove('no-trans');
     loader.classList.add('fade-out');
     requestAnimationFrame(()=>loader.style.opacity = 0);
     loader.addEventListener('transitionend', ()=>loader.remove(), { once:true });
   }
 
-  /* ---------- seamless page transitions ---------- */
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href]');
     if (!a) return;
@@ -90,7 +81,7 @@
       document.documentElement.append(loader);
       void loader.offsetHeight;
     }
-    startTime = performance.now();   // reset minimum time
+    startTime = performance.now();
     loader.classList.add('show');
     loader.classList.remove('fade-out');
     loader.style.opacity = 1;

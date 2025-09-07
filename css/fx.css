@@ -1,0 +1,108 @@
+:root{
+  --scrollY: 0;
+
+  /* grid tuning */
+  --grid-tilt: -10deg;          /* 10–20° feels best */
+  --grid-gap: 30px;             /* cell size */
+  --grid-line: rgba(89, 0, 255, 0.432);
+  --grid-accent: rgba(111, 0, 255, 0.384);  /* every 5th */
+  --grid-speed: 60s;            /* drift cycle */
+  --grid-parallax: -0.5px;     /* stronger parallax */
+  --grid-opacity: .4;          /* a little more visible */
+  --grid-tile: calc(var(--grid-gap) * 5);   /* size of the accent tile */
+  --drift-tiles-x: -6;   /* move -6 big tiles horizontally  (must be integer) */
+  --drift-tiles-y: -12;  /* move -12 big tiles vertically    (must be integer) */
+}
+
+/* keep your body bg off; we draw behind everything here */
+body{ background: none !important; }
+
+#fx-bg{ position:fixed; inset:0; z-index:-2; pointer-events:none; overflow:hidden; }
+
+/* ===== base stays STATIC (your purple gradient image) ===== */
+#fx-bg .fx-base{
+  position:absolute; inset:0;                          /* no transform => no jank, no cutoff */
+  background: url('/assets/img/webs/Background.png') center/cover no-repeat;
+}
+
+/* soft brand glow (still static color) */
+#fx-bg .fx-glow{
+  position:absolute; inset:-20vh -12vw;
+  background:
+    radial-gradient(60vmax 40vmax at 72% 30%, rgba(80,0,230,.18), transparent 62%),
+    radial-gradient(48vmax 36vmax at 22% 70%, rgba(90,110,255,.14), transparent 64%);
+  transform: translateZ(0); /* no scroll tie; purely aesthetic */
+}
+
+/* ===== tilted, drifting GRID with true parallax ===== */
+#fx-bg .fx-grid{
+  position:absolute;
+  inset:-80vmax;
+  opacity:var(--grid-opacity);
+  pointer-events:none;
+  will-change:transform, background-position;
+  transform-origin:50% 60%;
+
+  /* crisp tiled grid (accents every 5 cells) */
+  background-image:
+    linear-gradient(to right, var(--grid-accent) 2px, transparent 2px),
+    linear-gradient(to bottom, var(--grid-accent) 2px, transparent 2px),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+
+  background-size:
+    calc(var(--grid-gap)*5) calc(var(--grid-gap)*5),
+    calc(var(--grid-gap)*5) calc(var(--grid-gap)*5),
+    var(--grid-gap) var(--grid-gap),
+    var(--grid-gap) var(--grid-gap);
+
+  /* start aligned */
+  background-position: 0 0, 0 0, 0 0, 0 0;
+
+  /* rotate plane + parallax */
+  transform: rotate(var(--grid-tilt))
+             translate3d(0, calc(var(--scrollY) * var(--grid-parallax)), 0);
+
+  /* texture-only drift; distance = integer multiples of the largest tile */
+  animation: gridDrift var(--grid-speed) linear infinite;
+}
+
+@keyframes gridDrift{
+  from{
+    background-position:
+      0 0, 0 0, 0 0, 0 0;
+  }
+  to{
+    /* move by N * (grid-gap*5) so ALL layers realign exactly */
+    background-position:
+      calc(var(--grid-tile) * var(--drift-tiles-x)) calc(var(--grid-tile) * var(--drift-tiles-y)),
+      calc(var(--grid-tile) * var(--drift-tiles-x)) calc(var(--grid-tile) * var(--drift-tiles-y)),
+      calc(var(--grid-tile) * var(--drift-tiles-x)) calc(var(--grid-tile) * var(--drift-tiles-y)),
+      calc(var(--grid-tile) * var(--drift-tiles-x)) calc(var(--grid-tile) * var(--drift-tiles-y));
+  }
+}
+
+#fx-bg .fx-grid{ transform: translateZ(0) rotate(var(--grid-tilt))
+                 translate3d(0, calc(var(--scrollY) * var(--grid-parallax)), 0); }
+
+/* hero text parallax stays obvious */
+header.masthead .masthead-content{ will-change: transform; }
+
+/* keep heading solid brand color (no gradient text) */
+.masthead .masthead-heading span{
+  color:#5000e6 !important;
+  text-shadow:0 4px 20px rgba(80,0,230,.25);
+}
+
+/* section backgrounds use scroll (fixed causes jank) */
+.page-section,
+.content-page-section,
+.contact-page-section{
+  background-attachment: scroll !important;
+  background-position: center top;
+}
+
+/* accessibility */
+@media (prefers-reduced-motion: reduce){
+  #fx-bg .fx-grid{ animation:none !important; transform: rotate(var(--grid-tilt)); }
+}
