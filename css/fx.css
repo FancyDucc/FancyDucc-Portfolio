@@ -3,11 +3,11 @@
 
   /* grid tuning */
   --grid-tilt: -10deg;          /* 10–20° feels best */
-  --grid-gap: 30px;             /* cell size */
+  --grid-gap: 50px;             /* cell size */
   --grid-line: rgba(89, 0, 255, 0.432);
   --grid-accent: rgba(111, 0, 255, 0.384);  /* every 5th */
   --grid-speed: 60s;            /* drift cycle */
-  --grid-parallax: -0.5px;     /* stronger parallax */
+  --grid-parallax: 0px;     /* stronger parallax */
   --grid-opacity: .4;          /* a little more visible */
   --grid-tile: calc(var(--grid-gap) * 5);   /* size of the accent tile */
   --drift-tiles-x: -6;   /* move -6 big tiles horizontally  (must be integer) */
@@ -61,7 +61,7 @@ body{ background: none !important; }
 
   /* rotate plane + parallax */
   transform: rotate(var(--grid-tilt))
-             translate3d(0, calc(var(--scrollY) * var(--grid-parallax)), 0);
+             translate3d(0, var(--scrollY), 0);
 
   /* texture-only drift; distance = integer multiples of the largest tile */
   animation: gridDrift var(--grid-speed) linear infinite;

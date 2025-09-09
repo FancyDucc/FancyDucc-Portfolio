@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
       root.style.setProperty('--scrollY', y.toFixed(2));
 
       if (mast && !reduce){
-        const offset = Math.min(y * 0.25, 140);
+        const offset = Math.min(y * 0.4, 3000);
         mast.style.transform = `translate3d(0, ${offset}px, 0)`;
       }
       ticking = false;
