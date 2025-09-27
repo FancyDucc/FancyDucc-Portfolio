@@ -601,84 +601,6 @@ input[type="range"]::-moz-range-thumb {
 }
 .currency-toggle[data-mode="ROBUX"] .pill-slider{ transform:translateX(100%); }
 
-/* chooser */
-.fiat-select{
-  position:relative;
-  display:flex;
-  flex:0 1 46px; /* tries to be 300px but can shrink/grow a bit */
-  max-width:46px; /* hard cap so it can’t get comically long */
-  height:var(--switch-h);
-  background:var(--switch-bg);
-  border:1px solid var(--switch-b);
-  border-radius:var(--bs-border-radius);
-  z-index:5;
-}
-
-.fiat-btn{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:100%;
-  padding:0 12px;
-  color:#ddd;
-  border:none;
-  border-radius:var(--bs-border-radius);
-  background:transparent;
-  transition: box-shadow .25s ease;
-}
-.fiat-btn:hover{ box-shadow:0 0 0 2px rgba(80,0,230,.35) inset; }
-
-.fiat-btn .label{ color:#c9c9c9; font-size:.9rem; }
-.fiat-btn .value{ color:#fff; font-weight:700; margin-left:auto; }
-.fiat-btn .chev{ width:14px; height:14px; opacity:.85; transition:transform .2s ease; }
-.fiat-select[data-open="true"] .chev{ transform:rotate(180deg); }
-
-/* dropdown menu */
-.fiat-list{
-  position:absolute;
-  top:calc(100% + 8px);
-  left:0;
-  min-width:245px;
-  max-height:280px;
-  overflow:auto;
-  background:#0f0f0f;
-  border:1px solid var(--switch-b);
-  border-radius:var(--bs-border-radius);
-  box-shadow:0 10px 24px rgba(0,0,0,.5);
-  padding:6px;
-  display:none;
-  z-index:9999;
-}
-.fiat-select[data-open="true"] .fiat-list{
-  display:block; animation:menuIn .12s ease-out;
-}
-@keyframes menuIn{ from{ transform:translateY(-4px); opacity:0 } to{ transform:none; opacity:1 } }
-
-.fiat-group{
-  padding:4px 8px;
-  font-size:.8rem;
-  color:#aaa;
-  text-transform:uppercase;
-  letter-spacing:.05em;
-}
-
-.fiat-option{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:6px 8px;
-  border-radius:8px;
-  color:#ddd;
-  cursor:pointer;
-}
-.fiat-option:hover,
-.fiat-option[aria-selected="true"],
-.fiat-option.focus{
-  background:rgba(80,0,230,.15);
-  color:#fff;
-}
-
 /* helpers */
 .robux-chunk{ white-space:nowrap; }
 .hidden{ display:none !important; }
@@ -1920,3 +1842,80 @@ body {
 
 .skill-track { animation: shimmer 5s linear infinite; }
 @keyframes shimmer{ to{ background-position-x:-1000%; } }
+
+.fiat-select{
+  position:relative;
+  display:flex;
+  flex:0 1 46px; /* tries to be 300px but can shrink/grow a bit */
+  max-width:46px; /* hard cap so it can’t get comically long */
+  height:var(--switch-h);
+  background:var(--switch-bg);
+  border:1px solid var(--switch-b);
+  border-radius:var(--bs-border-radius);
+  z-index:5;
+}
+
+.fiat-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:100%;
+  padding:0 12px;
+  color:#ddd;
+  border:none;
+  border-radius:var(--bs-border-radius);
+  background:transparent;
+  transition: box-shadow .25s ease;
+}
+.fiat-btn:hover{ box-shadow:0 0 0 2px rgba(80,0,230,.35) inset; }
+
+.fiat-btn .label{ color:#c9c9c9; font-size:.9rem; }
+.fiat-btn .value{ color:#fff; font-weight:700; margin-left:auto; }
+.fiat-btn .chev{ width:14px; height:14px; opacity:.85; transition:transform .2s ease; }
+.fiat-select[data-open="true"] .chev{ transform:rotate(180deg); }
+
+/* dropdown menu */
+.fiat-list{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  min-width:245px;
+  max-height:280px;
+  overflow:auto;
+  background:#0f0f0f;
+  border:1px solid var(--switch-b);
+  border-radius:var(--bs-border-radius);
+  box-shadow:0 10px 24px rgba(0,0,0,.5);
+  padding:6px;
+  display:none;
+  z-index:9999;
+}
+.fiat-select[data-open="true"] .fiat-list{
+  display:block; animation:menuIn .12s ease-out;
+}
+@keyframes menuIn{ from{ transform:translateY(-4px); opacity:0 } to{ transform:none; opacity:1 } }
+
+.fiat-group{
+  padding:4px 8px;
+  font-size:.8rem;
+  color:#aaa;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.fiat-option{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 8px;
+  border-radius:8px;
+  color:#ddd;
+  cursor:pointer;
+}
+.fiat-option:hover,
+.fiat-option[aria-selected="true"],
+.fiat-option.focus{
+  background:rgba(80,0,230,.15);
+  color:#fff;
+}

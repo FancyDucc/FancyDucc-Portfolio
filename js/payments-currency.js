@@ -1,31 +1,29 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ====== CONFIG ======
-  const ROBUX_PER_USD = 10000 / 38;               // DevEx (10k R$ = $38)
-  const STORE_CUR  = "fd.currency.code";
-  const STORE_MODE = "fd.currency.mode";          // "FIAT" | "ROBUX"
-  const STORE_FX   = "fd.fx.usd";                 // cached FX (base USD)
+  const ROBUX_PER_USD = 10000 / 38;
+  const STORE_CUR = "fd.currency.code";
+  const STORE_MODE = "fd.currency.mode";
+  const STORE_FX = "fd.fx.usd";
 
-  // ====== STATE ======
   let rates = { USD: 1 };
-  let mode  = localStorage.getItem(STORE_MODE) || "FIAT";
-  let fiat  = localStorage.getItem(STORE_CUR)  || "USD";
+  let mode = localStorage.getItem(STORE_MODE) || "FIAT";
+  let fiat = localStorage.getItem(STORE_CUR)  || "USD";
 
-  // ui refs
-  const toggle    = document.getElementById("currency-toggle");
-  const pillFiat  = document.getElementById("pill-fiat");
+  // ui stuff
+  const toggle = document.getElementById("currency-toggle");
+  const pillFiat = document.getElementById("pill-fiat");
   const pillRobux = document.getElementById("pill-robux");
 
-  // custom dropdown refs
+  // dropdown stuff
   const fiatSelect = document.getElementById("fiat-select");
-  const fiatBtn    = document.getElementById("fiat-btn");
-  const fiatList   = document.getElementById("fiat-list");
-  const fiatValue  = document.getElementById("fiat-value");
+  const fiatBtn = document.getElementById("fiat-btn");
+  const fiatList = document.getElementById("fiat-list");
+  const fiatValue = document.getElementById("fiat-value");
 
   pillFiat?.addEventListener("click", () => setMode("FIAT"));
   pillRobux?.addEventListener("click", () => setMode("ROBUX"));
   fiatList.addEventListener("click", (e) => e.stopPropagation());
 
-  // ====== UTILS ======
   const getSuffix = t => (t.match(/\/(build|script|animation|track|asset)/i)?.[0]) || "";
 
   function wrapRobuxChunks() {
@@ -78,6 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // thanks stack overflow :3
   async function fetchRates() {
     try {
       const r = await fetch("https://api.exchangerate.host/latest?base=USD");
@@ -95,14 +94,12 @@ document.addEventListener("DOMContentLoaded", () => {
           rates = cache.rates; return;
         }
       } catch {}
-      // coarse fallback so UI still works offline
       rates = { USD:1, EUR:0.85, GBP:0.77, CAD:1.36, AUD:1.52, NZD:1.66, JPY:155, KRW:1370, INR:83.2,
                 BRL:5.5, MXN:18.3, SEK:10.6, NOK:10.7, DKK:6.35, CHF:0.90, PLN:3.9, CZK:23.4, HUF:370,
                 TRY:33, ZAR:18.5, AED:3.67, SAR:3.75, ILS:3.8, CNY:7.2 };
     }
   }
 
-  // === custom dropdown build/behavior ===
   function makeOption(code) {
     const li = document.createElement("div");
     li.className = "fiat-option";
@@ -155,7 +152,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   function clearFocus(){ fiatList.querySelectorAll(".fiat-option.focus").forEach(el => el.classList.remove("focus")); }
 
-  // keyboard + outside click
   fiatBtn.addEventListener("click", e => { e.stopPropagation(); toggleMenu(); });
   document.addEventListener("click", e => { if (fiatSelect.dataset.open === "true" && !fiatSelect.contains(e.target)) closeMenu(); });
 
@@ -170,7 +166,6 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (e.key === "Enter" || e.key === " "){ e.preventDefault(); const el = els[focusIndex]; if (el){ selectFiat(el.dataset.value); closeMenu(); fiatBtn.focus(); } }
   });
 
-  // width sync so chooser == switcher
   function syncWidths(){
     const t = document.getElementById("currency-toggle");
     const s = document.getElementById("fiat-select");
@@ -178,7 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   window.addEventListener("resize", syncWidths);
 
-  // mode + fiat setters
   function setMode(newMode) {
     mode = newMode;
     toggle.dataset.mode = newMode;
@@ -194,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (mode !== "ROBUX") renderAll();
   }
 
-  // discounts API (compatible)
   window.applyDiscount = function(discountPct, services) {
     const list = document.getElementById("discounted-services-list");
     const card = document.getElementById("discount-card");
@@ -212,20 +205,17 @@ document.addEventListener("DOMContentLoaded", () => {
     renderAll();
   };
 
-  // ====== INIT ======
   (async function init() {
     wrapRobuxChunks();
     await fetchRates();
     buildFiatMenu();
     syncWidths();
 
-    // default render
     setFiat(fiat);
     fiatValue.textContent = fiat;
     setMode(mode);
     renderAll();
 
-    // keep your example discount
     applyDiscount(30, [{ name: "vfx", description: "VFX" }]);
   })();
 });
