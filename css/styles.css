@@ -70,6 +70,10 @@
   --star-size  : 1.15rem;
   --star-fill  : #ffffff;
   --star-empty : #3a3a3a;
+  --switch-h: 44px;
+  --switch-radius: var(--bs-border-radius);
+  --switch-bg: #1a1a1a;
+  --switch-b: #2a2a2a;
 }
 
 *,
@@ -547,6 +551,138 @@ input[type="range"]::-moz-range-thumb {
 .current-time, .total-time {
   font-size: 14px;
 }
+
+.currency-bar{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  width:100%;
+  margin:1.25rem auto 2.25rem;
+  padding:4px 0;
+  max-width:800px;
+}
+
+/* toggle (USD | Robux) */
+.currency-toggle{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  height:var(--switch-h);
+  background:var(--switch-bg);
+  border:1px solid var(--switch-b);
+  padding:4px;
+  border-radius:var(--bs-border-radius);
+  z-index:2;
+}
+
+.toggle-pill{
+  position:relative;
+  z-index:2;
+  padding:0 14px;            /* was 16px — trimmed side padding */
+  min-width:90px;            /* just enough so text isn’t cramped */
+  line-height:calc(var(--switch-h) - 10px);
+  text-align:center;
+  color:#cfcfcf;
+}
+.toggle-pill.active{ color:#fff; }
+
+.pill-slider{
+  position:absolute;
+  top:4px; bottom:4px;
+  width:calc(50% - 4px);
+  border-radius:var(--bs-border-radius);
+  background:linear-gradient(135deg,#5000e6,#9b00e6);
+  box-shadow:0 0 20px rgba(80,0,230,.35);
+  transform:translateX(0);
+  transition:transform .3s cubic-bezier(.25,.8,.25,1);
+  z-index:1;
+}
+.currency-toggle[data-mode="ROBUX"] .pill-slider{ transform:translateX(100%); }
+
+/* chooser */
+.fiat-select{
+  position:relative;
+  display:flex;
+  flex:0 1 46px; /* tries to be 300px but can shrink/grow a bit */
+  max-width:46px; /* hard cap so it can’t get comically long */
+  height:var(--switch-h);
+  background:var(--switch-bg);
+  border:1px solid var(--switch-b);
+  border-radius:var(--bs-border-radius);
+  z-index:5;
+}
+
+.fiat-btn{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:100%;
+  padding:0 12px;
+  color:#ddd;
+  border:none;
+  border-radius:var(--bs-border-radius);
+  background:transparent;
+  transition: box-shadow .25s ease;
+}
+.fiat-btn:hover{ box-shadow:0 0 0 2px rgba(80,0,230,.35) inset; }
+
+.fiat-btn .label{ color:#c9c9c9; font-size:.9rem; }
+.fiat-btn .value{ color:#fff; font-weight:700; margin-left:auto; }
+.fiat-btn .chev{ width:14px; height:14px; opacity:.85; transition:transform .2s ease; }
+.fiat-select[data-open="true"] .chev{ transform:rotate(180deg); }
+
+/* dropdown menu */
+.fiat-list{
+  position:absolute;
+  top:calc(100% + 8px);
+  left:0;
+  min-width:245px;
+  max-height:280px;
+  overflow:auto;
+  background:#0f0f0f;
+  border:1px solid var(--switch-b);
+  border-radius:var(--bs-border-radius);
+  box-shadow:0 10px 24px rgba(0,0,0,.5);
+  padding:6px;
+  display:none;
+  z-index:9999;
+}
+.fiat-select[data-open="true"] .fiat-list{
+  display:block; animation:menuIn .12s ease-out;
+}
+@keyframes menuIn{ from{ transform:translateY(-4px); opacity:0 } to{ transform:none; opacity:1 } }
+
+.fiat-group{
+  padding:4px 8px;
+  font-size:.8rem;
+  color:#aaa;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+
+.fiat-option{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:6px 8px;
+  border-radius:8px;
+  color:#ddd;
+  cursor:pointer;
+}
+.fiat-option:hover,
+.fiat-option[aria-selected="true"],
+.fiat-option.focus{
+  background:rgba(80,0,230,.15);
+  color:#fff;
+}
+
+/* helpers */
+.robux-chunk{ white-space:nowrap; }
+.hidden{ display:none !important; }
+.price.discounted{ color:#ff5252 !important; font-weight:700; }
 
 .volume-slider {
   position: absolute;

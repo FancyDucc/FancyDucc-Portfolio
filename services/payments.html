@@ -81,11 +81,12 @@
             <div class="notice-container">
                 <ul>
                     <li><strong>Preferred:</strong> Pay with PayPal or Cash App (secure, no Roblox tax).</li>
-                    <li><strong>Robux:</strong> Must use DevEx rate (30 000 Robux = $105).</li>
-                    <li><strong>Robux + Gamepasses, T-Shirts, DevProduct:</strong> Add 30% fee for Roblox’s tax.</li>
+                    <li><strong>Robux:</strong> Must use DevEx rate (10,000 Robux = $38 USD, 30,000 Robux = $114 USD).</li>
+                    <li><strong>Robux + Gamepasses, T-Shirts, DevProduct:</strong> Add 30% fee for Roblox's tax.</li>
                     <p>To avoid extra costs, use Group Payouts.</p>
                 </ul>
             </div>
+
             <div class="col-lg-14 mb-4">
                 <div class="card" style="background-color: #222222; padding: 1rem; min-height: 300px;">
                     <h4 style="color: #ff3e3e;">Special Services</h4>
@@ -108,13 +109,32 @@
                     hired me for, you will still get the discounted rate for the entire duration of our work together.
                 </p>
             </div>
+
+            <div class="currency-bar" id="currency-bar">
+                <div class="currency-toggle" id="currency-toggle" data-mode="FIAT" role="tablist" aria-label="Price currency">
+                    <button type="button" class="toggle-pill active" data-mode="FIAT" aria-selected="true" id="pill-fiat">USD</button>
+                    <button type="button" class="toggle-pill" data-mode="ROBUX" aria-selected="false" id="pill-robux">Robux</button>
+                    <span class="pill-slider" aria-hidden="true"></span>
+                </div>
+
+                <div class="fiat-select" id="fiat-select" data-open="false">
+                    <button type="button" class="fiat-btn" id="fiat-btn" aria-haspopup="listbox" aria-expanded="false" aria-controls="fiat-list">
+                    <span class="label">currency</span>
+                    <span class="value" id="fiat-value">USD</span>
+                    <svg class="chev" viewBox="0 0 20 20" aria-hidden="true">
+                        <path d="M5 7l5 6 5-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    </button>
+                    <ul class="fiat-list" id="fiat-list" role="listbox" tabindex="-1"></ul>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <div class="card" style="background-color: #222222; padding: 1rem; min-height: 300px;">
                         <h4 style="color: #5000e6;">Building</h4>
                         <p>
-                            Starting at: <strong class="price usd" data-original-price="8">tbd</strong>
-                            or <strong class="price robux" data-original-price="8">tbd</strong>
+                            Starting at: <strong class="price usd" data-original-price="8">Loading...</strong>
                         </p>
                         <ul>
                             <li>
@@ -130,8 +150,6 @@
                                 <strong style="color: #f0f0f0;" class="price usd"
                                     data-original-price="20">$20/build</strong>
                             </li>
-                            <li>Group Projects or Collaborations: Custom rates based on scope and team size, please
-                                contact me.</li>
                         </ul>
                     </div>
                 </div>
@@ -139,8 +157,7 @@
                     <div class="card" style="background-color: #222222; padding: 1rem; min-height: 300px;">
                         <h4 style="color: #5000e6;">Scripting (Luau, HTML, JavaScript, Python)</h4>
                         <p>
-                            Starting at: <strong class="price usd" data-original-price="4">tbd</strong>
-                            or <strong class="price robux" data-original-price="4">tbd</strong>
+                            Starting at: <strong class="price usd" data-original-price="4">Loading...</strong>
                         <ul>
                             <li>
                                 Basic Scripts (ex; GUI interactions, simple mechanics): <strong style="color: #f0f0f0;"
@@ -184,7 +201,6 @@
                         <h4 style="color: #5000e6;">Animation (Blender, Moon Animator, Roblox Animation Editor)</h4>
                         <p>
                             Starting at: <strong class="price usd" data-original-price="8">Loading...</strong>
-                            or <strong class="price robux" data-original-price="8">Loading...</strong>
                         </p>
                         <ul>
                             <li>
@@ -273,7 +289,6 @@
                         <h4 style="color: #5000e6;">VFX (Particles, Textures)</h4>
                         <p>
                             Starting at: <strong class="price usd" data-original-price="5">Loading...</strong>
-                            or <strong class="price robux" data-original-price="5">Loading...</strong>
                         <p>Detailed scripting services:</p>
                         <ul>
                             <li>
@@ -301,8 +316,6 @@
                         <p>
                             Starting at:
                             <strong class="price usd" data-original-price="5">Loading...</strong>
-                            or
-                            <strong class="price robux" data-original-price="5">Loading...</strong>
                         </p>
                         <p>Simple, effective models for game assets, these are limited as I am not completely
                             professional at 3D Modeling:</p>
@@ -325,7 +338,7 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
     <script src="/js/scripts.js"></script>
-    <script src="/js/discounts.js"></script>
+    <script src="/js/payments-currency.js"></script>
 </body>
 
 </html>
