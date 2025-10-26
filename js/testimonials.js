@@ -39,6 +39,11 @@ const testimonials = [
     stars: 4.5,
     text: "Fancy Ducc is honestly one of the best people ive worked with, his work flow and quality is beyond expectations"
   },
+    {
+    author: "Slyifern - Commissioner of The Foundation",
+    stars: 5,
+    text: "genuinely rly sick animation work and was extremly fast, would recommend 🙏"
+  },
   {
     author: "Polyograthyms",
     stars: 5,
