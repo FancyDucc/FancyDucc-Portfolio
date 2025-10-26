@@ -25,6 +25,11 @@ const testimonials = [
     text: "Literally for less than 2 hours made the task, after payment once gave the file and helped to understand the scripts."
   },
   {
+    author: "Failworks - Owner of Doorways",
+    stars: 5,
+    text: "Had a teaser due in the same day i received the model, i hit up Ducc and he absolutely smashed it out of the park, seriously saved us trouble and helped out asap, seriously, one of the coolest people out there (hire this guy)"
+  },
+  {
     author: "Pingolein",
     stars: 5,
     text: "Service was fast, extremely good results, and overall just extremely skilled at LITERALLY EVERYTHING!"
