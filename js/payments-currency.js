@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ====== CONFIG ======
   const ROBUX_PER_USD = 10000 / 38;
   const STORE_CUR = "fd.currency.code";
   const STORE_MODE = "fd.currency.mode";
