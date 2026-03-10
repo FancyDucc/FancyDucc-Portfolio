@@ -782,6 +782,57 @@ input[type="range"]::-moz-range-thumb {
   margin-top: 5px;
 }
 
+.game-card {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+  color: #f0f0f0;
+  border: none;
+}
+
+.game-card-link,
+.game-card-inner {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.game-card-media img {
+  width: 220px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+.game-card-title {
+  color: rgb(80, 0, 230);
+}
+
+.game-card-text {
+  color: #f0f0f0;
+}
+
+.game-card-status {
+  font-size: 0.9em;
+  color: #888;
+}
+
+@media (max-width: 768px) {
+  .game-card-link,
+  .game-card-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .game-card-media img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 .process-list {
   list-style: none;
   padding-left: 0;
