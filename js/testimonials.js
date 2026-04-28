@@ -72,11 +72,11 @@ function stars(rating){
 
 testimonials.forEach(t => {
   const col = document.createElement("div");
-  col.className = "col-md-6 col-lg-4 fade-up";
+  col.className = "col-lg-4 col-md-6 col-sm-12 fade-up";
 
   col.innerHTML = `
-    <div class="testimonial-card h-100">
-      <div class="testimonial-rating mb-2" style="color:#f5c518;">
+    <div class="testimonial-card showcase-card h-100">
+      <div class="testimonial-rating mb-2">
         ${stars(t.stars)}
       </div>
       <p class="testimonial-text mb-3">${t.text}</p>

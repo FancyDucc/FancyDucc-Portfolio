@@ -1,6 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
   console.log("DOM moment");
 
+  const loadLazyMedia = (element) => {
+    if (!element.hasAttribute("data-src")) return;
+    element.src = element.getAttribute("data-src");
+    element.removeAttribute("data-src");
+    if (element.tagName === "VIDEO") {
+      element.load();
+    }
+  };
+
   const LazyElements = document.querySelectorAll("img[loading='lazy'], video, .portfolio-item, .custom-audio-player");
   const ScrollToTopBtn = document.getElementById("scrollToTopBtn");
 
@@ -10,20 +19,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const LazyObserver = new IntersectionObserver(
       (Entries, Observer) => {
         Entries.forEach(entry => {
-          if (entry.isIntersecting && entry.intersectionRatio === 1) {
+          if (entry.isIntersecting) {
             const LazyElement = entry.target;
             if (LazyElement.tagName === "IMG" || LazyElement.tagName === "VIDEO") {
-              if (LazyElement.hasAttribute("data-src")) {
-                LazyElement.src = LazyElement.getAttribute("data-src");
-                LazyElement.removeAttribute("data-src");
-              }
+              loadLazyMedia(LazyElement);
             }
             LazyElement.classList.add("visible-element");
             Observer.unobserve(LazyElement);
           }
         });
       },
-      { threshold: 1 }
+      { rootMargin: "300px 0px", threshold: 0.1 }
     );
 
     LazyElements.forEach(element => {
@@ -33,10 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     LazyElements.forEach(element => {
       if (element.tagName === "IMG" || element.tagName === "VIDEO") {
-        if (element.hasAttribute("data-src")) {
-          element.src = element.getAttribute("data-src");
-          element.removeAttribute("data-src");
-        }
+        loadLazyMedia(element);
       }
       element.classList.add("visible-element");
     });
@@ -184,11 +187,14 @@ window.onload = function () {
 
   const ToggleButtons = document.querySelectorAll(".toggle-description");
   ToggleButtons.forEach(function (btn) {
+    if (btn.dataset.descriptionBound === "true") return;
+
     const Caption = btn.parentElement;
     const ExtraDesc = Caption.querySelector(".portfolio-extra-description");
 
     if (ExtraDesc && ExtraDesc.textContent.trim() !== "") {
       btn.style.display = "block";
+      btn.dataset.descriptionBound = "true";
       btn.addEventListener("click", function () {
         if (ExtraDesc.classList.contains("expanded")) {
           ExtraDesc.style.height = ExtraDesc.scrollHeight + "px";

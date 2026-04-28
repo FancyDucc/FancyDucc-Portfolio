@@ -48,14 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     freeStuffItems.forEach((item, index) => {
         const itemElement = document.createElement("div");
-        itemElement.classList.add("col-lg-12", "mb-4");
+        itemElement.classList.add("col-lg-4", "col-md-6", "col-sm-12");
 
         itemElement.innerHTML = `
-            <div class="card" style="background-color:rgb(12, 12, 12); border-radius: 10px; padding: 20px; color: #f0f0f0;">
-                <div class="card-body text-center">
-                    <h5 class="card-title" style="color: rgb(80, 0, 230);"><strong>${item.title}</strong></h5>
+            <div class="card free-stuff-card showcase-card">
+                <div class="card-body">
+                    <div class="resource-type">${item.type === "file" ? "File" : "Link"}</div>
+                    <h5 class="card-title">${item.title}</h5>
                     <p class="card-text">${item.description}</p>
-                    <a href="${item.link}" ${item.type === "file" ? "download" : "target=\"_blank\""} class="btn btn-primary text-uppercase" style="color: #ffffff; width: 50%; margin: 0 auto;">Download</a>
+                    <a href="${item.link}" ${item.type === "file" ? "download" : "target=\"_blank\""} class="btn btn-primary text-uppercase">${item.type === "file" ? "Download" : "Open"}</a>
                 </div>
             </div>
         `;
@@ -80,7 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     };
 
-    window.addEventListener("scroll", toggleScrollToTopBtn);
-    scrollToTopBtn.addEventListener("click", scrollToTop);
-    toggleScrollToTopBtn();
+    if (scrollToTopBtn) {
+        window.addEventListener("scroll", toggleScrollToTopBtn);
+        scrollToTopBtn.addEventListener("click", scrollToTop);
+        toggleScrollToTopBtn();
+    }
 });

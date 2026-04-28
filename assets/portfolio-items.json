@@ -1,0 +1,642 @@
+{
+  "building": [
+    {
+      "title": "Sane Bedroom",
+      "date": "2024 December",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/sane_bedroom.png",
+      "alt": "Sane Bedroom"
+    },
+    {
+      "title": "Sane Main Floor",
+      "date": "2024 October",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Sane Living Room.png",
+      "alt": "Sane Main Floor"
+    },
+    {
+      "title": "Sane Bathroom",
+      "date": "2024 October",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Sane Bathroom.png",
+      "alt": "Sane Bathroom"
+    },
+    {
+      "title": "Inbetween Level 7",
+      "date": "2024 February",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Inbetween Puzzle.png",
+      "alt": "Inbetween Puzzle"
+    },
+    {
+      "title": "Inbetween Level 4",
+      "date": "2024 February",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Inbetween Entrance.png",
+      "alt": "Inbetween Entrance"
+    },
+    {
+      "title": "Interliminality Things Warehouse",
+      "date": "2024 March",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Interliminality Things Warehouse.png",
+      "alt": "Interliminality Things Warehouse"
+    },
+    {
+      "title": "Terra-Isle Photo 1",
+      "date": "2024 February",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Terraisle1.png",
+      "alt": "Terra-Isle 1",
+      "description": [
+        "Terra-Isle was a showcase type project that I challenged myself to make in the shortest amount of time possible.",
+        "The final time was 13 hours and 26 minutes, which was when I finished creating the showcase.",
+        "The timer was not paused once during the creation of this, it was all made in one session.",
+        "Ever since that, the showcase has not had any more progress on it, as that would be cheating."
+      ]
+    },
+    {
+      "title": "Terra-Isle Photo 2",
+      "date": "2024 February",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Terraisle2.png",
+      "alt": "Terra-Isle 2",
+      "description": [
+        "Terra-Isle was a showcase type project that I challenged myself to make in the shortest amount of time possible.",
+        "The final time was 13 hours and 26 minutes, which was when I finished creating the showcase.",
+        "The timer was not paused once during the creation of this, it was all made in one session.",
+        "Ever since that, the showcase has not had any more progress on it, as that would be cheating."
+      ]
+    },
+    {
+      "title": "Enigma Doorway Bright",
+      "date": "2023 September",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Enigma Doorway.png",
+      "alt": "Enigma Doorway 1"
+    },
+    {
+      "title": "Enigma Door Dark",
+      "date": "2023 September",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Enigma Doorway Dark.png",
+      "alt": "Enigma Doorway 2"
+    },
+    {
+      "title": "Enigma Hallway",
+      "date": "2023 September",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Enigma Hallway.png",
+      "alt": "Engima Hallway"
+    },
+    {
+      "title": "Enigma Elevator Shaft",
+      "date": "2023 September",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Enigma Elevator Shaft.png",
+      "alt": "Enigma Elevator Shaft"
+    },
+    {
+      "title": "Quantum Decay Main Menu",
+      "date": "2023 July",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Quantum Decay Main Menu.png",
+      "alt": "Quantum Decay Main Menu"
+    },
+    {
+      "title": "Quantum Decay Hallway",
+      "date": "2023 July",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Quantum Decay Hallway.png",
+      "alt": "Quantum Decay Hallway"
+    },
+    {
+      "title": "Analysis Living Room",
+      "date": "2023",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Analysis Living Room.png",
+      "alt": "Analysis Living Room"
+    },
+    {
+      "title": "Adventurer Main Island Day",
+      "date": "2023",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Adventurer Day.png",
+      "alt": "Adventurer Day"
+    },
+    {
+      "title": "Adventurer Main Island Night",
+      "date": "2023",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Adventurer Night.png",
+      "alt": "Adventurer Night"
+    },
+    {
+      "title": "Noob Attack Castle",
+      "date": "2022",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Noob Attack Castle.png",
+      "alt": "Noob Attack Castle"
+    },
+    {
+      "title": "Mutated Hallway",
+      "date": "2022",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Mutated Hallway.png",
+      "alt": "Mutated Hallway"
+    },
+    {
+      "title": "The Basement Loot Room",
+      "date": "2021",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/The Basement Loot Room.png",
+      "alt": "The Basement Loot Room"
+    },
+    {
+      "title": "Survival Rains Entrance Gate",
+      "date": "2021",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/Survival Rains Entrance Gate.png",
+      "alt": "Survival Rains Entrance Gate"
+    },
+    {
+      "title": "The Dummy Safe Room",
+      "date": "2021",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/The Dummy Safe Room.png",
+      "alt": "The Dummy Safe Room"
+    },
+    {
+      "title": "After Hours",
+      "date": "Abandoned 2020",
+      "mediaType": "image",
+      "src": "/assets/img/portfolio/After Hours.png",
+      "alt": "After Hours"
+    }
+  ],
+  "animation": [
+    {
+      "title": "Cool Finisher Combo",
+      "mediaType": "video",
+      "src": "/assets/img/video/coolfinisher.mp4",
+      "alt": "Cool Finisher Combo"
+    },
+    {
+      "title": "Fight Cutscene Testing",
+      "mediaType": "video",
+      "src": "/assets/img/video/fight_cutscene.mp4",
+      "alt": "Fight Cutscene",
+      "description": [
+        "This is very old..."
+      ]
+    },
+    {
+      "title": "R6 Fight Combo",
+      "mediaType": "video",
+      "src": "/assets/img/video/dirty_combo.mp4",
+      "alt": "Fight Combo",
+      "description": [
+        "Made using my R6 blender IK rig",
+        "Animation and Sound Design done in about 4 hours total"
+      ]
+    },
+    {
+      "title": "Bored Cutscene Testing",
+      "mediaType": "video",
+      "src": "/assets/img/video/cutscene_testing.mp4",
+      "alt": "Bored Cutscene",
+      "description": [
+        "Unfinished sound design, probably won't ever be finished anyway."
+      ]
+    },
+    {
+      "title": "Shut The Fuck Up Slap",
+      "mediaType": "video",
+      "src": "/assets/img/video/stfu.mp4",
+      "alt": "Shut The Fuck Up Slap",
+      "descriptionMedia": [
+        {
+          "title": "Reference Video",
+          "mediaType": "video",
+          "src": "/assets/img/video/stfureference.mp4",
+          "alt": "Reference Video"
+        }
+      ]
+    },
+    {
+      "title": "Cool Run",
+      "mediaType": "video",
+      "src": "/assets/img/video/cool_run.mp4",
+      "alt": "Cool Run"
+    },
+    {
+      "title": "Die Stupid Baby",
+      "mediaType": "video",
+      "src": "/assets/img/video/orbit.mp4",
+      "alt": "Die Stupid Baby"
+    },
+    {
+      "title": "Tool-based Gun Animations",
+      "mediaType": "video",
+      "src": "/assets/img/video/gun_anims.mp4",
+      "alt": "Tool-based Gun Animations"
+    },
+    {
+      "title": "Closet Hiding Animations",
+      "mediaType": "video",
+      "src": "/assets/img/video/closet_doors.mp4",
+      "alt": "Closet",
+      "description": [
+        "These animations were made for a DOORS Fangame called Unseen Floors",
+        "Ignore the music, I was jammin."
+      ]
+    },
+    {
+      "type": "section",
+      "title": "Paradox Cutscenes",
+      "description": "All of the DOORS: Paradox cutscenes that I animated, this is a very small selection of them, I animated roughly 85% of every animation in Paradox.",
+      "defaultOpen": false,
+      "items": [
+        {
+          "title": "Teaser Trailer Ending Cutscene",
+          "mediaType": "video",
+          "src": "/assets/img/video/teaser_ending_cutscene.mp4",
+          "alt": "Teaser Trailer Ending Cutscene",
+          "descriptionHtml": [
+            "You can see the Teaser Trailer <a href=\"https://www.youtube.com/watch?v=rWJOufLrbOo\" class=\"hover-link\">Here</a>."
+          ]
+        },
+        {
+          "title": "Arrival",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/arrival.mp4",
+          "alt": "Arrival"
+        },
+        {
+          "title": "Chase Transition",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/chasetransition.mp4",
+          "alt": "Chase Transition"
+        },
+        {
+          "title": "Deliria",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/deliria.mp4",
+          "alt": "Deliria"
+        },
+        {
+          "title": "Starting Cutscene",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/startingcutscene.mp4",
+          "alt": "Starting Cutscene"
+        },
+        {
+          "title": "Truck Ending",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/truckending.mp4",
+          "alt": "Truck Ending"
+        },
+        {
+          "title": "Truck Enter",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/truckenter.mp4",
+          "alt": "Truck Enter"
+        },
+        {
+          "title": "Truck Wakeup",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/truckwakeup.mp4",
+          "alt": "Truck Wakeup"
+        },
+        {
+          "title": "True Lab Bad Ending",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/truelabbadending.mp4",
+          "alt": "True Lab Bad Ending"
+        },
+        {
+          "title": "True Lab Chase New",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/truelabchasenew.mp4",
+          "alt": "True Lab Chase New"
+        },
+        {
+          "title": "True Lab Good Ending",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/truelabgoodending.mp4",
+          "alt": "True Lab Good Ending"
+        },
+        {
+          "title": "Verde Chase Start",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/verdechasestart.mp4",
+          "alt": "Verde Chase Start"
+        },
+        {
+          "title": "Verde Idle",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/verdeidle.mp4",
+          "alt": "Verde Idle"
+        },
+        {
+          "title": "Verde Run",
+          "mediaType": "video",
+          "src": "/assets/img/video/paradox/verderun.mp4",
+          "alt": "Verde Run"
+        }
+      ]
+    },
+    {
+      "type": "section",
+      "title": "The Foundation",
+      "description": "The animations I made for The Foundation, the current selection of these were from the Halloween update.",
+      "defaultOpen": false,
+      "items": [
+        {
+          "title": "Amalgamation Chase Cutscene",
+          "mediaType": "video",
+          "src": "/assets/img/video/amalgamationcutscene.mp4",
+          "alt": "Amalgamation Chase Cutscene"
+        },
+        {
+          "title": "Amalgamation Kill Cutscene",
+          "mediaType": "video",
+          "src": "/assets/img/video/amalgamationkill.mp4",
+          "alt": "Amalgamation Kill Cutscene"
+        },
+        {
+          "title": "Amalgamation Chase",
+          "mediaType": "video",
+          "src": "/assets/img/video/amalgamationrun.mp4",
+          "alt": "Amalgamation Chase"
+        }
+      ]
+    },
+    {
+      "title": "Futuristic Ship",
+      "mediaType": "video",
+      "src": "/assets/img/video/demiseship.mp4",
+      "alt": "Futuristic Ship"
+    },
+    {
+      "title": "Desert Eagle Inspect",
+      "mediaType": "video",
+      "src": "/assets/img/video/cool_inspect.mp4",
+      "alt": "Desert Eagle Inspect"
+    },
+    {
+      "title": "Helicopter Leave",
+      "mediaType": "video",
+      "src": "/assets/img/video/heli_leave.mp4",
+      "alt": "Helicopter Leave",
+      "description": [
+        "This is a cutscene made for an up-and-coming game called Unpaid Workers.",
+        "I did all of the camera work, animation, and sound design.",
+        "Fun Fact: nearly 6 hours of research was put into how helicopters land and behave to make this animation."
+      ]
+    },
+    {
+      "title": "Helicopter Land",
+      "mediaType": "video",
+      "src": "/assets/img/video/heli_land.mp4",
+      "alt": "Helicopter Land",
+      "description": [
+        "This is a cutscene made for an up-and-coming game called Unpaid Workers.",
+        "I did all of the camera work, animation, and sound design.",
+        "Fun Fact: nearly 6 hours of research was put into how helicopters land and behave to make this animation."
+      ]
+    },
+    {
+      "title": "Seek Rise",
+      "mediaType": "video",
+      "src": "/assets/img/video/seek_rise.mp4",
+      "alt": "Seek Rise",
+      "description": [
+        "This is for an unreleased DOORS Fangame called Unseen Floors."
+      ]
+    },
+    {
+      "title": "Unseen Floors Sneak Peek",
+      "mediaType": "video",
+      "src": "/assets/img/video/unseen_floors_sneak_peek.mp4",
+      "alt": "Unseen Floors Sneak Peek",
+      "descriptionHtml": [
+        "This cutscene was made for an up-and-coming DOORS Fangame called Unseen Floors.",
+        "This was featured in <a href=\"https://www.youtube.com/watch?v=FaDtjOogoEA&t=191s\" class=\"hover-link\">Doors Direct</a>."
+      ]
+    }
+  ],
+  "scripting": [
+    {
+      "title": "Movement System",
+      "mediaType": "video",
+      "src": "/assets/img/video/movementsystem.mp4",
+      "alt": "Movement System"
+    },
+        {
+      "title": "UI Light Edge Simulation",
+      "mediaType": "video",
+      "src": "/assets/img/scripting/uilightsim/showcase.mp4",
+      "alt": "UI Light Edge Simulation ",
+      "descriptionMedia": [
+        {
+          "title": "3 Big Lights",
+          "src": "/assets/img/scripting/uilightsim/3biglights.png"
+        },
+        {
+          "title": "3 Small Lights",
+          "src": "/assets/img/scripting/uilightsim/3lights.png"
+        }
+      ]
+    },
+    {
+      "title": "Hyperaccurate Pathtracer",
+      "mediaType": "video",
+      "src": "/assets/img/scripting/pathtracer/showcase.mp4",
+      "alt": "Hyperaccurate Pathtracer",
+      "descriptionHtml": [
+        "This system was made to be a very accurate pathtracer, or what most people would typically call raytracing.",
+        "It can calculate everything from: Lighting, Textures, PBR, Reflections, Refractions, Caustics, HDRI (Sky), and more.",
+        "This would not exist without PoptartNoah's pathtracer module, which I heavily modified and optimized to make this system possible.",
+        "Nearly no original code from PoptartNoah's module exists in this system, however it would be wrong to say that it's a completely original creation."
+      ],
+      "descriptionMedia": [
+        {
+          "title": "4K Image",
+          "src": "/assets/img/scripting/pathtracer/4k.png"
+        },
+        {
+          "title": "Global Illumination",
+          "src": "/assets/img/scripting/pathtracer/globalillumination.png"
+        },
+        {
+          "title": "Mirror Reflections",
+          "src": "/assets/img/scripting/pathtracer/mirror.png"
+        },
+        {
+          "title": "Sunrays",
+          "src": "/assets/img/scripting/pathtracer/sunrays.png"
+        }
+      ]
+    },
+    {
+      "title": "NPC Advanced Sight System",
+      "mediaType": "video",
+      "src": "/assets/img/video/npcsight.mp4",
+      "alt": "NPC Advanced Sight",
+      "descriptionHtml": [
+        "This sight system is a highly optimized (like, REALLY optimized) sight system for any kind of NPC",
+        "I was annoyed that all NPC systems use raycasting just for the torso or the head despite needing accuracy, so I made this system that detects any kind of limb and the location inside of the limb.",
+        "Despite raycasts happening 60 times a second (maximum, not frame dependant), this system uses a modified version of <a href=\"https://devforum.roblox.com/t/making-a-combat-game-with-ranged-weapons-fastcast-may-be-the-module-for-you/133474\" class=\"hover-link\">FastCast</a> to handle it's raycasts in a few hacky ways."
+      ]
+    },
+    {
+      "title": "Tool-based Gun system",
+      "mediaType": "video",
+      "src": "/assets/img/video/gun_system.mp4",
+      "alt": "Tool-based Gun system",
+      "description": [
+        "This was done by me and a friend, where we made an entire tool-based gun system and only in a tool in about 6 hours, all animations, visual effects, sound effects, and about half of the scripting was done by me."
+      ]
+    },
+    {
+      "title": "Truck Driving System",
+      "mediaType": "video",
+      "src": "/assets/img/video/truck_system.mp4",
+      "alt": "Truck Driving System",
+      "description": [
+        "This entire truck driving system was done by me completely solo.",
+        "It took me nearly 3 days and 10 sources just to get the suspension to look realistic and good..."
+      ]
+    },
+    {
+      "title": "Versatile Climbing System",
+      "mediaType": "video",
+      "src": "/assets/img/video/climbing_system.mp4",
+      "alt": "Advanced First Person Movement System",
+      "description": [
+        "This system is for climbing and has multiple configurations per-ladder and globally for all kinda of climbing, whether ladder, rock-climbing, etc, this system can do it."
+      ]
+    },
+    {
+      "title": "Real Time Global Illumination + Reflections",
+      "mediaType": "video",
+      "src": "/assets/img/video/global_illumination_and_reflections.mp4",
+      "alt": "Global Illumination + Reflections",
+      "description": [
+        "After creating a raycast system that was so optimized where 1000 raycasts per frame would take up 2.6% of ALL script activity, I added a Bouncecast system to it.",
+        "That bouncecast system looked somewhat like light bouncing, so I wanted to push the system to it's limits, and I managed to make a real-time Global Illumination system and reflections after a few days of work.",
+        "GL is done with Color inheritence and very tiny lights and lots of raycasts",
+        "Reflections are done with Viewport Frames set to angle with the camera and to hold visuals, also using raycasting for shadows and better visuals.",
+        "This system runs at a comfortable and stable 120-130 FPS on my RTX 4070."
+      ]
+    },
+    {
+      "title": "Sane Camera and Footstep System",
+      "mediaType": "video",
+      "src": "/assets/img/video/sane_camera_and_footstep_system.mp4",
+      "alt": "Sane Camera and Footstep System"
+    },
+    {
+      "title": "Random Room Generation",
+      "mediaType": "video",
+      "src": "/assets/img/video/random_room_generator.mp4",
+      "alt": "Random Room System"
+    },
+    {
+      "title": "Advanced AI System",
+      "mediaType": "video",
+      "src": "/assets/img/video/advanced_ai_system.mp4",
+      "alt": "Advanced AI System",
+      "description": [
+        "This AI system was done as I was very tired of making a new AI from the ground up anytime I wanted to make a roaming AI monster for a horror game.",
+        "The system contains 1,356 lines of highly optimized code (for reference, before optimization, the system was nearly 2600 lines of code.)",
+        "Fun Fact: Any AI that properly uses this system does NOT have collision on anything other than walls, rather it avoids objects at all costs, meaning it won't get stuck, but it also won't attempt to go through walls or objects."
+      ]
+    },
+    {
+      "title": "First Person Horror Movement",
+      "mediaType": "video",
+      "src": "/assets/img/video/firstpersonhorrormovement.mp4",
+      "alt": "Advanced First Person Movement System",
+      "description": [
+        "This is an unfinished movement system and camera system for my game, Sane.",
+        "ALL of the movement and camera is done fully custom by reverse engineering Unreal Engine's default first person camera and movement is done without any prior help",
+        "Movement and camera work also supports Controller and mobile, albeit cursed, it works and is fully playable."
+      ]
+    },
+    {
+      "title": "Roomba AI",
+      "mediaType": "video",
+      "src": "/assets/img/video/roomba_ai.mp4",
+      "alt": "Roomba AI",
+      "description": [
+        "A very functional roomba ai for some reason.",
+        "What's really funny is that this pathfinding is my most advanced pathfinding system I've ever done...",
+        "... and it's for a roomba."
+      ]
+    }
+  ],
+  "vfx": [
+    {
+      "title": "Misleading Portal (from Paradox)",
+      "mediaType": "video",
+      "src": "/assets/img/video/misleading portal.mp4",
+      "alt": "Misleading Portal"
+    },
+    {
+      "title": "Guiding Light Death (From up-and-coming Unseen Floors)",
+      "mediaType": "video",
+      "src": "/assets/img/video/guidinglightvfx.mp4",
+      "alt": "Guiding Light"
+    },
+    {
+      "title": "Winter Storm (From up-and-coming Unpaid Workers)",
+      "mediaType": "video",
+      "src": "/assets/img/video/unpaid_workers_storm.mp4",
+      "alt": "Winter Storm"
+    }
+  ],
+  "models": [
+    {
+      "title": "Misleading Repellent",
+      "mediaType": "video",
+      "src": "/assets/img/video/redacted_machine.mp4",
+      "alt": "Misleading Repellent"
+    },
+    {
+      "title": "Deceptium Reactor",
+      "mediaType": "video",
+      "src": "/assets/img/video/paradox/deceptiumreactor.mp4",
+      "alt": "Deceptium Reactor"
+    },
+    {
+      "title": "Crane",
+      "mediaType": "video",
+      "src": "/assets/img/video/paradox/crane.mp4",
+      "alt": "Crane"
+    },
+    {
+      "title": "OVERCONTROL Scythe",
+      "mediaType": "video",
+      "src": "/assets/img/video/scythe.mp4",
+      "alt": "OVERCONTROL Scythe",
+      "description": [
+        "This was a model made for OVERCONTROL in the Growth Of Giggle YouTube series.",
+        "I also am the voice actor for OVERCONTROL."
+      ]
+    },
+    {
+      "title": "Unit-7",
+      "mediaType": "video",
+      "src": "/assets/img/video/paradox/unit7.mp4",
+      "alt": "Unit-7"
+    },
+    {
+      "title": "Castle Tower",
+      "mediaType": "video",
+      "src": "/assets/img/video/castle_tower.mp4",
+      "alt": "Castle Tower"
+    }
+  ]
+}

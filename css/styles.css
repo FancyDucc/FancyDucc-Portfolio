@@ -811,6 +811,15 @@ input[type="range"]::-moz-range-thumb {
   color: rgb(80, 0, 230);
 }
 
+.game-card-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.game-card-title-link:hover {
+  color: #875cff;
+}
+
 .game-card-text {
   color: #f0f0f0;
 }
@@ -1511,6 +1520,29 @@ p {
   background-size: cover;
   color: #f0f0f0;
   padding: 6rem 0;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.page-section::before,
+.page-section::after,
+.content-page-section::before,
+.content-page-section::after,
+.home-main::before,
+.home-main::after,
+.footer::before,
+.footer::after {
+  content: none;
+}
+
+.page-section > .container,
+.content-page-section > .container,
+.home-main > .container,
+.footer > .container {
+  position: relative;
+  z-index: 1;
 }
 
 .preloader {
@@ -1542,14 +1574,40 @@ p {
   background-size: cover;
   color: #f0f0f0;
   padding: 6rem 6rem;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .contact-page-section {
-  background: url('../assets/img/map-image.png') no-repeat center;
-  background-size: contain;
+  background: transparent;
   color: #f0f0f0;
   padding: 6rem 0;
-  z-index: -2;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.contact-map-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  opacity: 1;
+  filter: none;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+.contact-page-section .container {
+  position: relative;
+  z-index: 1;
 }
 
 .contact-icon {
@@ -1614,15 +1672,6 @@ p {
   font-weight: 700;
 }
 
-.dualitystats {
-  margin: 30px 0;
-  padding: 15px;
-  background-color: #262626;
-  border-radius: 8px;
-}
-.dualitystats p {
-  margin: 8px 0;
-}
 .abilities-table {
   width: 100%;
   border-collapse: collapse;
@@ -1833,9 +1882,15 @@ header.masthead .masthead-heading {
 }
 
 .footer {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
   text-align: center;
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  color: #9da3b6;
+  background: rgba(4, 1, 13, 0.98);
 }
 
 body {
@@ -1843,56 +1898,374 @@ body {
   background-size: cover;
 }
 
-/* === SKILL STRIP =================================================== */
-#skill-strip{
-  position:relative;
-  width:100%;
-  overflow:hidden;
-  padding:1.4rem 0;                    /* a bit taller */
-  background:url('/assets/img/webs/SectionBackground.png') center/cover;
-  border-top:1px solid rgba(255,255,255,.05);
-  border-bottom:1px solid rgba(255,255,255,.05);
-  cursor:grab;
-}
-#skill-strip:active{cursor:grabbing;}
-
-.skill-track{
-  display:flex;
-  gap:2.75rem;                         /* even spacing */
-  white-space:nowrap;
-  will-change:transform;
+/* === PORTFOLIO CONTENT REFRESH ===================================== */
+#building.page-section,
+#animation.page-section,
+#scripting.page-section,
+#vfx.page-section,
+#models.page-section {
+  padding-top: 4.5rem;
+  scroll-margin-top: 8.5rem;
 }
 
-.slice{ 
-  display:flex; 
-  gap:inherit; 
+#building > .container,
+#animation > .container,
+#scripting > .container,
+#vfx > .container,
+#models > .container {
+  max-width: 1360px;
 }
 
-
-.skill{
-  font-family:"Montserrat",sans-serif;
-  font-weight:900;                     /* extra bold */
-  font-size:1.2rem;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-
-  /* chrome-style neon gradient text */
-  background:linear-gradient(90deg,#9d6bff 0%,#4f4bff 50%,#9d6bff 100%);
-  background-size:400% auto;           /* so it shimmers on scroll */
-  background-clip:text;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 6px rgba(80,0,230,.55);
-  pointer-events:none;                 /* never selectable */
-}
-#skill-strip, .skill {
-  user-select: none;          /* modern browsers  */
-  -webkit-user-select: none;  /* Safari / iOS     */
-  -ms-user-select: none;      /* old Edge / IE    */
+#building .row,
+#animation .row,
+#scripting .row,
+#vfx .row,
+#models .row {
+  --bs-gutter-x: 1.55rem;
+  --bs-gutter-y: 1.55rem;
 }
 
-.skill-track { animation: shimmer 5s linear infinite; }
-@keyframes shimmer{ to{ background-position-x:-1000%; } }
+#building .row > [class*="col-"],
+#animation .row > [class*="col-"],
+#scripting .row > [class*="col-"],
+#vfx .row > [class*="col-"],
+#models .row > [class*="col-"] {
+  margin-bottom: 0 !important;
+}
+
+#building .portfolio-item,
+#animation .portfolio-item,
+#scripting .portfolio-item,
+#vfx .portfolio-item,
+#models .portfolio-item {
+  position: relative;
+  height: 100%;
+  padding: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(80, 0, 230, 0.26);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(22, 7, 52, 0.84), rgba(6, 2, 18, 0.96)),
+    rgba(6, 2, 18, 0.95);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34);
+  transform: translateY(0);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#building .portfolio-item::before,
+#animation .portfolio-item::before,
+#scripting .portfolio-item::before,
+#vfx .portfolio-item::before,
+#models .portfolio-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(120deg, rgba(80, 0, 230, 0.2), transparent 34%),
+    linear-gradient(300deg, rgba(126, 65, 255, 0.11), transparent 48%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+#building .portfolio-item:hover,
+#animation .portfolio-item:hover,
+#scripting .portfolio-item:hover,
+#vfx .portfolio-item:hover,
+#models .portfolio-item:hover {
+  border-color: rgba(143, 92, 255, 0.52);
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(80, 0, 230, 0.14);
+  transform: translateY(-4px);
+}
+
+#building .portfolio-item:hover::before,
+#animation .portfolio-item:hover::before,
+#scripting .portfolio-item:hover::before,
+#vfx .portfolio-item:hover::before,
+#models .portfolio-item:hover::before {
+  opacity: 1;
+}
+
+#building .portfolio-item img,
+#building .portfolio-item video,
+#animation .portfolio-item img,
+#animation .portfolio-item video,
+#scripting .portfolio-item img,
+#scripting .portfolio-item video,
+#vfx .portfolio-item img,
+#vfx .portfolio-item video,
+#models .portfolio-item img,
+#models .portfolio-item video {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  max-height: none;
+  border-radius: 6px;
+  background: #010103;
+  object-fit: cover;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+#building .portfolio-image,
+#animation .portfolio-image,
+#scripting .portfolio-image,
+#vfx .portfolio-image,
+#models .portfolio-image,
+.game-card-media .portfolio-image {
+  cursor: zoom-in;
+}
+
+#building .portfolio-caption,
+#animation .portfolio-caption,
+#scripting .portfolio-caption,
+#vfx .portfolio-caption,
+#models .portfolio-caption {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-height: 74px;
+  padding: 0.85rem 0.65rem 0.55rem;
+}
+
+#building .portfolio-caption-heading,
+#animation .portfolio-caption-heading,
+#scripting .portfolio-caption-heading,
+#vfx .portfolio-caption-heading,
+#models .portfolio-caption-heading {
+  color: #ffffff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 800;
+  line-height: 1.24;
+  text-wrap: balance;
+}
+
+#building .portfolio-caption-subheading,
+#animation .portfolio-caption-subheading,
+#scripting .portfolio-caption-subheading,
+#vfx .portfolio-caption-subheading,
+#models .portfolio-caption-subheading,
+#building .text-muted,
+#animation .text-muted,
+#scripting .text-muted,
+#vfx .text-muted,
+#models .text-muted {
+  color: #9da3b6 !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+#building .portfolio-extra-description,
+#animation .portfolio-extra-description,
+#scripting .portfolio-extra-description,
+#vfx .portfolio-extra-description,
+#models .portfolio-extra-description {
+  color: #d7d9e6;
+  font-size: 0.92rem;
+  line-height: 1.58;
+}
+
+#building .portfolio-extra-description p,
+#animation .portfolio-extra-description p,
+#scripting .portfolio-extra-description p,
+#vfx .portfolio-extra-description p,
+#models .portfolio-extra-description p {
+  margin: 0.65rem 0 0;
+}
+
+.portfolio-description-media {
+  margin: 0.85rem 0 0;
+}
+
+.portfolio-description-media img,
+.portfolio-description-media video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px solid rgba(80, 0, 230, 0.26);
+  border-radius: 6px;
+  background: #010103;
+  object-fit: cover;
+}
+
+.portfolio-description-media-title {
+  margin-top: 0.4rem;
+  color: #9da3b6;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+#building .toggle-description,
+#animation .toggle-description,
+#scripting .toggle-description,
+#vfx .toggle-description,
+#models .toggle-description {
+  align-self: flex-start;
+  margin-top: 0.7rem;
+  padding: 0.42rem 0.68rem;
+  border: 1px solid rgba(143, 92, 255, 0.45);
+  border-radius: 999px;
+  color: #d9ceff;
+  background: rgba(80, 0, 230, 0.12);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+#building .toggle-description:hover,
+#animation .toggle-description:hover,
+#scripting .toggle-description:hover,
+#vfx .toggle-description:hover,
+#models .toggle-description:hover {
+  border-color: rgba(64, 199, 255, 0.62);
+  color: #ffffff;
+  background: rgba(80, 0, 230, 0.26);
+}
+
+.portfolio-section-col {
+  width: 100%;
+  height: auto !important;
+}
+
+.portfolio-section-block {
+  height: auto !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 1px solid rgba(80, 0, 230, 0.26);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(22, 7, 52, 0.84), rgba(6, 2, 18, 0.96)),
+    rgba(6, 2, 18, 0.95);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34);
+}
+
+.portfolio-section-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  min-height: 0;
+  padding: 0.76rem 1rem 0.74rem;
+  border: 0;
+  color: #f0f0f0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.portfolio-section-toggle > span {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.portfolio-section-toggle::after {
+  content: "+";
+  flex: 0 0 auto;
+  color: #875cff;
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+
+.portfolio-section-block.is-open .portfolio-section-toggle::after {
+  content: "-";
+}
+
+.portfolio-section-title {
+  display: block;
+  color: #ffffff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.portfolio-section-description {
+  width: 100%;
+  max-width: none;
+  margin: 0.2rem 0 0;
+  color: #b9b4ca;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+.portfolio-section-panel {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+  overflow: hidden;
+  transition:
+    grid-template-rows 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 0.2s ease,
+    transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.portfolio-section-panel.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.portfolio-section-panel > .row {
+  --bs-gutter-x: 1.55rem;
+  --bs-gutter-y: 1.55rem;
+  min-height: 0;
+  overflow: hidden;
+  padding-top: 1.55rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-section-panel {
+    transition: none;
+    transform: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #building.page-section,
+  #animation.page-section,
+  #scripting.page-section,
+  #vfx.page-section,
+  #models.page-section {
+    padding-top: 3rem;
+    scroll-margin-top: 10.5rem;
+  }
+
+  #building .portfolio-caption,
+  #animation .portfolio-caption,
+  #scripting .portfolio-caption,
+  #vfx .portfolio-caption,
+  #models .portfolio-caption {
+    min-height: auto;
+  }
+
+  .portfolio-section-toggle {
+    align-items: flex-start;
+  }
+
+}
 
 .fiat-select{
   position:relative;
@@ -1969,4 +2342,716 @@ body {
 .fiat-option.focus{
   background:rgba(80,0,230,.15);
   color:#fff;
+}
+
+/* === SERVICES + ABOUT CARD REFRESH ================================= */
+#payments.page-section,
+#games.page-section,
+#free-stuff.page-section,
+#testimonials.page-section {
+  padding-top: 4.5rem;
+  scroll-margin-top: 8.5rem;
+}
+
+#payments > .container,
+#games > .container,
+#free-stuff > .container,
+#testimonials > .container {
+  max-width: 1360px;
+}
+
+#payments .row,
+#game-list,
+#free-stuff-list,
+#testimonialsContainer {
+  --bs-gutter-x: 1.55rem;
+  --bs-gutter-y: 1.55rem;
+}
+
+#game-list {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+#game-list > .game-card-col {
+  grid-column: span 4;
+  width: auto;
+  max-width: none;
+  padding: 0;
+}
+
+#game-list > .game-card-feature-col {
+  grid-column: span 4;
+}
+
+#payments .row > [class*="col-"],
+#game-list > [class*="col-"],
+#free-stuff-list > [class*="col-"],
+#testimonialsContainer > [class*="col-"] {
+  margin-bottom: 0 !important;
+}
+
+.pricing-note,
+#payments .notice-container,
+#payments .card,
+.showcase-card {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(80, 0, 230, 0.26) !important;
+  border-radius: 8px !important;
+  color: #f0f0f0 !important;
+  background:
+    linear-gradient(180deg, rgba(22, 7, 52, 0.84), rgba(6, 2, 18, 0.96)),
+    rgba(6, 2, 18, 0.95) !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34) !important;
+}
+
+#payments .card,
+.showcase-card {
+  padding: 1.1rem !important;
+  transform: translateY(0);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+#payments .card::before,
+.showcase-card::before,
+.pricing-note::before,
+#payments .notice-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(120deg, rgba(80, 0, 230, 0.2), transparent 34%),
+    linear-gradient(300deg, rgba(126, 65, 255, 0.11), transparent 48%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+#payments .card:hover,
+.showcase-card:hover {
+  border-color: rgba(143, 92, 255, 0.52) !important;
+  box-shadow:
+    0 22px 60px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(80, 0, 230, 0.14) !important;
+  transform: translateY(-4px);
+}
+
+#payments .card:hover::before,
+.showcase-card:hover::before,
+.pricing-note:hover::before,
+#payments .notice-container:hover::before {
+  opacity: 1;
+}
+
+.pricing-note {
+  height: auto;
+  max-width: 920px;
+  margin: 0 0 1.4rem;
+  padding: 1.15rem 1.25rem;
+}
+
+.pricing-note h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.45rem;
+  color: #ffffff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: clamp(1.2rem, 2vw, 1.65rem);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.pricing-note p {
+  position: relative;
+  z-index: 1;
+  max-width: 820px;
+  margin: 0;
+  color: #c9c7d6;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+#payments .notice-container {
+  height: auto;
+  margin: 0 0 1.6rem !important;
+  padding: 1rem 1.1rem !important;
+}
+
+#payments .notice-container ul {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1rem;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+#payments .notice-container li,
+#payments .notice-container p {
+  margin: 0 !important;
+  color: #d8d5e8 !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.92rem !important;
+  font-weight: 650;
+  line-height: 1.5 !important;
+}
+
+#payments .notice-container strong {
+  color: #ffffff !important;
+}
+
+#payments .card h4,
+.game-card-title,
+.free-stuff-card .card-title {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 0.55rem;
+  color: #ffffff !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 900;
+  line-height: 1.28;
+}
+
+#payments .card p,
+#payments .card li,
+#payments .card strong,
+.game-card-text,
+.free-stuff-card .card-text,
+.testimonial-text {
+  position: relative;
+  z-index: 1;
+  color: #d9d7e6 !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.94rem;
+  font-weight: 600;
+  line-height: 1.58;
+}
+
+#payments .card ul {
+  position: relative;
+  z-index: 1;
+  margin: 0.75rem 0 0;
+  padding-left: 1.1rem;
+}
+
+#payments .card li + li {
+  margin-top: 0.55rem;
+}
+
+#payments .card .price,
+#payments .card strong.price {
+  color: #ffffff !important;
+  font-weight: 900;
+}
+
+.currency-bar {
+  justify-content: flex-start;
+  max-width: none;
+  margin: 0 0 1.6rem;
+}
+
+.currency-toggle,
+.fiat-select {
+  border-color: rgba(80, 0, 230, 0.34);
+  background: rgba(8, 3, 22, 0.92);
+}
+
+.fiat-select {
+  flex: 0 1 112px;
+  max-width: 112px;
+}
+
+.fiat-list {
+  background: #090312;
+  border-color: rgba(80, 0, 230, 0.34);
+}
+
+.game-card,
+.free-stuff-card,
+.testimonial-card {
+  min-height: 100%;
+}
+
+.game-card-link,
+.game-card-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.game-card-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.game-card-media {
+  width: 100%;
+  margin-bottom: 0.95rem;
+}
+
+.game-card-media img,
+.game-card-media-empty {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+  background:
+    linear-gradient(135deg, rgba(80, 0, 230, 0.22), rgba(6, 2, 18, 0.96)),
+    #050211;
+}
+
+.game-card-media-empty span {
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 2.35rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-card-date,
+.resource-type,
+.testimonial-author,
+.testimonial-note {
+  position: relative;
+  z-index: 1;
+  color: #9da3b6 !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.game-card .game-card-text {
+  margin: 0.65rem 0 1rem;
+}
+
+.game-card-text.is-collapsed:not(.is-expanded) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.game-card-text.is-expanded {
+  display: block;
+  overflow: visible;
+}
+
+.game-card-description-toggle {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  width: fit-content;
+  margin: -0.25rem 0 1rem;
+  padding: 0;
+  color: #875cff;
+  background: transparent;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.game-card-description-toggle:hover {
+  color: #ffffff;
+}
+
+.game-card-feature {
+  min-height: 0;
+  padding: 1.35rem !important;
+}
+
+.game-card-feature .game-card-link,
+.game-card-feature .game-card-inner {
+  justify-content: stretch;
+}
+
+.game-card-feature .game-card-title {
+  font-size: 1.22rem;
+}
+
+.game-card-feature .game-card-text {
+  font-size: 0.98rem;
+}
+
+.game-card-feature .game-card-date {
+  margin-bottom: 0.85rem;
+}
+
+.game-card-feature .game-card-status {
+  margin-top: 1rem;
+}
+
+.game-card-status {
+  position: relative;
+  z-index: 1;
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: auto;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 999px;
+  color: #b8b2ce;
+  background: rgba(255, 255, 255, 0.045);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
+.free-stuff-card .card-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0 !important;
+}
+
+.resource-type {
+  margin-bottom: 0.75rem;
+  color: #875cff !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.free-stuff-card .card-text {
+  margin-bottom: 1.2rem;
+}
+
+.free-stuff-card .btn {
+  width: fit-content;
+  margin-top: auto;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid rgba(143, 92, 255, 0.45);
+  border-radius: 999px;
+  color: #ffffff !important;
+  background: rgba(80, 0, 230, 0.28);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.free-stuff-card .btn:hover {
+  border-color: rgba(143, 92, 255, 0.8);
+  background: rgba(80, 0, 230, 0.45);
+}
+
+.testimonial-rating {
+  position: relative;
+  z-index: 1;
+  color: #f5c518;
+}
+
+.testimonial-author {
+  margin-top: auto;
+}
+
+@media (max-width: 767.98px) {
+  #payments.page-section,
+  #games.page-section,
+  #free-stuff.page-section,
+  #testimonials.page-section {
+    padding-top: 3rem;
+    scroll-margin-top: 10.5rem;
+  }
+
+  #payments .notice-container ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  #game-list > .game-card-col,
+  #game-list > .game-card-feature-col {
+    grid-column: span 6;
+  }
+}
+
+@media (max-width: 767.98px) {
+  #game-list {
+    grid-template-columns: 1fr;
+  }
+
+  #game-list > .game-card-col,
+  #game-list > .game-card-feature-col {
+    grid-column: 1;
+  }
+
+  .game-card-feature {
+    min-height: 0;
+  }
+}
+
+/* === HOME REFRESH ================================================== */
+.home-masthead {
+  display: flex;
+  align-items: center;
+  min-height: 58vh !important;
+  max-height: none !important;
+  padding-top: 8.5rem !important;
+  padding-bottom: 3.5rem !important;
+  text-align: left !important;
+}
+
+.home-masthead .masthead-content {
+  display: flex;
+  align-items: center;
+}
+
+.home-masthead .container {
+  max-width: 1180px;
+  text-align: left;
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: clamp(1.4rem, 6vw, 5rem);
+  align-items: center;
+}
+
+.home-kicker {
+  margin: 0 0 0.75rem;
+  color: #40c7ff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.home-hero h1 {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.home-lede {
+  max-width: 760px;
+  margin: 1rem 0 0;
+  color: #d8d7e3;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: clamp(1.02rem, 1.7vw, 1.35rem);
+  font-weight: 650;
+  line-height: 1.65;
+}
+
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.8rem;
+}
+
+.home-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0.62rem 0.95rem;
+  border: 1px solid rgba(143, 92, 255, 0.42);
+  border-radius: 999px;
+  color: #ffffff;
+  background: rgba(7, 2, 20, 0.72);
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.home-action:hover {
+  border-color: rgba(64, 199, 255, 0.68);
+  color: #ffffff;
+  background: rgba(80, 0, 230, 0.28);
+  transform: translateY(-2px);
+}
+
+.home-action-primary {
+  border-color: rgba(80, 0, 230, 0.78);
+  background: rgba(80, 0, 230, 0.42);
+}
+
+.home-hero-logo {
+  display: block;
+  width: min(180px, 24vw);
+  aspect-ratio: 1;
+  border: 1px solid rgba(143, 92, 255, 0.32);
+  border-radius: 50%;
+  background: rgba(7, 2, 20, 0.46);
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.36),
+    0 0 0 8px rgba(80, 0, 230, 0.08);
+  object-fit: cover;
+}
+
+.home-main {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  isolation: isolate;
+  padding: 3.5rem 0 1rem;
+  background: url('/assets/img/webs/SectionBackground.png') center top / cover repeat-y;
+}
+
+.home-feature-section {
+  padding: 0 0 3.5rem;
+}
+
+.home-section-head {
+  max-width: 680px;
+  margin-bottom: 1rem;
+}
+
+.home-section-head h2 {
+  margin: 0;
+  color: #ffffff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  font-weight: 900;
+  line-height: 1.14;
+}
+
+.home-feature-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.55rem;
+  align-items: stretch;
+}
+
+.home-feature-card {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(80, 0, 230, 0.26);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(22, 7, 52, 0.84), rgba(6, 2, 18, 0.96)),
+    rgba(6, 2, 18, 0.95);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.34);
+}
+
+.home-feature-card {
+  padding: 8px;
+}
+
+.home-feature-card video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border-radius: 6px;
+  background: #010103;
+  object-fit: cover;
+}
+
+.home-feature-card .portfolio-caption {
+  padding: 0.85rem 0.65rem 0.55rem;
+}
+
+.home-feature-card .portfolio-caption-heading {
+  color: #ffffff;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.home-feature-card .portfolio-caption-subheading {
+  color: #9da3b6 !important;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.home-page .contact-page-section {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  background: transparent;
+  color: #f0f0f0;
+  pointer-events: auto;
+}
+
+.home-page .contact-page-section .container {
+  position: relative;
+  z-index: 2;
+  max-width: 920px;
+}
+
+.home-page .contact-page-section a,
+.home-page .contact-page-section button,
+.home-page .contact-icon {
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+.home-page .contact-page-section p {
+  color: #d8d6e6;
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  font-weight: 650;
+}
+
+@media (max-width: 991.98px) {
+  .home-masthead {
+    min-height: auto !important;
+    padding-top: 8.5rem !important;
+    padding-bottom: 3rem !important;
+  }
+
+  .home-hero,
+  .home-feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .home-masthead {
+    padding-top: 8.25rem !important;
+    padding-bottom: 2.6rem !important;
+  }
+
+  .home-main {
+    padding-top: 2.6rem;
+  }
+
+  .home-feature-section {
+    padding-bottom: 2.5rem;
+  }
+
+  .home-hero-logo {
+    width: 116px;
+  }
 }

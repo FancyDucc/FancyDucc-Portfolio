@@ -21,9 +21,6 @@
     });
   };
 
-  let explicitReady = false;
-  window.appReady = () => { explicitReady = true; maybeDone(); };
-
   let nativeReady = false;
   window.addEventListener('load', async () => {
     await Promise.allSettled([
@@ -36,15 +33,11 @@
 
   async function decodeMedia(){
     const imgs   = Array.from(document.images);
-    const vids   = Array.from(document.querySelectorAll('video'));
 
     await Promise.all([
       ...imgs.map(img => img.decode ? img.decode().catch(()=>{}) :
                        img.complete ? Promise.resolve() :
-                       new Promise(r=>img.addEventListener('load',r,{once:true}))),
-
-      ...vids.map(v  => v.readyState >= 4 ? Promise.resolve() :
-                       new Promise(r=>v.addEventListener('canplaythrough',r,{once:true})))
+                       new Promise(r=>img.addEventListener('load',r,{once:true})))
     ]);
   }
 
@@ -52,7 +45,6 @@
     const elapsed = performance.now() - startTime;
     if (!nativeReady)          return;
     if (inFlightFetch)         return;
-    if (window.appReady && !explicitReady) return;
     if (elapsed < MIN_SHOW) {
       setTimeout(maybeDone, MIN_SHOW - elapsed);
       return;
