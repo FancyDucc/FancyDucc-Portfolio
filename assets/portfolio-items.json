@@ -629,8 +629,14 @@
       "alt": "OVERCONTROL Scythe",
       "description": [
         "This was a model made for OVERCONTROL in the Growth Of Giggle YouTube series.",
-        "I also am the voice actor for OVERCONTROL."
+        "I am also the voice actor for OVERCONTROL."
       ]
+    },
+    {
+      "title": "EX-20",
+      "mediaType": "video",
+      "src": "/assets/img/video/paradox/ex20.mp4",
+      "alt": "EX-20"
     },
     {
       "title": "Unit-7",
