@@ -45,86 +45,93 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // scrroll to top
+  // Scroll-to-top button — rAF-throttled, no layout reads on every event.
   if (ScrollToTopBtn) {
-    let Previous = window.scrollY;
-    let Scrolling = false;
+    let previous = window.scrollY;
+    let cachedHeight = document.documentElement.scrollHeight;
+    let cachedWinH = window.innerHeight;
+    let scrolling = false;
     let scrollAnimationFrame;
+    let pending = false;
+    let isShown = false;
 
-    const CancelScroll = () => {
-      if (Scrolling) {
-        Scrolling = false;
+    const cancelScroll = () => {
+      if (scrolling) {
+        scrolling = false;
         cancelAnimationFrame(scrollAnimationFrame);
-        window.removeEventListener("wheel", onUserScroll, { passive: true });
-        window.removeEventListener("touchmove", onUserScroll, { passive: true });
+        window.removeEventListener("wheel", cancelScroll);
+        window.removeEventListener("touchmove", cancelScroll);
       }
     };
-  
-    const onUserScroll = () => {
-      CancelScroll();
-    };
 
-    const ToTheTop = () => {
-      CancelScroll();
-      Scrolling = true;
-      const Start = window.scrollY;
-      const Duration = 800;
-      const StartTime = performance.now();
-  
-      window.addEventListener("wheel", CancelScroll, { passive: true });
-      window.addEventListener("touchmove", CancelScroll, { passive: true });
-  
-      const step = (CurrentTime) => {
-        if (!Scrolling) return;
-        const Elapsed = CurrentTime - StartTime;
-        const Progress = Math.min(Elapsed / Duration, 1);
-        const Ease = 1 - Math.pow(1 - Progress, 3);
-        const NewPosition = Start * (1 - Ease);
-        window.scrollTo(0, NewPosition);
-  
-        if (Progress < 1 && Scrolling) {
+    const toTheTop = () => {
+      cancelScroll();
+      scrolling = true;
+      const start = window.scrollY;
+      const duration = 800;
+      const startTime = performance.now();
+
+      window.addEventListener("wheel", cancelScroll, { passive: true });
+      window.addEventListener("touchmove", cancelScroll, { passive: true });
+
+      const step = (currentTime) => {
+        if (!scrolling) return;
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        window.scrollTo(0, start * (1 - ease));
+
+        if (progress < 1 && scrolling) {
           scrollAnimationFrame = requestAnimationFrame(step);
         } else {
-          Scrolling = false;
-          window.removeEventListener("wheel", CancelScroll, { passive: true });
-          window.removeEventListener("touchmove", CancelScroll, { passive: true });
+          scrolling = false;
+          window.removeEventListener("wheel", cancelScroll);
+          window.removeEventListener("touchmove", cancelScroll);
         }
       };
-  
+
       scrollAnimationFrame = requestAnimationFrame(step);
     };
-  
-    const Toggle = () => {
-      let Current = window.scrollY;
-      const Height = document.documentElement.scrollHeight;
-      const WindowHeight = window.innerHeight;
-      const NearBottom = (WindowHeight + Current) >= (0.9 * Height);
-  
-      if (NearBottom) {
-        ScrollToTopBtn.classList.add('show');
-        ScrollToTopBtn.classList.remove('hide');
-      } else {
-        if (Current < Previous && Current > 50) {
-          ScrollToTopBtn.classList.add('show');
-          ScrollToTopBtn.classList.remove('hide');
-        } else {
-          ScrollToTopBtn.classList.add('hide');
-          ScrollToTopBtn.classList.remove('show');
-        }
-      }
-      Previous = Current;
+
+    const setShown = (next) => {
+      if (next === isShown) return;
+      isShown = next;
+      ScrollToTopBtn.classList.toggle("show", next);
     };
-  
-    window.addEventListener("scroll", () => {
-      if (Scrolling) {
-        CancelScroll();
+
+    const evaluate = () => {
+      pending = false;
+      const current = window.scrollY;
+      const nearBottom = (cachedWinH + current) >= (0.9 * cachedHeight);
+      const scrollingUp = current < previous && current > 50;
+      setShown(nearBottom || scrollingUp);
+      previous = current;
+    };
+
+    const onScroll = () => {
+      if (scrolling) cancelScroll();
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(evaluate);
       }
-      Toggle();
-    });
-  
-    ScrollToTopBtn.addEventListener("click", ToTheTop);
-    Toggle();
-  }  
+    };
+
+    // Recompute cached layout reads only when they actually can change
+    let resizeTimer;
+    const refreshCache = () => {
+      cachedHeight = document.documentElement.scrollHeight;
+      cachedWinH = window.innerHeight;
+    };
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(refreshCache, 150);
+    }, { passive: true });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    ScrollToTopBtn.addEventListener("click", toTheTop);
+    refreshCache();
+    evaluate();
+  }
 });
 
 window.onload = function () {

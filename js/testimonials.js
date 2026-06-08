@@ -17,7 +17,16 @@ const testimonials = [
   {
     author: "Lighty_42 - Owner of DOORS: Paradox",
     stars: 5,
-    text: "Very good service, he's just really cracked at what he does and fast, he's also really passionate on the stuff he works on."
+    text: "Very good service, he's just really cracked at what he does and fast, he's also really passionate on the stuff he works on.",
+    gameLink: "https://www.roblox.com/games/95959136210771/PARADOX",
+    banner: "/assets/img/portfolio/Paradox.webp"
+  },
+  {
+    author: "Evan - Owner of Interliminality",
+    stars: 5,
+    text: "very happy with the final result! work flow was extremely fast and very productive - very accepting of criticism and feedback if needed",
+    gameLink: "https://www.roblox.com/games/14237585680/Interliminality",
+    banner: "/assets/img/portfolio/Interliminality.webp"
   },
   {
     author: "wenuxxe - Owner of The Deepstorm & The Underside",
@@ -44,10 +53,12 @@ const testimonials = [
     stars: 4.5,
     text: "Fancy Ducc is honestly one of the best people ive worked with, his work flow and quality is beyond expectations"
   },
-    {
+  {
     author: "Slyifern - Commissioner of The Foundation",
     stars: 5,
-    text: "genuinely rly sick animation work and was extremly fast, would recommend 🙏"
+    text: "genuinely rly sick animation work and was extremly fast, would recommend 🙏",
+    gameLink: "https://www.roblox.com/games/18186775539/THE-FOUNDATION",
+    banner: "/assets/img/portfolio/Foundation.webp"
   },
   {
     author: "Polyograthyms",
@@ -58,32 +69,97 @@ const testimonials = [
 
 const container = document.getElementById("testimonialsContainer");
 
-function stars(rating){
-  const full  = Math.floor(rating);
-  const half  = rating % 1 >= 0.25 && rating % 1 <= 0.75;
-  const empty = 5 - full - (half?1:0);
+function stars(rating) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.25 && rating % 1 <= 0.75;
+  const empty = 5 - full - (half ? 1 : 0);
 
   return [
     ...Array(full).fill('<span class="star full"></span>'),
     ...(half ? ['<span class="star half"></span>'] : []),
     ...Array(empty).fill('<span class="star"></span>')
-  ].join('');
+  ].join("");
 }
 
-testimonials.forEach(t => {
+function placeIdFromRobloxUrl(url) {
+  const match = String(url || "").match(/roblox\.com\/games\/(\d+)/i);
+  return match ? match[1] : "";
+}
+
+function formatVisits(visits) {
+  return new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 }).format(visits);
+}
+
+async function loadVisits(testimonial, visitsEl) {
+  const placeId = placeIdFromRobloxUrl(testimonial.gameLink);
+  if (!placeId) return;
+
+  return;
+
+  // five server and static hosting cannot proxy Roblox APIs for some stupid reason, so this is disabled
+  // try {
+  //   const response = await fetch(`/api/roblox/game-visits?placeId=${encodeURIComponent(placeId)}`);
+  //   if (!response.ok) return;
+
+  //   const data = await response.json();
+  //   if (typeof data.visits !== "number") return;
+
+  //   visitsEl.textContent = `${formatVisits(data.visits)} visits`;
+  //   visitsEl.hidden = false;
+  // } catch {
+  // }
+}
+
+function createTestimonial(testimonial) {
   const col = document.createElement("div");
   col.className = "col-lg-4 col-md-6 col-sm-12 fade-up";
 
-  col.innerHTML = `
-    <div class="testimonial-card showcase-card h-100">
-      <div class="testimonial-rating mb-2">
-        ${stars(t.stars)}
-      </div>
-      <p class="testimonial-text mb-3">${t.text}</p>
-      <div class="testimonial-author text-muted fw-semibold">- ${t.author} -</div>
-    </div>
-  `;
-  container.appendChild(col);
+  const card = document.createElement("article");
+  card.className = "testimonial-card showcase-card h-100";
+  if (testimonial.banner) {
+    card.classList.add("testimonial-card-with-banner");
+    card.style.setProperty("--testimonial-bg-image", `url("${encodeURI(testimonial.banner)}")`);
+  }
+
+  const rating = document.createElement("div");
+  rating.className = "testimonial-rating mb-2";
+  rating.innerHTML = stars(testimonial.stars);
+
+  const text = document.createElement("p");
+  text.className = "testimonial-text mb-3";
+  text.textContent = testimonial.text;
+
+  const meta = document.createElement("div");
+  meta.className = "testimonial-meta";
+
+  const author = document.createElement("div");
+  author.className = "testimonial-author text-muted fw-semibold";
+  author.textContent = `${testimonial.author}`;
+  meta.appendChild(author);
+
+  if (testimonial.gameLink) {
+    const link = document.createElement("a");
+    link.className = "testimonial-game-link";
+    link.href = testimonial.gameLink;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "View game";
+    meta.appendChild(link);
+
+    const visits = document.createElement("div");
+    visits.className = "testimonial-visits";
+    visits.hidden = true;
+    meta.appendChild(visits);
+    loadVisits(testimonial, visits);
+  }
+
+  card.append(rating, text, meta);
+  col.appendChild(card);
+  return col;
+}
+
+testimonials.forEach((testimonial) => {
+  container.appendChild(createTestimonial(testimonial));
 });
 
 const reveal = new IntersectionObserver(

@@ -1,10 +1,12 @@
 const fs = require("fs");
+const https = require("https");
 const http = require("http");
 const path = require("path");
 const { URL } = require("url");
 
 const root = __dirname;
 const port = Number(process.env.PORT || 4173);
+const robloxCache = new Map();
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -58,8 +60,12 @@ const resolveFile = (pathname) => {
 };
 
 const send404 = (res) => {
-  const fallback = path.join(root, "other", "404.html");
-  if (fs.existsSync(fallback)) {
+  const fallback = [
+    path.join(root, "404.html"),
+    path.join(root, "other", "404.html"),
+  ].find((candidate) => fs.existsSync(candidate));
+
+  if (fallback) {
     res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
     fs.createReadStream(fallback).pipe(res);
     return;
@@ -67,6 +73,96 @@ const send404 = (res) => {
 
   res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
   res.end("Not found");
+};
+
+const sendJson = (res, status, payload) => {
+  const body = JSON.stringify(payload);
+  res.writeHead(status, {
+    "Content-Type": "application/json; charset=utf-8",
+    "Cache-Control": "no-store",
+    "Content-Length": Buffer.byteLength(body),
+  });
+  res.end(body);
+};
+
+const readRemoteJson = (url) => new Promise((resolve, reject) => {
+  const request = https.get(url, {
+    headers: {
+      "Accept": "application/json",
+      "User-Agent": "FancyDucc-Portfolio/1.0",
+    },
+  }, (response) => {
+    let body = "";
+    response.setEncoding("utf8");
+    response.on("data", (chunk) => {
+      body += chunk;
+    });
+    response.on("end", () => {
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        reject(new Error(`Roblox returned ${response.statusCode}`));
+        return;
+      }
+
+      try {
+        resolve(JSON.parse(body));
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
+
+  request.on("error", reject);
+  request.setTimeout(10000, () => {
+    request.destroy(new Error("Roblox request timed out"));
+  });
+});
+
+const getRobloxVisits = async (placeId) => {
+  const cached = robloxCache.get(placeId);
+  if (cached && cached.expires > Date.now()) {
+    return cached.payload;
+  }
+
+  const placeData = await readRemoteJson(`https://apis.roblox.com/universes/v1/places/${placeId}/universe`);
+  const universeId = placeData?.universeId;
+  if (!Number.isFinite(universeId)) {
+    throw new Error("Unable to resolve Roblox universe ID");
+  }
+
+  const gameData = await readRemoteJson(`https://games.roblox.com/v1/games?universeIds=${universeId}`);
+  const game = Array.isArray(gameData?.data) ? gameData.data[0] : null;
+  if (!game || typeof game.visits !== "number") {
+    throw new Error("Unable to resolve Roblox visits");
+  }
+
+  const payload = {
+    placeId: Number(placeId),
+    universeId,
+    name: game.name,
+    visits: game.visits,
+  };
+  robloxCache.set(placeId, {
+    expires: Date.now() + 5 * 60 * 1000,
+    payload,
+  });
+  return payload;
+};
+
+const handleApi = async (url, res) => {
+  if (url.pathname !== "/api/roblox/game-visits") return false;
+
+  const placeId = url.searchParams.get("placeId");
+  if (!/^\d+$/.test(placeId || "")) {
+    sendJson(res, 400, { error: "A numeric placeId is required." });
+    return true;
+  }
+
+  try {
+    sendJson(res, 200, await getRobloxVisits(placeId));
+  } catch (error) {
+    sendJson(res, 502, { error: error.message || "Unable to load Roblox visits." });
+  }
+  return true;
 };
 
 const sendFile = (req, res, filePath) => {
@@ -139,22 +235,28 @@ const sendFile = (req, res, filePath) => {
   fs.createReadStream(filePath).pipe(res);
 };
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   if (req.method !== "GET" && req.method !== "HEAD") {
     res.writeHead(405, { "Allow": "GET, HEAD" });
     res.end();
     return;
   }
 
-  const url = new URL(req.url, `http://${req.headers.host}`);
-  const filePath = resolveFile(url.pathname);
+  try {
+    const url = new URL(req.url, `http://${req.headers.host}`);
+    if (await handleApi(url, res)) return;
 
-  if (!filePath) {
-    send404(res);
-    return;
+    const filePath = resolveFile(url.pathname);
+
+    if (!filePath) {
+      send404(res);
+      return;
+    }
+
+    sendFile(req, res, filePath);
+  } catch (error) {
+    sendJson(res, 500, { error: error.message || "Internal server error" });
   }
-
-  sendFile(req, res, filePath);
 });
 
 server.listen(port, () => {

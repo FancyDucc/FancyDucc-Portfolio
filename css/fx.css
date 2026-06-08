@@ -106,3 +106,28 @@ header.masthead .masthead-content{ will-change: transform; }
 @media (prefers-reduced-motion: reduce){
   #fx-bg .fx-grid{ animation:none !important; transform: rotate(var(--grid-tilt)); }
 }
+
+/* Mobile: kill the animated grid + parallax entirely. The constant
+   transform/background-position updates are the worst single source of
+   GPU/CPU load on phones — drop the layer instead of taxing it. */
+@media (max-width: 991.98px) {
+  #fx-bg .fx-grid {
+    animation: none !important;
+    transform: rotate(var(--grid-tilt)) !important;
+    opacity: calc(var(--grid-opacity) * 0.6);
+  }
+  header.masthead .masthead-content {
+    transform: none !important;
+    will-change: auto;
+  }
+  /* fx-glow's radial gradients are cheap but the giant inset bleed isn't.
+     Trim it on small screens to reduce paint area. */
+  #fx-bg .fx-glow {
+    inset: 0;
+  }
+}
+
+/* Hover-incapable devices (phones/tablets): no animated grid */
+@media (hover: none) and (pointer: coarse) {
+  #fx-bg .fx-grid { animation: none !important; }
+}

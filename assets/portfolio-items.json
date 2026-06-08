@@ -605,6 +605,32 @@
   ],
   "models": [
     {
+      "type": "section",
+      "title": "3D Renders / GFX",
+      "description": "Some GFX and Renders I made of friends or just for fun, these are not really models I directly made from scratch, but I put them here anyway.",
+      "defaultOpen": false,
+      "items": [
+        {
+          "title": "Amalgamation Chase Cutscene",
+          "mediaType": "video",
+          "src": "/assets/img/video/amalgamationcutscene.mp4",
+          "alt": "Amalgamation Chase Cutscene"
+        },
+        {
+          "title": "Amalgamation Kill Cutscene",
+          "mediaType": "video",
+          "src": "/assets/img/video/amalgamationkill.mp4",
+          "alt": "Amalgamation Kill Cutscene"
+        },
+        {
+          "title": "Amalgamation Chase",
+          "mediaType": "video",
+          "src": "/assets/img/video/amalgamationrun.mp4",
+          "alt": "Amalgamation Chase"
+        }
+      ]
+    },
+    {
       "title": "Misleading Repellent",
       "mediaType": "video",
       "src": "/assets/img/video/redacted_machine.mp4",
