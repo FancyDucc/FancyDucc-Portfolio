@@ -49,6 +49,11 @@ const testimonials = [
     text: "your 3D modeling isn't perfect, but it isn't bad by any means, it's still good"
   },
   {
+    author: "Wafflynutria",
+    stars: 5,
+    text: "yeah",
+  },
+  {
     author: "Sam - Owner of Unpaid Workers and Sillygoofs",
     stars: 4.5,
     text: "Fancy Ducc is honestly one of the best people ive worked with, his work flow and quality is beyond expectations"

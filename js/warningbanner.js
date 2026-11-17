@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     var bannerEnabled = true;
     var defaultBannerContent = '<div class="container text-center" style="color: rgb(255, 255, 255);">' +
-      '<span id="warningBannerText">My commissions are not currently open, check back later to see when they are open again.</span>' +
+      '<span id="warningBannerText">My one-time commissions are not currently open, please check back later.</span>' +
       '</div>';
     var bannerBgColor = "rgb(0, 0, 0)";
 

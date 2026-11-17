@@ -1,0 +1,102 @@
+body.showreel-page {
+  margin: 0;
+  padding-top: 52px;
+  background: #000;
+  color: #f0f0f0;
+}
+
+/* compact nav */
+.compact-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background: rgba(33, 37, 41, 0.9);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.0625em;
+  text-transform: uppercase;
+}
+
+.compact-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5100ff;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+.compact-brand:hover { color: #fff; }
+.compact-brand img { height: 26px; }
+
+.compact-links,
+.compact-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.compact-links { display: flex; gap: 8px; }
+.compact-links > li { position: relative; }
+
+.compact-links button {
+  background: none;
+  border: 0;
+  padding: 8px;
+  color: #fff;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+/* dropdowns open on hover, or on tap/focus */
+.compact-links ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 150px;
+  padding: 6px;
+  background: #212529;
+  border-radius: 6px;
+}
+.compact-links > li:hover button,
+.compact-links > li:focus-within button { color: #5100ff; }
+.compact-links > li:hover ul,
+.compact-links > li:focus-within ul { display: block; }
+
+.compact-links ul a {
+  display: block;
+  padding: 8px 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.4s ease;
+}
+.compact-links ul a:hover { color: #5100ff; }
+
+@media (max-width: 480px) {
+  .compact-brand span { display: none; }
+  .compact-links { gap: 0; }
+}
+
+/* video, sized to fit the screen below the nav */
+.showreel {
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px;
+}
+.showreel video {
+  display: block;
+  width: min(100%, 1600px, (100vh - 100px) * 16 / 9);
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+}
